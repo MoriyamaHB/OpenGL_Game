@@ -1,8 +1,9 @@
 #include<GL/glut.h>
 #include<stdio.h>
 #include<math.h>
-#include"../head_2/vector3.hpp"
+#include"../head_2/vector3.h"
 #include<iostream>
+#include"../head_2/uGL.h"
 
 #define WINDOW_INI_HEIGHT 1200
 #define WINDOW_INI_WIDTH 800
@@ -16,8 +17,6 @@
 GLuint objects;
 
 /* 物体の色 */
-static GLfloat red[] = { 0.8, 0.2, 0.2, 1.0 };
-static GLfloat ground[][4] = { { 0.6, 0.6, 0.6, 1.0 }, { 0.3, 0.3, 0.3, 1.0 } };
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 float CameraX = 0;
@@ -29,7 +28,6 @@ float CameraGz = 0;
 float CameraRx = 1;
 float CameraRy = 1;
 float CameraRz = 0;
-
 
 typedef struct {
 	float x;
@@ -103,7 +101,6 @@ void camera_TR() {
 
 //ディスプレイ関数
 void draw(void) {
-	int i, j;
 	static int frc = 0;
 	camera_TR();
 
@@ -112,31 +109,20 @@ void draw(void) {
 	gluLookAt(CameraX, CameraY, CameraZ, CameraGx, CameraGy, CameraGz, CameraRx,
 			CameraRy, CameraRz);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
-	glCallList(objects);
-
-	/* 図形をディスプレイリストに登録 */
-	objects = glGenLists(1);
-	glNewList(objects, GL_COMPILE);
 
 	/* 赤い箱 */
 	glPushMatrix();
-	glTranslated(0.0, 0.0, -3.0);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, red);
+	glLoadIdentity();
+	glTranslated(CameraGx, CameraGy, CameraGz);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	/* 地面 */
-	glBegin(GL_QUADS);
-	glNormal3d(0.0, 1.0, 0.0);
-	for (j = -30; j < 30; j++) {
-		for (i = -30; i < 30; i++) {
-			glMaterialfv(GL_FRONT, GL_DIFFUSE, ground[(i * j) % 200]);
-			glVertex3d((GLdouble) i, -0.5, (GLdouble) j);
-			glVertex3d((GLdouble) i, -0.5, (GLdouble) (j + 1));
-			glVertex3d((GLdouble) (i + 1), -0.5, (GLdouble) (j + 1));
-			glVertex3d((GLdouble) (i + 1), -0.5, (GLdouble) j);
-		}
-	}
+	//地面描画
+	glPushMatrix();
+	uDrawGround(20);
+	glPopMatrix();
+
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
@@ -234,9 +220,6 @@ void init(int argc, char *argv[]) {
 //メイン
 int main(int argc, char *argv[]) {
 	init(argc, argv);
-	Vector3 test[2]={Vector3(1,2,3),Vector3(3,4,5)};
-	std::cout<<distance(test[0],test[1])<<std::endl;
 	glutMainLoop();
-	printf("a");
 	return 0;
 }
