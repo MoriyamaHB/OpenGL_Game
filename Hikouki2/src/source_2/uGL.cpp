@@ -1,6 +1,7 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include "../head_2/vector3.h"
+#include "../head_2/uGL.h"
 
 #define uPI 3.1415926
 

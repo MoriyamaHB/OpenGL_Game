@@ -12,7 +12,6 @@
 #define CAMERA_ROTATE_PX 4000//カメラが一周回るためのマウス移動ピクセル量
 #define PI 3.14159265
 #define CAMERA_SP_D 0.1 //加速、減速キーを押しているときに1フレームの変化量
-#define CAMERA_ROTATE_SP PI/100//回転キーを押しているときに1フレームの変化量
 /* ディスプレイリスト番号 */
 GLuint objects;
 
@@ -25,7 +24,7 @@ float CameraZ = -10;
 float CameraGx = 0;
 float CameraGy = 0;
 float CameraGz = 0;
-float CameraRx = 1;
+float CameraRx = 0;
 float CameraRy = 1;
 float CameraRz = 0;
 
@@ -57,22 +56,18 @@ double k = 1; //速度係数
 double camera_angle = PI / 2;
 double camera_angleY = 0;
 
+//ループカウント
+int loop_count = 0;
+
 //カメラ移動、視点変更
 void camera_TR() {
-
 	//カメラの視点変更
 	camera_angle += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-	camera_angleY += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+	camera_angleY -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 	mouse_dx = mouse_dy = 0;
 	CameraGx = cos(camera_angle) * cos(camera_angleY) + CameraX;
 	CameraGz = sin(camera_angle) * cos(camera_angleY) + CameraZ;
 	CameraGy = sin(camera_angleY) + CameraY;
-
-	CameraRx = cos(camera_angle) * cos(camera_angleY) + CameraX;
-	CameraRz = sin(camera_angle) * cos(camera_angleY) + CameraZ;
-	CameraRy = sin(camera_angleY) + CameraY;
-
-	//視点リセット
 	if (key_q != 0) { //リセットキーが押されたら
 		//視点,座標を初期化
 		CameraX = CameraY = 0;
@@ -84,24 +79,37 @@ void camera_TR() {
 
 	//カメラの移動
 
-	//加速、減速処理
-	if (key_w == 1)
-		k += CAMERA_SP_D;
-	if (key_s == 1)
-		(k - CAMERA_SP_D >= 0) ? (k -= CAMERA_SP_D) : (k = 0);
-
-	//傾き処理
-	//if (key_a == 1)
-
 	//前進する
-	CameraX += CAMERA_SP * cos(camera_angle) * cos(camera_angleY) * k;
-	CameraZ += CAMERA_SP * sin(camera_angle) * cos(camera_angleY) * k;
-	CameraY += CAMERA_SP * sin(camera_angleY) * k;
+	if (key_w == 1) {
+		CameraX += CAMERA_SP * cos(camera_angle) * cos(camera_angleY) * k;
+		CameraZ += CAMERA_SP * sin(camera_angle) * cos(camera_angleY) * k;
+		CameraY += CAMERA_SP * sin(camera_angleY) * k;
+	}
+	if (key_s == 1) {
+		CameraX -= CAMERA_SP * cos(camera_angle) * cos(camera_angleY) * k;
+		CameraZ -= CAMERA_SP * sin(camera_angle) * cos(camera_angleY) * k;
+		CameraY -= CAMERA_SP * sin(camera_angleY) * k;
+	}
+	if (key_a == 1) {
+		CameraX += CAMERA_SP * cos(camera_angle - PI / 2) * cos(camera_angleY)
+				* k;
+		CameraZ += CAMERA_SP * sin(camera_angle - PI / 2) * cos(camera_angleY)
+				* k;
+		//CameraY += CAMERA_SP * sin(camera_angleY + PI / 2) * k;
+	}
+	if (key_d == 1) {
+		CameraX += CAMERA_SP * cos(camera_angle + PI / 2) * cos(camera_angleY)
+				* k;
+		CameraZ += CAMERA_SP * sin(camera_angle + PI / 2) * cos(camera_angleY)
+				* k;
+		//CameraY += CAMERA_SP * sin(camera_angleY - PI / 2) * k;
+	}
 }
 
 //ディスプレイ関数
 void draw(void) {
 	static int frc = 0;
+	loop_count++;
 	camera_TR();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -112,10 +120,9 @@ void draw(void) {
 
 	/* 赤い箱 */
 	glPushMatrix();
-	glLoadIdentity();
 	glTranslated(CameraGx, CameraGy, CameraGz);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(1.0);
+	glutSolidCube(0.1);
 	glPopMatrix();
 
 	//地面描画
@@ -127,6 +134,7 @@ void draw(void) {
 	glEndList();
 	glutSwapBuffers();
 	frc++;
+
 }
 
 void resize(int w, int h) {
@@ -138,7 +146,7 @@ void resize(int w, int h) {
 
 	/* 透視変換行列の初期化 */
 	glLoadIdentity();
-	gluPerspective(30.0, (double) w / (double) h, 1.0, 100.0);
+	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
 
 	/* モデルビュー変換行列の指定 */
 	glMatrixMode(GL_MODELVIEW);
