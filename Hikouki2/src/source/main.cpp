@@ -21,7 +21,7 @@ void draw(void) {
 	//赤い箱
 	glPushMatrix();
 	Camera camera = getStateCameraCoordinates();
-	glTranslated(camera.gx, camera.gy, camera.gz);
+	glTranslated(camera.x, camera.y, camera.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.1);
 	glPopMatrix();
