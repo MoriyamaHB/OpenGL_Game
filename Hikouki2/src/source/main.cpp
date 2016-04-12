@@ -1,17 +1,6 @@
-#include<GL/glut.h>
-#include<stdio.h>
-#include<math.h>
-#include"../head_2/vector3.h"
-#include<iostream>
-#include"../head_2/uGL.h"
+#define GLOBAL_INSTANCE
+#include "../head/GV.h"
 
-#define WINDOW_INI_HEIGHT 1200
-#define WINDOW_INI_WIDTH 800
-#define FRAME_PER_SECONDS 60
-#define CAMERA_SP 0.05//カメラスピード
-#define CAMERA_ROTATE_PX 4000//カメラが一周回るためのマウス移動ピクセル量
-#define PI 3.14159265
-#define CAMERA_SP_D 0.1 //加速、減速キーを押しているときに1フレームの変化量
 /* ディスプレイリスト番号 */
 GLuint objects;
 

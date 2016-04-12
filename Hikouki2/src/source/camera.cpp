@@ -1,10 +1,5 @@
-/*
- * camera.cpp
- *
- *  Created on: 2016/04/11
- *      Author: c501506068
- */
+#include"../head/GV.h"
 
+void transfarAndRotateCameraByMouse(Camera camera){
 
-
-
+}
