@@ -1,4 +1,5 @@
-#include <GL/freeglut.h>
+#include <freeglut.h>
+//#include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>
 #include "../head_2/vector3.h"

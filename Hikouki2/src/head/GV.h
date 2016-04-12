@@ -1,7 +1,8 @@
 #include"define.h"
 #include"enum.h"
 #include"struct.h"
-#include<GL/freeglut.h>
+#include <freeglut.h>
+//#include<GL/freeglut.h>
 #include<stdio.h>
 #include<math.h>
 #include"../head_2/vector3.h"
