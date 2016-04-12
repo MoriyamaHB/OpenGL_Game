@@ -20,8 +20,7 @@ void draw(void) {
 
 	//赤い箱
 	glPushMatrix();
-	Vector3 cam_vec;
-	cam_vec= camera.getStateCoordinates();
+	Vector3 cam_vec = camera.getStateCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.1);
@@ -44,12 +43,12 @@ void resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 //タイマー
@@ -69,21 +68,21 @@ void init(int argc, char *argv[]) {
 
 	//openGLイベント関数
 	glutDisplayFunc(draw);
-	glutKeyboardFunc (checkPushKey);
-	glutKeyboardUpFunc (checkUpkey);
-	glutPassiveMotionFunc (checkMouseMotion);
+	glutKeyboardFunc(checkPushKey);
+	glutKeyboardUpFunc(checkUpkey);
+	glutPassiveMotionFunc(checkMouseMotion);
 	glutMotionFunc(checkMouseMotion);
 	glutReshapeFunc(resize);
 	glutTimerFunc(100, timer, 0);
 
 	//その他openGLの設定
-	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する
-	glutSetCursor (GLUT_CURSOR_CROSSHAIR);
+	glutIgnoreKeyRepeat(GL_TRUE); //繰り返しのキー入力を無視する
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 	glClearColor(1.0, 1.0, 1.0, 0.0); //塗りつぶし色を白に設定
-	glEnable (GL_DEPTH_TEST);
-	glEnable (GL_CULL_FACE);
-	glEnable (GL_LIGHTING);
-	glEnable (GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 }
 
 //メイン
