@@ -3,10 +3,6 @@
 //カメラ座標
 static Camera camera;
 
-//カメラの角度
-static double camera_angle;
-static double camera_angleY;
-
 //カメラ座標を初期化する
 void initCamerCoordinates() {
 	camera.x = 0;
@@ -18,8 +14,8 @@ void initCamerCoordinates() {
 	camera.ux = 0;
 	camera.uy = 1;
 	camera.uz = 0;
-	camera_angle = PI / 2;
-	camera_angleY = 0;
+	camera.angle_h = PI / 2;
+	camera.angle_w = 0;
 }
 
 //カメラ座標を取得する
@@ -35,13 +31,13 @@ void transfarAndRotateCameraByMouse() {
 	getMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 	//マウスの動きをカメラ角度に変換
-	camera_angle += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-	camera_angleY -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+	camera.angle_h += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
+	camera.angle_w -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
 	//カメラ角度を視点位置に反映
-	camera.gx = cos(camera_angle) * cos(camera_angleY) + camera.x;
-	camera.gz = sin(camera_angle) * cos(camera_angleY) + camera.z;
-	camera.gy = sin(camera_angleY) + camera.y;
+	camera.gx = cos(camera.angle_h) * cos(camera.angle_w) + camera.x;
+	camera.gz = sin(camera.angle_h) * cos(camera.angle_w) + camera.z;
+	camera.gy = sin(camera.angle_w) + camera.y;
 
 }
 
@@ -49,22 +45,26 @@ void transfarAndRotateCameraByMouse() {
 void transfarCameraByKey() {
 	//カメラの移動
 	if (getStateKeyOfSmallAlphabet('w') == 1) {
-		camera.x += CAMERA_SP * cos(camera_angle) * cos(camera_angleY);
-		camera.z += CAMERA_SP * sin(camera_angle) * cos(camera_angleY);
-		camera.y += CAMERA_SP * sin(camera_angleY);
+		camera.x += CAMERA_SP * cos(camera.angle_h) * cos(camera.angle_w);
+		camera.z += CAMERA_SP * sin(camera.angle_h) * cos(camera.angle_w);
+		camera.y += CAMERA_SP * sin(camera.angle_w);
 	}
 	if (getStateKeyOfSmallAlphabet('s') == 1) {
-		camera.x -= CAMERA_SP * cos(camera_angle) * cos(camera_angleY);
-		camera.z -= CAMERA_SP * sin(camera_angle) * cos(camera_angleY);
-		camera.y -= CAMERA_SP * sin(camera_angleY);
+		camera.x -= CAMERA_SP * cos(camera.angle_h) * cos(camera.angle_w);
+		camera.z -= CAMERA_SP * sin(camera.angle_h) * cos(camera.angle_w);
+		camera.y -= CAMERA_SP * sin(camera.angle_w);
 	}
 	if (getStateKeyOfSmallAlphabet('a') == 1) {
-		camera.x += CAMERA_SP * cos(camera_angle - PI / 2) * cos(camera_angleY);
-		camera.z += CAMERA_SP * sin(camera_angle - PI / 2) * cos(camera_angleY);
+		camera.x += CAMERA_SP * cos(camera.angle_h - PI / 2)
+				* cos(camera.angle_w);
+		camera.z += CAMERA_SP * sin(camera.angle_h - PI / 2)
+				* cos(camera.angle_w);
 	}
 	if (getStateKeyOfSmallAlphabet('d') == 1) {
-		camera.x += CAMERA_SP * cos(camera_angle + PI / 2) * cos(camera_angleY);
-		camera.z += CAMERA_SP * sin(camera_angle + PI / 2) * cos(camera_angleY);
+		camera.x += CAMERA_SP * cos(camera.angle_h + PI / 2)
+				* cos(camera.angle_w);
+		camera.z += CAMERA_SP * sin(camera.angle_h + PI / 2)
+				* cos(camera.angle_w);
 	}
 
 	//q入力時_カメラの初期化

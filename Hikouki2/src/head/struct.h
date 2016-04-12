@@ -1,4 +1,3 @@
-
 typedef struct {
 	float x;
 	float y;
@@ -9,4 +8,6 @@ typedef struct {
 	float ux;
 	float uy;
 	float uz;
-}Camera;
+	double angle_h;
+	double angle_w;
+} Camera;
