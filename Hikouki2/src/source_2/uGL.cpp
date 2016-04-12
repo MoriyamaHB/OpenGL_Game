@@ -194,8 +194,10 @@ void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 
 //黒白の地面を描画
 void uDrawGround(int size) {
-	if (size < 0 || 1000 < size)
+	if (size < 0 || 1000 < size) {
 		uErrorOut(__FILE__, __func__, __LINE__, "サイズ指定値が不正です");
+		return;
+	}
 
 	glBegin (GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
