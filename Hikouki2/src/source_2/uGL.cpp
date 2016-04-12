@@ -197,9 +197,9 @@ void uDrawGround(int size) {
 				glColor4fv(uColor4fv_brack);
 			//材質設定
 			if (((i + j) % 2) == 0)
-				glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_white);
+				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_white);
 			else
-				glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_black);
+				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_black);
 
 			glVertex3d((GLdouble) i, 0.0, (GLdouble) j);
 			glVertex3d((GLdouble) i, 0.0, (GLdouble) (j + 1));

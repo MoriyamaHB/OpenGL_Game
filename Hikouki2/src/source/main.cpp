@@ -19,7 +19,7 @@ GLuint objects;
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 float CameraX = 0;
-float CameraY = 0;
+float CameraY = 10;
 float CameraZ = -10;
 float CameraGx = 0;
 float CameraGy = 0;
@@ -70,7 +70,8 @@ void camera_TR() {
 	CameraGy = sin(camera_angleY) + CameraY;
 	if (key_q != 0) { //リセットキーが押されたら
 		//視点,座標を初期化
-		CameraX = CameraY = 0;
+		CameraX = 0;
+		CameraY = 3;
 		CameraZ = -10;
 		camera_angle = PI / 2;
 		camera_angleY = 0;
@@ -110,10 +111,10 @@ void camera_TR() {
 void draw(void) {
 	static int frc = 0;
 	loop_count++;
-	camera_TR();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+	camera_TR();//カメラ移動計算
 	gluLookAt(CameraX, CameraY, CameraZ, CameraGx, CameraGy, CameraGz, CameraRx,
 			CameraRy, CameraRz);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
@@ -127,7 +128,7 @@ void draw(void) {
 
 	//地面描画
 	glPushMatrix();
-	uDrawGround(20);
+	uDrawGround(50);
 	glPopMatrix();
 
 	glEnd();
