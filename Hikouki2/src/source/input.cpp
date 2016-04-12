@@ -4,8 +4,8 @@
 static unsigned char small_alphabet[26]; //小文字アルファベット
 
 //マウスの移動量
-int mouse_dx = 0;
-int mouse_dy = 0;
+static int mouse_dx = 0;
+static int mouse_dy = 0;
 
 //小文字アルファベットの入力状態取得
 int getStateKeyOfSmallAlphabet(unsigned char key) {
