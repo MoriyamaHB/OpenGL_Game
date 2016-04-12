@@ -1,4 +1,4 @@
-#include <GL/freeglut.h>
+#include <freeglut.h>
 #include <math.h>
 #include<stdio.h>
 #include "../head_2/vector3.h"
@@ -21,15 +21,16 @@ float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
 float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
 
 //エラー出力
-static void uErrorOut(const char file[],const char func[],int line,const char message[]){
-	fprintf(stderr,"<file:%s func:%s line:%d>\n",file,func,line);
-	fprintf(stderr,"Error:%s\n\n",message);
+static void uErrorOut(const char file[], const char func[], int line,
+		const char message[]) {
+	fprintf(stderr, "<file:%s func:%s line:%d>\n", file, func, line);
+	fprintf(stderr, "Error:%s\n\n", message);
 }
 
 //2D上にの点を描画する(size=直径)
 void uPoint2D(int x, int y, float size) {
 	glPointSize(size);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glVertex2i(x, y);
 	glEnd();
 }
@@ -37,7 +38,7 @@ void uPoint2D(int x, int y, float size) {
 //2D上に線を描画する
 void uLine2D(int x1, int y1, int x2, int y2, float width) {
 	glLineWidth(width);
-	glBegin(GL_LINES);
+	glBegin (GL_LINES);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glEnd();
@@ -47,7 +48,7 @@ void uLine2D(int x1, int y1, int x2, int y2, float width) {
 void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
 		float width) {
 	glLineWidth(width);
-	glBegin(GL_LINE_LOOP);
+	glBegin (GL_LINE_LOOP);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x3, y3);
@@ -57,7 +58,7 @@ void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
 
 void uSquare2D(int x1, int y1, int x2, int y2, float width) {
 	glLineWidth(width);
-	glBegin(GL_LINE_LOOP);
+	glBegin (GL_LINE_LOOP);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y1);
 	glVertex2i(x2, y2);
@@ -68,7 +69,7 @@ void uSquare2D(int x1, int y1, int x2, int y2, float width) {
 //2D上に四角形を描画する(塗りつぶし)
 void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
 		int y4) {
-	glBegin(GL_QUADS);
+	glBegin (GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x3, y3);
@@ -77,7 +78,7 @@ void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
 }
 
 void uSquareFill2D(int x1, int y1, int x2, int y2) {
-	glBegin(GL_QUADS);
+	glBegin (GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y1);
 	glVertex2i(x2, y2);
@@ -97,7 +98,7 @@ void uCircle2D(float radius, int x, int y) {
 		float x2 = radius * cos(th2_rad);
 		float y2 = radius * sin(th2_rad);
 
-		glBegin(GL_LINES);
+		glBegin (GL_LINES);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
@@ -116,7 +117,7 @@ void uCircle2DFill(float radius, int x, int y) {
 		float x2 = radius * cos(th2_rad);
 		float y2 = radius * sin(th2_rad);
 
-		glBegin(GL_TRIANGLES);
+		glBegin (GL_TRIANGLES);
 		glVertex2f(x, y);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
@@ -136,7 +137,7 @@ void uOval2D(float radius, int x, int y, float ovalx, float ovaly) {
 		float x2 = radius * cos(th2_rad) * (ovalx / 100.0f);
 		float y2 = radius * sin(th2_rad) * (ovaly / 100.0f);
 
-		glBegin(GL_LINES);
+		glBegin (GL_LINES);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
@@ -155,7 +156,7 @@ void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
 		float x2 = radius * cos(th2_rad) * (ovalx / 100.0f);
 		float y2 = radius * sin(th2_rad) * (ovaly / 100.0f);
 
-		glBegin(GL_TRIANGLES);
+		glBegin (GL_TRIANGLES);
 		glVertex2f(x, y);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
@@ -166,7 +167,7 @@ void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
 //三角形を描画
 void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[]) {
-	glBegin(GL_TRIANGLES);
+	glBegin (GL_TRIANGLES);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
 	glColor4fv(color2);
@@ -179,7 +180,7 @@ void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 //四角形を描画
 void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[], Vector3 v4, float color4[]) {
-	glBegin(GL_QUADS);
+	glBegin (GL_QUADS);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
 	glColor4fv(color2);
@@ -194,9 +195,9 @@ void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 //黒白の地面を描画
 void uDrawGround(int size) {
 	if (size < 0 || 1000 < size)
-		uErrorOut(__FILE__,__func__,__LINE__,"サイズ指定値が不正です");
+		uErrorOut(__FILE__, __func__, __LINE__, "サイズ指定値が不正です");
 
-	glBegin(GL_QUADS);
+	glBegin (GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
 	for (int j = -size / 2; j < size / 2; j++) {
 		for (int i = -size / 2; i < size; i++) {
@@ -212,9 +213,9 @@ void uDrawGround(int size) {
 				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_black);
 
 			glVertex3d((GLdouble) i, 0.0, (GLdouble) j);
-			glVertex3d((GLdouble) i, 0.0, (GLdouble) (j + 1));
-			glVertex3d((GLdouble) (i + 1), 0.0, (GLdouble) (j + 1));
-			glVertex3d((GLdouble) (i + 1), 0.0, (GLdouble) j);
+			glVertex3d((GLdouble) i, 0.0, (GLdouble)(j + 1));
+			glVertex3d((GLdouble)(i + 1), 0.0, (GLdouble)(j + 1));
+			glVertex3d((GLdouble)(i + 1), 0.0, (GLdouble) j);
 		}
 	}
 	glEnd();
