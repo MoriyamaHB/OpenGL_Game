@@ -19,7 +19,7 @@ GLuint objects;
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 float CameraX = 0;
-float CameraY = 10;
+float CameraY = 3;
 float CameraZ = -10;
 float CameraGx = 0;
 float CameraGy = 0;

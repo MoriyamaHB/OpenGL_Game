@@ -1,5 +1,6 @@
 #include <GL/freeglut.h>
 #include <math.h>
+#include<stdio.h>
 #include "../head_2/vector3.h"
 #include "../head_2/uGL.h"
 
@@ -17,7 +18,13 @@ float uMaterial4fv_red[] = { 0.8, 0.2, 0.2, 1.0 }; //赤
 float uMaterial4fv_white[] = { 0.9, 0.9, 0.9, 1.0 }; //白
 float uMaterial4fv_black[] = { 0.1, 0.1, 0.1, 1.0 }; //黒
 float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
-float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 };//緑
+float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
+
+//エラー出力
+static void uErrorOut(const char file[],const char func[],int line,const char message[]){
+	fprintf(stderr,"<file:%s func:%s line:%d>\n",file,func,line);
+	fprintf(stderr,"Error:%s\n\n",message);
+}
 
 //2D上にの点を描画する(size=直径)
 void uPoint2D(int x, int y, float size) {
@@ -186,6 +193,9 @@ void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 
 //黒白の地面を描画
 void uDrawGround(int size) {
+	if (size < 0 || 1000 < size)
+		uErrorOut(__FILE__,__func__,__LINE__,"サイズ指定値が不正です");
+
 	glBegin(GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
 	for (int j = -size / 2; j < size / 2; j++) {
