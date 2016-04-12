@@ -7,6 +7,7 @@
 #include"../head_2/vector3.h"
 #include<iostream>
 #include"../head_2/uGL.h"
+#include"class.h"
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
@@ -15,3 +16,5 @@
 #endif
 
 #include "function.h"
+
+GLOBAL Camera camera;

@@ -11,17 +11,18 @@ void draw(void) {
 	glLoadIdentity(); //モデルビュー変換行列の初期化
 
 	//カメラ
-	transfarAndRotateCameraByMouse(); //カメラ移動計算(マウス)
-	transfarCameraByKey(); //カメラ移動計算(キー)
-	setGluLookAt(); //視点をセット
+	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
+	camera.transfarByKey(); //カメラ移動計算(キー)
+	camera.setGluLookAt(); //視点をセット
 
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 
 	//赤い箱
 	glPushMatrix();
-	Camera camera = getStateCameraCoordinates();
-	glTranslated(camera.x, camera.y, camera.z);
+	Vector3 cam_vec;
+	cam_vec= camera.getStateCoordinates();
+	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.1);
 	glPopMatrix();
@@ -83,9 +84,6 @@ void init(int argc, char *argv[]) {
 	glEnable (GL_CULL_FACE);
 	glEnable (GL_LIGHTING);
 	glEnable (GL_LIGHT0);
-
-	//カメラ初期化
-	initCamerCoordinates();
 }
 
 //メイン

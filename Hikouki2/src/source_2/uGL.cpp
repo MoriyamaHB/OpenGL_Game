@@ -1,6 +1,6 @@
 #include <GL/freeglut.h>
 #include <math.h>
-#include<stdio.h>
+#include <stdio.h>
 #include "../head_2/vector3.h"
 #include "../head_2/uGL.h"
 
