@@ -4,6 +4,7 @@
 #include <freeglut.h>
 //#include<GL/freeglut.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include<math.h>
 #include"../head_2/vector3.h"
 #include<iostream>

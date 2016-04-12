@@ -35,6 +35,8 @@ void draw(void) {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
+	if (getStateKeyOfSmallAlphabet('e') == 1)
+		exit(0);
 }
 
 //リサイズ
@@ -43,12 +45,12 @@ void resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 }
 
 //タイマー
