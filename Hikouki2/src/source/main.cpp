@@ -20,7 +20,7 @@ void draw(void) {
 
 	//赤い箱
 	glPushMatrix();
-	Vector3 cam_vec = camera.getStateCoordinates();
+	Vector3 cam_vec = camera.getStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.1);

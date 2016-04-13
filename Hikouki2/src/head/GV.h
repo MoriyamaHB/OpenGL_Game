@@ -22,4 +22,4 @@
 #include"../source/camera.hpp"
 
 //クラス定義
-GLOBAL Camera camera;
+GLOBAL Camera3D3P camera;
