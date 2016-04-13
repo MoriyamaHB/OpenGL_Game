@@ -8,17 +8,17 @@ public:
 
 	//カメラ座標を初期化する
 	void initCoordinates() {
-		gx = 0;
-		gy = 1;
-		gz = 0;
 		x = 0;
 		y = 5;
 		z = 0;
+		gx = 0;
+		gy = 1;
+		gz = 0;
 		ux = 0;
 		uy = 1;
 		uz = 0;
-		angle_h = PI / 2;
-		angle_w = 0;
+		angle_w = PI / 2;
+		angle_h = 0;
 	}
 
 	//カメラ視点座標を取得する
@@ -34,13 +34,19 @@ public:
 		getMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 		//マウスの動きをカメラ角度に変換
-		angle_h += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-		angle_w += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+		angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
+		angle_h += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+
+		//min_wrap_angle_h~π/2の範囲にangle_hをラップする
+		if (angle_h < min_wrap_angle_h)
+			angle_h = min_wrap_angle_h;
+		else if (angle_h > max_wrap_angle_h)
+			angle_h = max_wrap_angle_h;
 
 		//カメラ角度を視点位置に反映
-		x = cos(angle_h) * cos(angle_w) + gx;
-		z = sin(angle_h) * cos(angle_w) + gz;
-		y = sin(angle_w) + gy;
+		x = cos(angle_w) * cos(angle_h) + gx;
+		z = sin(angle_w) * cos(angle_h) + gz;
+		y = sin(angle_h) + gy;
 
 		//yの範囲を限定
 		if (y < 0.05)
@@ -53,22 +59,22 @@ public:
 
 		//カメラの移動
 		if (getStateKeyOfSmallAlphabet('w') == 1) {
-			gx -= CAMERA_SP * cos(angle_h) * cos(angle_w);
-			gz -= CAMERA_SP * sin(angle_h) * cos(angle_w);
-			gy -= CAMERA_SP * sin(angle_w);
+			gx -= CAMERA_SP * cos(angle_w) * cos(angle_h);
+			gz -= CAMERA_SP * sin(angle_w) * cos(angle_h);
+			gy -= CAMERA_SP * sin(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('s') == 1) {
-			gx += CAMERA_SP * cos(angle_h) * cos(angle_w);
-			gz += CAMERA_SP * sin(angle_h) * cos(angle_w);
-			gy += CAMERA_SP * sin(angle_w);
+			gx += CAMERA_SP * cos(angle_w) * cos(angle_h);
+			gz += CAMERA_SP * sin(angle_w) * cos(angle_h);
+			gy += CAMERA_SP * sin(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('a') == 1) {
-			gx -= CAMERA_SP * cos(angle_h - PI / 2) * cos(angle_w);
-			gz -= CAMERA_SP * sin(angle_h - PI / 2) * cos(angle_w);
+			gx -= CAMERA_SP * cos(angle_w - PI / 2) * cos(angle_h);
+			gz -= CAMERA_SP * sin(angle_w - PI / 2) * cos(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('d') == 1) {
-			gx -= CAMERA_SP * cos(angle_h + PI / 2) * cos(angle_w);
-			gz -= CAMERA_SP * sin(angle_h + PI / 2) * cos(angle_w);
+			gx -= CAMERA_SP * cos(angle_w + PI / 2) * cos(angle_h);
+			gz -= CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
 		}
 
 		//yの範囲を限定
@@ -95,8 +101,10 @@ private:
 	float ux;
 	float uy;
 	float uz;
-	double angle_h;
 	double angle_w;
+	double angle_h;
+	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
+	const static double max_wrap_angle_h = PI / 2 + 0.0001;
 };
 
 class Camera3D1P {
@@ -118,8 +126,8 @@ public:
 		ux = 0;
 		uy = 1;
 		uz = 0;
-		angle_h = PI / 2;
-		angle_w = 0;
+		angle_w = PI / 2;
+		angle_h = 0;
 	}
 
 	//カメラ座標を取得する
@@ -135,13 +143,19 @@ public:
 		getMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 		//マウスの動きをカメラ角度に変換
-		angle_h += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-		angle_w -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+		angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
+		angle_h -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+
+		//min_wrap_angle_h~π/2の範囲にangle_hをラップする
+		if (angle_h < min_wrap_angle_h)
+			angle_h = min_wrap_angle_h;
+		else if (angle_h > max_wrap_angle_h)
+			angle_h = max_wrap_angle_h;
 
 		//カメラ角度を視点位置に反映
-		gx = cos(angle_h) * cos(angle_w) + x;
-		gz = sin(angle_h) * cos(angle_w) + z;
-		gy = sin(angle_w) + y;
+		gx = cos(angle_w) * cos(angle_h) + x;
+		gz = sin(angle_w) * cos(angle_h) + z;
+		gy = sin(angle_h) + y;
 
 		//yの範囲を限定
 		if (gy < -0.9)
@@ -154,22 +168,22 @@ public:
 
 		//カメラの移動
 		if (getStateKeyOfSmallAlphabet('w') == 1) {
-			x += CAMERA_SP * cos(angle_h) * cos(angle_w);
-			z += CAMERA_SP * sin(angle_h) * cos(angle_w);
-			y += CAMERA_SP * sin(angle_w);
+			x += CAMERA_SP * cos(angle_w) * cos(angle_h);
+			z += CAMERA_SP * sin(angle_w) * cos(angle_h);
+			y += CAMERA_SP * sin(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('s') == 1) {
-			x -= CAMERA_SP * cos(angle_h) * cos(angle_w);
-			z -= CAMERA_SP * sin(angle_h) * cos(angle_w);
-			y -= CAMERA_SP * sin(angle_w);
+			x -= CAMERA_SP * cos(angle_w) * cos(angle_h);
+			z -= CAMERA_SP * sin(angle_w) * cos(angle_h);
+			y -= CAMERA_SP * sin(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('a') == 1) {
-			x += CAMERA_SP * cos(angle_h - PI / 2) * cos(angle_w);
-			z += CAMERA_SP * sin(angle_h - PI / 2) * cos(angle_w);
+			x += CAMERA_SP * cos(angle_w - PI / 2) * cos(angle_h);
+			z += CAMERA_SP * sin(angle_w - PI / 2) * cos(angle_h);
 		}
 		if (getStateKeyOfSmallAlphabet('d') == 1) {
-			x += CAMERA_SP * cos(angle_h + PI / 2) * cos(angle_w);
-			z += CAMERA_SP * sin(angle_h + PI / 2) * cos(angle_w);
+			x += CAMERA_SP * cos(angle_w + PI / 2) * cos(angle_h);
+			z += CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
 		}
 
 		//yの範囲を限定
@@ -196,6 +210,8 @@ private:
 	float ux;
 	float uy;
 	float uz;
-	double angle_h;
 	double angle_w;
+	double angle_h;
+	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
+	const static double max_wrap_angle_h = PI / 2 + 0.0001;
 };
