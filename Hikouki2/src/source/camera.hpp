@@ -144,8 +144,8 @@ public:
 		gy = sin(angle_w) + y;
 
 		//yの範囲を限定
-		if (gy < 0.05)
-			gy = 0.05;
+		if (gy < -0.9)
+			gy = -0.9;
 
 	}
 
@@ -173,8 +173,8 @@ public:
 		}
 
 		//yの範囲を限定
-		if (y < 0)
-			y = 0;
+		if (y < 0.1)
+			y = 0.1;
 
 		//q入力時_カメラの初期化
 		if (getStateKeyOfSmallAlphabet('q') == 1)
