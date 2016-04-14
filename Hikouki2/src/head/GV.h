@@ -1,8 +1,8 @@
 #include"define.h"
 #include"enum.h"
 #include"struct.h"
-#include <freeglut.h>
-//#include<GL/freeglut.h>
+//#include <freeglut.h>
+#include<GL/freeglut.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -23,5 +23,5 @@
 #include"../source/fps.hpp"
 
 //クラス定義
-GLOBAL Camera3D1P camera;
+GLOBAL Camera3D3P camera;
 GLOBAL Fps fps;

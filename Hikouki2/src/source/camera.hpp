@@ -104,7 +104,7 @@ private:
 	double angle_w;
 	double angle_h;
 	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
-	const static double max_wrap_angle_h = PI / 2 + 0.0001;
+	const static double max_wrap_angle_h = PI / 2 - 0.0001;
 };
 
 class Camera3D1P {
@@ -213,5 +213,5 @@ private:
 	double angle_w;
 	double angle_h;
 	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
-	const static double max_wrap_angle_h = PI / 2 + 0.0001;
+	const static double max_wrap_angle_h = PI / 2 - 0.0001;
 };
