@@ -1,8 +1,8 @@
 #include"define.h"
 #include"enum.h"
 #include"struct.h"
-//#include <freeglut.h>
-#include<GL/freeglut.h>
+#include <freeglut.h>
+//#include<GL/freeglut.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
