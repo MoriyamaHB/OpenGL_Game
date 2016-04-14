@@ -3,22 +3,7 @@
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 
-//ディスプレイ関数
-void draw(void) {
-
-	//ディスプレイ初期化
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
-	glLoadIdentity(); //モデルビュー変換行列の初期化
-	fps.fps_Update();
-	fps.fps_DrawFPS(100, 100);
-
-	//カメラ
-	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
-	camera.transfarByKey(); //カメラ移動計算(キー)
-	camera.setGluLookAt(); //視点をセット
-
-	//ライト
-	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
+static void drawObject() {
 
 	//赤い箱
 	glPushMatrix();
@@ -32,6 +17,29 @@ void draw(void) {
 	glPushMatrix();
 	uDrawGround(50);
 	glPopMatrix();
+}
+
+//ディスプレイ関数
+void draw(void) {
+
+	//ディスプレイ初期化
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
+	glLoadIdentity(); //モデルビュー変換行列の初期化
+
+	//fps
+	fps.fps_Update();
+	fps.fps_DrawFPS(100, 100);
+
+	//カメラ
+	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
+	camera.transfarByKey(); //カメラ移動計算(キー)
+	camera.setGluLookAt(); //視点をセット
+
+	//ライト
+	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
+
+	//オブジェクト描画
+	drawObject();
 
 	//ディスプレイ終了処理
 	glEnd();
