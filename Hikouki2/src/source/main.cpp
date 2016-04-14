@@ -1,6 +1,5 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
-#include "GL/gl.h"
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 
