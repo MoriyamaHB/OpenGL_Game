@@ -10,7 +10,7 @@ static int mouse_dy = 0;
 //小文字アルファベットの入力状態取得
 int getStateKeyOfSmallAlphabet(unsigned char key) {
 	if (key < 'a' || 'z' < key) {
-		ErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
+		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
 	}
 	return small_alphabet[key - 'a'];

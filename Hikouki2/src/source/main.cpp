@@ -69,10 +69,3 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-//エラー出力
-void ErrorOut(const char file[], const char func[], int line,
-		const char message[]) {
-	fprintf(stderr, "<file:%s func:%s line:%d>\n", file, func, line);
-	fprintf(stderr, "Error:%s\n\n", message);
-}
-

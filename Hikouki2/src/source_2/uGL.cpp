@@ -22,7 +22,7 @@ float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
 float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
 
 //エラー出力
-static void uErrorOut(const char file[], const char func[], int line,
+void uErrorOut(const char file[], const char func[], int line,
 		const char message[]) {
 	fprintf(stderr, "<file:%s func:%s line:%d>\n", file, func, line);
 	fprintf(stderr, "Error:%s\n\n", message);

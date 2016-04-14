@@ -17,6 +17,10 @@ extern float uMaterial4fv_black[];
 extern float uMaterial4fv_blue[];
 extern float uMaterial4fv_green[];
 
+//エラー出力
+void uErrorOut(const char file[], const char func[], int line,
+		const char message[]);
+
 //2D上にの点を描画する(size=直径)
 extern void uPoint2D(int x, int y, float size);
 
