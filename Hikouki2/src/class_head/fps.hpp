@@ -13,6 +13,6 @@ public:
 	void update();
 
 	//描画
-	void draw(int x, int y);
+	void draw(int x, int y) const;
 };
 

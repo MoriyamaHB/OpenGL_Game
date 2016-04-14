@@ -21,7 +21,7 @@ void Fps::update() {
 }
 
 //描画
-void Fps::draw(int x, int y) {
+void Fps::draw(int x, int y) const {
 	char str[48];
 	sprintf(str, "%.2f", fps);
 	out_disp.regist(str, uColor4fv_blue);
