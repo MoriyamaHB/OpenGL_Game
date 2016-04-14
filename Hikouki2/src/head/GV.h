@@ -1,17 +1,20 @@
-#include"define.h"
-#include"enum.h"
-#include"struct.h"
+//標準、ライブラリ
 #include <freeglut.h>
 //#include<GL/freeglut.h>
 #include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include"../head/vector3.h"
-#include<iostream>
-#include"../head/uGL.h"
-#include<unistd.h>
-#include<time.h>
 #include<string.h>
+#include"../head/uGL.h"
+
+//自作ヘッダ
+#include"define.h"
+#include"enum.h"
+#include"struct.h"
+
+//クラス
+#include"../class_head/vector3.h"
+#include"../class_head/camera.hpp"
+#include"../class_head/fps.hpp"
+#include"../class_head/OutputDisplay.hpp"
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
@@ -20,11 +23,6 @@
 #endif
 
 #include "function.h"
-
-//クラス設計
-#include"../class_head/camera.hpp"
-#include"../class_head/fps.hpp"
-#include"../class_head/OutputDisplay.hpp"
 
 //クラス定義
 GLOBAL Camera3D3P camera;

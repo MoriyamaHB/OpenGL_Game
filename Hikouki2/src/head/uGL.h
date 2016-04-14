@@ -5,7 +5,7 @@
 //#include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>
-#include "../head/vector3.h"
+#include "../class_head/vector3.h"
 
 #define uPI 3.1415926
 
