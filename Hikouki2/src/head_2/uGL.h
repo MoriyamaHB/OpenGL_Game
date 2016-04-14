@@ -56,4 +56,7 @@ extern void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2,
 //黒白の地面を描画
 extern void uDrawGround(int size);
 
+//文字列描画
+void uDrawString(char str[], int x0, int y0, float color[]);
+
 #endif /* UGL_H_ */

@@ -130,9 +130,9 @@ public:
 		angle_h = 0;
 	}
 
-	//カメラ座標を取得する
-	Vector3 getStateCoordinates() const {
-		return Vector3(x, y, z);
+	//カメラ視点座標を取得する
+	Vector3 getStateWatchCoordinates() const {
+		return Vector3(gx, gy, gz);
 	}
 
 	//カメラ座標をマウスの移動から計算する(3人称視点)

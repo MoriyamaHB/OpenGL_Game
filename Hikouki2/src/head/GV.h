@@ -20,6 +20,8 @@
 
 //クラス設計
 #include"../source/camera.hpp"
+#include"../source/fps.hpp"
 
 //クラス定義
 GLOBAL Camera3D1P camera;
+GLOBAL Fps fps;

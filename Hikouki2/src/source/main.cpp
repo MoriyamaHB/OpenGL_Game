@@ -1,5 +1,6 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
+#include "GL/gl.h"
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 
@@ -9,6 +10,8 @@ void draw(void) {
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
 	glLoadIdentity(); //モデルビュー変換行列の初期化
+	fps.fps_Update();
+	fps.fps_DrawFPS(100, 100);
 
 	//カメラ
 	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
@@ -20,7 +23,7 @@ void draw(void) {
 
 	//赤い箱
 	glPushMatrix();
-	Vector3 cam_vec = camera.getStateCoordinates();
+	Vector3 cam_vec = camera.getStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.1);
@@ -72,3 +75,4 @@ void ErrorOut(const char file[], const char func[], int line,
 	fprintf(stderr, "<file:%s func:%s line:%d>\n", file, func, line);
 	fprintf(stderr, "Error:%s\n\n", message);
 }
+

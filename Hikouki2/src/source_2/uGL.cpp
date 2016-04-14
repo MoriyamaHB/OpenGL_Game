@@ -223,3 +223,31 @@ void uDrawGround(int size) {
 	}
 	glEnd();
 }
+
+//文字列描画
+void uDrawString(char str[], int x0, int y0, float color[]) {
+	glDisable (GL_LIGHTING);
+
+	// 平行投影にする
+	glMatrixMode (GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, glutGet(GLUT_INIT_WINDOW_WIDTH),
+			glutGet(GLUT_INIT_WINDOW_HEIGHT), 0);
+	glMatrixMode (GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	// 画面上にテキスト描画
+	glColor4fv(color);
+	glRasterPos2f(x0, y0);
+	for (; *str; str++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *str);
+
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+
+	glEnable(GL_LIGHTING);
+}
