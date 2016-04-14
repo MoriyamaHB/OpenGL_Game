@@ -1,5 +1,5 @@
 //first_init
-void first_init(int argc, char *argv[]);
+GLOBAL void first_init(int argc, char *argv[]);
 
 //input.cpp
 GLOBAL int getStateKeyOfSmallAlphabet(unsigned char key);
@@ -9,8 +9,8 @@ GLOBAL void getMouseMotionAndInit(int *dx, int *dy);
 GLOBAL void checkMouseMotion(int x, int y);
 
 //main.cpp
-void draw(void);
-void resize(int w, int h);
-void timer(int value);
+GLOBAL void draw(void);
+GLOBAL void resize(int w, int h);
+GLOBAL void timer(int value);
 GLOBAL void ErrorOut(const char file[], const char func[], int line,
 		const char message[]);
