@@ -1,7 +1,13 @@
 #ifndef UGL_H_
 #define UGL_H_
 
-#include "vector3.h"
+#include <freeglut.h>
+//#include <GL/freeglut.h>
+#include <math.h>
+#include <stdio.h>
+#include "../head/vector3.h"
+
+#define uPI 3.1415926
 
 //色(4fv)
 extern float uColor4fv_brack[];

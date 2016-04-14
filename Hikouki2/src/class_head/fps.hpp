@@ -11,6 +11,7 @@ public:
 		GLframe = 0;
 		GLtimenow = 0;
 		GLtimebase = 0;
+		fps = 0;
 	}
 
 	//更新

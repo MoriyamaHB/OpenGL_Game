@@ -1,11 +1,4 @@
-#include <freeglut.h>
-//#include <GL/freeglut.h>
-#include <math.h>
-#include <stdio.h>
-#include "../head_2/vector3.h"
-#include "../head_2/uGL.h"
-
-#define uPI 3.1415926
+#include "../head/uGL.h"
 
 //色(4fv)
 float uColor4fv_brack[] = { 0.0f, 0.0f, 0.0f, 1.0f }; //黒

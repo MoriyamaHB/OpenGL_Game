@@ -6,9 +6,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#include"../head_2/vector3.h"
+#include"../head/vector3.h"
 #include<iostream>
-#include"../head_2/uGL.h"
+#include"../head/uGL.h"
 #include<unistd.h>
 #include<time.h>
 #include<string.h>
