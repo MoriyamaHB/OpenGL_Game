@@ -37,7 +37,7 @@ void Camera3D3P::transfarAndRotateByMouse() {
 	angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
 	angle_h += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
-	//min_wrap_angle_h~π/2の範囲にangle_hをラップする
+	//angle_hの角度範囲ををラップする
 	if (angle_h < min_wrap_angle_h)
 		angle_h = min_wrap_angle_h;
 	else if (angle_h > max_wrap_angle_h)
@@ -129,7 +129,7 @@ void Camera3D1P::transfarAndRotateByMouse() {
 	angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
 	angle_h -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
-	//min_wrap_angle_h~π/2の範囲にangle_hをラップする
+	//angle_hの角度範囲ををラップする
 	if (angle_h < min_wrap_angle_h)
 		angle_h = min_wrap_angle_h;
 	else if (angle_h > max_wrap_angle_h)
