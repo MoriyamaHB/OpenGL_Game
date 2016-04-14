@@ -1,6 +1,9 @@
 class OutputDisplay {
 public:
 
+	//デフォルトコンストラクタ
+	OutputDisplay();
+
 	//画面出力文字の登録
 	void regist(const char str[], const float color[]);
 

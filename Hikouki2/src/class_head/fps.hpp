@@ -6,13 +6,8 @@ private:
 	double fps; //fps
 
 public:
-
-	Fps() {
-		GLframe = 0;
-		GLtimenow = 0;
-		GLtimebase = 0;
-		fps = 0;
-	}
+	//コンストラクタ
+	Fps();
 
 	//更新
 	void update();

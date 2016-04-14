@@ -15,6 +15,11 @@ void Camera3D3P::initCoordinates() {
 	angle_h = 0;
 }
 
+//デフォルトコンストラクタ
+Camera3D3P::Camera3D3P() {
+	initCoordinates();
+}
+
 //カメラ視点座標を取得する
 Vector3 Camera3D3P::getStateWatchCoordinates() const {
 	return Vector3(gx, gy, gz);
@@ -86,6 +91,11 @@ void Camera3D3P::setGluLookAt() const {
 }
 
 //-------------------------------------------------------------------------------------------
+
+//デフォルトコンストラクタ
+Camera3D1P::Camera3D1P() {
+	initCoordinates();
+}
 
 //カメラ座標を初期化する
 void Camera3D1P::initCoordinates() {

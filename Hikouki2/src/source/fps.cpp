@@ -1,5 +1,13 @@
 #include "../head/GV.h"
 
+//コンストラクタ
+Fps::Fps() {
+	GLframe = 0;
+	GLtimenow = 0;
+	GLtimebase = 0;
+	fps = 0;
+}
+
 //更新
 void Fps::update() {
 	GLframe++; //フレーム数を＋１

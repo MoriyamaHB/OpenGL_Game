@@ -4,15 +4,13 @@ class Camera3D3P {
 public:
 
 	//デフォルトコンストラクタ
-	Camera3D3P() {
-		initCoordinates();
-	}
+	Camera3D3P();
 
 	//カメラ座標を初期化する
 	void initCoordinates();
 
 	//カメラ視点座標を取得する
-	Vector3 getStateWatchCoordinates() const ;
+	Vector3 getStateWatchCoordinates() const;
 
 	//カメラ座標をマウスの移動から計算する(3人称視点)
 	void transfarAndRotateByMouse();
@@ -21,7 +19,7 @@ public:
 	void transfarByKey();
 
 	//gluLookAtを設定する
-	void setGluLookAt() const ;
+	void setGluLookAt() const;
 
 private:
 	float x;
@@ -43,9 +41,7 @@ class Camera3D1P {
 public:
 
 	//デフォルトコンストラクタ
-	Camera3D1P() {
-		initCoordinates();
-	}
+	Camera3D1P();
 
 	//カメラ座標を初期化する
 	void initCoordinates();

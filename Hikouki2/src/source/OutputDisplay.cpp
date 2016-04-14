@@ -1,5 +1,10 @@
 #include "../head/GV.h"
 
+//デフォルトコンストラクタ
+OutputDisplay::OutputDisplay() {
+	num = 0;
+}
+
 //画面出力文字の登録
 void OutputDisplay::regist(const char str[], const float color[]) {
 	if (num >= MAX_ITEM) { //満杯なら
