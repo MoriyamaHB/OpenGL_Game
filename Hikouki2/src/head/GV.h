@@ -11,6 +11,7 @@
 #include"../head_2/uGL.h"
 #include<unistd.h>
 #include<time.h>
+#include<string.h>
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
@@ -21,9 +22,11 @@
 #include "function.h"
 
 //クラス設計
-#include"../source/camera.hpp"
-#include"../source/fps.hpp"
+#include"../class_head/camera.hpp"
+#include"../class_head/fps.hpp"
+#include"../class_head/OutputDisplay.hpp"
 
 //クラス定義
 GLOBAL Camera3D3P camera;
+GLOBAL OutputDisplay out_disp;
 GLOBAL Fps fps;

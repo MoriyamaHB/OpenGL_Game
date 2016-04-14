@@ -41,6 +41,9 @@ void draw(void) {
 	//オブジェクト描画
 	drawObjects();
 
+	//画面出力文字列描画
+	out_disp.draw();
+
 	//ディスプレイ終了処理
 	glEnd();
 	glEndList();

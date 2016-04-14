@@ -225,7 +225,7 @@ void uDrawGround(int size) {
 }
 
 //文字列描画
-void uDrawString(char str[], int x0, int y0, float color[]) {
+void uDrawString(const char str[], int x0, int y0, const float color[]) {
 	glDisable (GL_LIGHTING);
 
 	// 平行投影にする

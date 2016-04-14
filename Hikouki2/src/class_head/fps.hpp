@@ -1,3 +1,5 @@
+#include "../head/GV.h"
+
 class Fps {
 private:
 	int GLframe; //フレーム数
@@ -29,7 +31,7 @@ public:
 	void draw(int x, int y) {
 		char str[48];
 		sprintf(str, "%.2f", fps);
-		uDrawString(str, x, y, uColor4fv_red);
+		out_disp.regist(str,uColor4fv_blue);
 	}
 };
 
