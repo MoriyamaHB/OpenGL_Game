@@ -3,7 +3,7 @@
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 
-static void drawObject() {
+static void drawObjects() {
 
 	//赤い箱
 	glPushMatrix();
@@ -27,8 +27,8 @@ void draw(void) {
 	glLoadIdentity(); //モデルビュー変換行列の初期化
 
 	//fps
-	fps.fps_Update();
-	fps.fps_DrawFPS(100, 100);
+	fps.update();
+	fps.draw(10, 25);
 
 	//カメラ
 	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
@@ -39,7 +39,7 @@ void draw(void) {
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 
 	//オブジェクト描画
-	drawObject();
+	drawObjects();
 
 	//ディスプレイ終了処理
 	glEnd();

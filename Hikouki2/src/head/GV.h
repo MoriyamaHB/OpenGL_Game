@@ -9,6 +9,8 @@
 #include"../head_2/vector3.h"
 #include<iostream>
 #include"../head_2/uGL.h"
+#include<unistd.h>
+#include<time.h>
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL

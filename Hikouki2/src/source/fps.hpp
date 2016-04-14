@@ -1,39 +1,35 @@
 class Fps {
+private:
+	int GLframe; //フレーム数
+	int GLtimenow; //経過時間
+	int GLtimebase; //計測開始時間
+	double fps; //fps
+
 public:
-	//デフォルトコンストラクタ
+
 	Fps() {
-		start_cnt = 0;
-		cnt = 0;
-		calculated_fps = 0;
-		update_cnt = FRAME_PER_SECONDS;
-		set_fps = FRAME_PER_SECONDS;
-		frame_cnt = 0;
-		WaitTime = 0;
+		GLframe = 0;
+		GLtimenow = 0;
+		GLtimebase = 0;
 	}
 
-	//FPS処理時間など更新
-	void fps_Update() {
-		frame_cnt++;
-		if (cnt == update_cnt) { //60フレーム目なら平均を計算する
-			calculated_fps = 1000 / ((update_cnt) / (double) update_cnt);
-			cnt = 0;
+	//更新
+	void update() {
+		GLframe++; //フレーム数を＋１
+		GLtimenow = glutGet(GLUT_ELAPSED_TIME); //経過時間を取得
+
+		if (GLtimenow - GLtimebase > 1000){ //１秒以上たったらfpsを出力
+			fps = GLframe * 1000.0 / (GLtimenow - GLtimebase);
+			GLtimebase = GLtimenow; //基準時間を設定
+			GLframe = 0; //フレーム数をリセット
 		}
 	}
 
-	//FPSの描画
-	void fps_DrawFPS(int X, int Y) {
+	//描画
+	void draw(int x, int y) {
 		char str[48];
-		sprintf(str, "%f", calculated_fps);
-		uDrawString(str, X, Y, uColor4fv_red);
+		sprintf(str, "%.2f", fps);
+		uDrawString(str, x, y, uColor4fv_red);
 	}
-
-private:
-	unsigned int start_cnt;		//測定開始時刻
-	unsigned int cnt;			//カウンタ
-	double calculated_fps;		//fpsの計算結果
-	unsigned int update_cnt;	//平均を取るサンプル数
-	int set_fps;				//設定したFPS
-	int WaitTime;				//待機時間のサンプリングフレーム間での合計
-	unsigned int frame_cnt;		//経過フレームのカウント
 };
 

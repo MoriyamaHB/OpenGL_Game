@@ -242,7 +242,7 @@ void uDrawString(char str[], int x0, int y0, float color[]) {
 	glColor4fv(color);
 	glRasterPos2f(x0, y0);
 	for (; *str; str++)
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *str);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
 
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
