@@ -18,6 +18,7 @@ void Camera3D3P::initCoordinates() {
 //デフォルトコンストラクタ
 Camera3D3P::Camera3D3P() {
 	initCoordinates();
+
 }
 
 //カメラ視点座標を取得する
