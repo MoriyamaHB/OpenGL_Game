@@ -1,6 +1,6 @@
 //標準、ライブラリ
-#include <freeglut.h>
-//#include<GL/freeglut.h>
+//#include <freeglut.h>
+#include<GL/freeglut.h>
 #include<stdio.h>
 #include<string.h>
 #include"../head/uGL.h"

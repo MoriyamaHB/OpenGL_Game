@@ -1,8 +1,8 @@
 #ifndef UGL_H_
 #define UGL_H_
 
-#include <freeglut.h>
-//#include <GL/freeglut.h>
+//#include <freeglut.h>
+#include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>
 #include "../class_head/vector3.h"
