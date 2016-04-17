@@ -1,13 +1,14 @@
 #include "../head/GV.h"
 
-//キーの入力
-static unsigned char small_alphabet[26]; //小文字アルファベット
+/*
+ * キー入力
+ */
 
-//マウスの移動量
-static int mouse_dx = 0;
-static int mouse_dy = 0;
+//キーの入力状態記録
+static unsigned char small_alphabet[26];
 
 //小文字アルファベットの入力状態取得
+//入力なら1,非入力なら0を返します
 int getStateKeyOfSmallAlphabet(unsigned char key) {
 	if (key < 'a' || 'z' < key) {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
@@ -16,7 +17,7 @@ int getStateKeyOfSmallAlphabet(unsigned char key) {
 	return small_alphabet[key - 'a'];
 }
 
-//キー入力判定
+//OpenGLコールバック関数
 void checkPushKey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
@@ -24,7 +25,7 @@ void checkPushKey(unsigned char key, int x, int y) {
 	}
 }
 
-//キー放す判定
+//OpenGLコールバック関数
 void checkUpkey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
@@ -32,14 +33,23 @@ void checkUpkey(unsigned char key, int x, int y) {
 	}
 }
 
-//マウス移動量取得&初期化
+/*
+ * マウス入力
+ */
+
+//マウスの移動量
+static int mouse_dx = 0;
+static int mouse_dy = 0;
+
+//前回の呼び出しからのマウス移動量を返します
 void getMouseMotionAndInit(int *dx, int *dy) {
 	*dx = mouse_dx;
 	*dy = mouse_dy;
 	mouse_dx = mouse_dy = 0;
 }
 
-//マウス移動
+//OpenGLコールバック関数
+//ボタンを押している時 & 押していない時の両方で呼び出されます
 void checkMouseMotion(int x, int y) {
 	static int wrap_flag = 0;
 

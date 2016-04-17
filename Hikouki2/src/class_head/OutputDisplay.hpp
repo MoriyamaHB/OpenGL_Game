@@ -1,18 +1,14 @@
 class OutputDisplay {
 public:
-
-	//画面出力文字の登録
 	void regist(const char str[], const float color[], int life = 1);
-
-	//画面出力文字の描画
 	void draw();
 
 private:
-	const static int MAX_ITEM = 24; //最大登録数
-	const static int LINE_HEIGHT = 30; //一行分の高さ
-	const static int START_WIDTH = 10; //描画開始座標x
-	const static int START_HEIGHT = 23; //描画開始座標y
-	OutputItem item[MAX_ITEM];
+	const static int kMaxItem = 24; 	//最大登録数
+	const static int kLineHeight = 30; 	//一行分の高さ
+	const static int kStartWidth = 10; 	//描画開始座標x
+	const static int kStartHeight = 23; //描画開始座標y
+	OutputItem item[kMaxItem];
 
 	//空の項目を探す
 	int serchEmptyItem();

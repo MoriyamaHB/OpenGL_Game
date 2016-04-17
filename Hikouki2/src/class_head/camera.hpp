@@ -1,21 +1,18 @@
 class Vector3;
 
+//3人称 & 自由飛行のカメラ移動計算を行います
 class Camera3D3P {
 public:
-
-	//デフォルトコンストラクタ
 	Camera3D3P();
 
-	//カメラ座標を初期化する
+	//初期化
 	void initCoordinates();
 
-	//カメラ視点座標を取得する
+	//getter
 	Vector3 getStateWatchCoordinates() const;
 
-	//カメラ座標をマウスの移動から計算する(3人称視点)
+	//カメラ移動
 	void transfarAndRotateByMouse();
-
-	//カメラ座標をキー入力から計算する(3人称視点)
 	void transfarByKey();
 
 	//gluLookAtを設定する
@@ -33,26 +30,23 @@ private:
 	float uz;
 	double angle_w;
 	double angle_h;
-	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
-	const static double max_wrap_angle_h = PI / 2 - 0.0001;
+	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
+	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 };
 
+//1人称 & 自由飛行のカメラ移動計算を行います
 class Camera3D1P {
 public:
-
-	//デフォルトコンストラクタ
 	Camera3D1P();
 
-	//カメラ座標を初期化する
+	//初期化
 	void initCoordinates();
 
-	//カメラ視点座標を取得する
+	//getter
 	Vector3 getStateWatchCoordinates() const;
 
-	//カメラ座標をマウスの移動から計算する(3人称視点)
+	//カメラ移動
 	void transfarAndRotateByMouse();
-
-	//カメラ座標をキー入力から計算する(3人称視点)
 	void transfarByKey();
 
 	//gluLookAtを設定する
@@ -70,6 +64,6 @@ private:
 	float uz;
 	double angle_w;
 	double angle_h;
-	const static double min_wrap_angle_h = -PI / 2 + 0.0001;
-	const static double max_wrap_angle_h = PI / 2 - 0.0001;
+	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
+	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 };

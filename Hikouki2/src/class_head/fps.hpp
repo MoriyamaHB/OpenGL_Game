@@ -6,7 +6,6 @@ private:
 	double fps; //fps
 
 public:
-	//コンストラクタ
 	Fps();
 
 	//更新

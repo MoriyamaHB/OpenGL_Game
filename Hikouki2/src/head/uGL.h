@@ -1,7 +1,6 @@
 #ifndef UGL_H_
 #define UGL_H_
 
-//#include <freeglut.h>
 #include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>

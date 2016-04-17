@@ -15,13 +15,11 @@ void Camera3D3P::initCoordinates() {
 	angle_h = 0;
 }
 
-//デフォルトコンストラクタ
 Camera3D3P::Camera3D3P() {
 	initCoordinates();
-
 }
 
-//カメラ視点座標を取得する
+//カメラ視点座標をVector3クラスで返します
 Vector3 Camera3D3P::getStateWatchCoordinates() const {
 	return Vector3(gx, gy, gz);
 }
@@ -38,23 +36,25 @@ void Camera3D3P::transfarAndRotateByMouse() {
 	angle_h += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
 	//angle_hの角度範囲ををラップする
-	if (angle_h < min_wrap_angle_h)
-		angle_h = min_wrap_angle_h;
-	else if (angle_h > max_wrap_angle_h)
-		angle_h = max_wrap_angle_h;
+	//これによりカメラが縦方向に一周しなくなる
+	if (angle_h < kMinWrapAngleH)
+		angle_h = kMinWrapAngleH;
+	else if (angle_h > kMaxWrapAngleH)
+		angle_h = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
 	x = cos(angle_w) * cos(angle_h) + gx;
 	z = sin(angle_w) * cos(angle_h) + gz;
 	y = sin(angle_h) + gy;
 
-	//yの範囲を限定
+	//todo 一時的なカメラの当たり判定
 	if (y < 0.05)
 		y = 0.05;
 
 }
 
 //カメラ座標をキー入力から計算する(3人称視点)
+//qが入力されているときはここでカメラが初期化されます
 void Camera3D3P::transfarByKey() {
 
 	//カメラの移動
@@ -77,7 +77,7 @@ void Camera3D3P::transfarByKey() {
 		gz -= CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
 	}
 
-	//yの範囲を限定
+	//todo 一時的なカメラ視点位置の当たり判定
 	if (gy < 0)
 		gy = 0;
 
@@ -93,7 +93,6 @@ void Camera3D3P::setGluLookAt() const {
 
 //-------------------------------------------------------------------------------------------
 
-//デフォルトコンストラクタ
 Camera3D1P::Camera3D1P() {
 	initCoordinates();
 }
@@ -113,7 +112,7 @@ void Camera3D1P::initCoordinates() {
 	angle_h = 0;
 }
 
-//カメラ視点座標を取得する
+//カメラ視点座標をVector3クラスで返します
 Vector3 Camera3D1P::getStateWatchCoordinates() const {
 	return Vector3(gx, gy, gz);
 }
@@ -130,23 +129,25 @@ void Camera3D1P::transfarAndRotateByMouse() {
 	angle_h -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
 	//angle_hの角度範囲ををラップする
-	if (angle_h < min_wrap_angle_h)
-		angle_h = min_wrap_angle_h;
-	else if (angle_h > max_wrap_angle_h)
-		angle_h = max_wrap_angle_h;
+	//これによりカメラが縦方向に一周しなくなる
+	if (angle_h < kMinWrapAngleH)
+		angle_h = kMinWrapAngleH;
+	else if (angle_h > kMaxWrapAngleH)
+		angle_h = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
 	gx = cos(angle_w) * cos(angle_h) + x;
 	gz = sin(angle_w) * cos(angle_h) + z;
 	gy = sin(angle_h) + y;
 
-	//yの範囲を限定
+	//todo 一時的なカメラの当たり判定
 	if (gy < -0.9)
 		gy = -0.9;
 
 }
 
 //カメラ座標をキー入力から計算する(3人称視点)
+//qが入力されているときはここでカメラが初期化されます
 void Camera3D1P::transfarByKey() {
 
 	//カメラの移動
@@ -169,7 +170,7 @@ void Camera3D1P::transfarByKey() {
 		z += CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
 	}
 
-	//yの範囲を限定
+	//todo 一時的なカメラ視点位置の当たり判定
 	if (y < 0.1)
 		y = 0.1;
 

@@ -1,6 +1,5 @@
 #include "../head/GV.h"
 
-//コンストラクタ
 Fps::Fps() {
 	GLframe = 0;
 	GLtimenow = 0;
@@ -8,7 +7,7 @@ Fps::Fps() {
 	fps = 0;
 }
 
-//更新
+//計測したいスレッドにある関数から毎フレーム呼び出してください
 void Fps::update() {
 	GLframe++; //フレーム数を＋１
 	GLtimenow = glutGet(GLUT_ELAPSED_TIME); //経過時間を取得
@@ -20,7 +19,7 @@ void Fps::update() {
 	}
 }
 
-//描画
+//x,yの位置に計測したfpsの描画を登録します
 void Fps::draw(int x, int y) const {
 	char str[48];
 	sprintf(str, "%.2f", fps);

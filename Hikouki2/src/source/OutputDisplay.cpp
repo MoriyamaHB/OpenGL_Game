@@ -16,14 +16,16 @@ void OutputDisplay::regist(const char str[], const float color[], int life) {
 	item[n].flag = 1;
 }
 
-//画面出力文字の描画
+//登録された文字列を描画します
+//描画life=0でも一度は描画されます
+//例)lefe=0→1,life=1→1,life=2→2
 void OutputDisplay::draw() {
 	int dn = 0; //描画回数
-	for (int i = 0; i < MAX_ITEM; i++)
+	for (int i = 0; i < kMaxItem; i++)
 		if (item[i].flag == 1) {
 			//項目描画
-			uDrawString(item[i].str, START_WIDTH,
-					START_HEIGHT + LINE_HEIGHT * dn, item[i].color);
+			uDrawString(item[i].str, kStartWidth,
+					kStartHeight + kLineHeight * dn, item[i].color);
 			dn++;
 			//削除処理
 			if (--item[i].life <= 0)
@@ -31,9 +33,10 @@ void OutputDisplay::draw() {
 		}
 }
 
-//空の項目を探す
+//空のitemの添字を返します
+//なければ-1を返します
 int OutputDisplay::serchEmptyItem() {
-	for (int i = 0; i < MAX_ITEM; i++)
+	for (int i = 0; i < kMaxItem; i++)
 		if (item[i].flag == 0)
 			return i;
 	return -1;

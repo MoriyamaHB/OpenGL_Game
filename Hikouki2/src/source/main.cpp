@@ -3,6 +3,7 @@
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
 
+//drawが長くなるのでオブジェクトだけ分割
 static void drawObjects() {
 
 	//赤い箱
@@ -19,7 +20,7 @@ static void drawObjects() {
 	glPopMatrix();
 }
 
-//ディスプレイ関数
+//OpenGLコールバック関数
 void draw(void) {
 
 	//ディスプレイ初期化
@@ -52,7 +53,7 @@ void draw(void) {
 		exit(0);
 }
 
-//リサイズ
+//OpenGLコールバック関数
 void resize(int w, int h) {
 	//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
@@ -66,7 +67,8 @@ void resize(int w, int h) {
 	glMatrixMode (GL_MODELVIEW);
 }
 
-//タイマー
+//OpenGLコールバック関数
+//FRAME_PER_SECONDSでdraw関数を呼び出します
 void timer(int value) {
 	glutTimerFunc(1000 / FRAME_PER_SECONDS, timer, 0);
 	glutPostRedisplay(); //再描画
