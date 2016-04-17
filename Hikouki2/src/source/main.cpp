@@ -11,7 +11,7 @@ static void drawObjects() {
 	Vector3 cam_vec = camera.getStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(0.1);
+	glutSolidCube(0.2);
 	glPopMatrix();
 
 	//地面描画
