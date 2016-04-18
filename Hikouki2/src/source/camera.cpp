@@ -69,12 +69,12 @@ void Camera3D3P::transfarByKey() {
 		gy += CAMERA_SP * sin(angle_h);
 	}
 	if (getStateKeyOfSmallAlphabet('a') == 1) {
-		gx -= CAMERA_SP * cos(angle_w - PI / 2) * cos(angle_h);
-		gz -= CAMERA_SP * sin(angle_w - PI / 2) * cos(angle_h);
+		gx -= CAMERA_SP * cos(angle_w - PI / 2);
+		gz -= CAMERA_SP * sin(angle_w - PI / 2);
 	}
 	if (getStateKeyOfSmallAlphabet('d') == 1) {
-		gx -= CAMERA_SP * cos(angle_w + PI / 2) * cos(angle_h);
-		gz -= CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
+		gx -= CAMERA_SP * cos(angle_w + PI / 2);
+		gz -= CAMERA_SP * sin(angle_w + PI / 2);
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
@@ -162,12 +162,12 @@ void Camera3D1P::transfarByKey() {
 		y -= CAMERA_SP * sin(angle_h);
 	}
 	if (getStateKeyOfSmallAlphabet('a') == 1) {
-		x += CAMERA_SP * cos(angle_w - PI / 2) * cos(angle_h);
-		z += CAMERA_SP * sin(angle_w - PI / 2) * cos(angle_h);
+		x += CAMERA_SP * cos(angle_w - PI / 2);
+		z += CAMERA_SP * sin(angle_w - PI / 2);
 	}
 	if (getStateKeyOfSmallAlphabet('d') == 1) {
-		x += CAMERA_SP * cos(angle_w + PI / 2) * cos(angle_h);
-		z += CAMERA_SP * sin(angle_w + PI / 2) * cos(angle_h);
+		x += CAMERA_SP * cos(angle_w + PI / 2);
+		z += CAMERA_SP * sin(angle_w + PI / 2);
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
