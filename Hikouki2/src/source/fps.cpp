@@ -4,14 +4,19 @@ Fps::Fps() {
 	GLframe = 0;
 	GLtimenow = 0;
 	GLtimebase = 0;
+	frame_count = 0;
 	fps = 0;
+}
+
+int Fps::getFrameCount(){
+	return frame_count;
 }
 
 //計測したいスレッドにある関数から毎フレーム呼び出してください
 void Fps::update() {
 	GLframe++; //フレーム数を＋１
+	frame_count++; //フレームカウント
 	GLtimenow = glutGet(GLUT_ELAPSED_TIME); //経過時間を取得
-
 	if (GLtimenow - GLtimebase > 1000) { //１秒以上たったらfpsを出力
 		fps = GLframe * 1000.0 / (GLtimenow - GLtimebase);
 		GLtimebase = GLtimenow; //基準時間を設定

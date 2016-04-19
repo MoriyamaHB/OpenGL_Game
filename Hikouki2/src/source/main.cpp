@@ -2,6 +2,7 @@
 #include "../head/GV.h"
 
 GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
+Ball ball_test(3.0f,2.0f,0.0f);//テストです.あとで削除予定
 
 //drawが長くなるのでオブジェクトだけ分割
 static void drawObjects() {
@@ -11,13 +12,17 @@ static void drawObjects() {
 	Vector3 cam_vec = camera.getStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(0.2);
+	glutSolidCube(0.01);
 	glPopMatrix();
 
 	//地面描画
 	glPushMatrix();
 	uDrawGround(50);
 	glPopMatrix();
+
+	//球を描画
+	ball_test.setScale((float)fps.getFrameCount()/1000);
+	ball_test.draw();
 }
 
 //OpenGLコールバック関数

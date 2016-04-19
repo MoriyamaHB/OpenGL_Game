@@ -15,6 +15,7 @@
 #include"../class_head/camera.hpp"
 #include"../class_head/fps.hpp"
 #include"../class_head/OutputDisplay.hpp"
+#include"../class_head/ball.hpp"
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
