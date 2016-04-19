@@ -21,6 +21,7 @@ static void drawObjects() {
 	glPopMatrix();
 
 	//球を描画
+	ball_test.setDrawFlag(true);
 	ball_test.setScale((float)fps.getFrameCount()/1000);
 	ball_test.draw();
 }

@@ -19,6 +19,7 @@ Ball::Ball(float x, float y, float z) {
 
 void Ball::init() {
 	place.zero();
+	can_draw = false;
 	scale = 1;
 	for (int i = 0; i < 4; i++)
 		material[i] = uMaterial4fv_white[i];
@@ -27,6 +28,10 @@ void Ball::init() {
 }
 /*************************    setter    *************************/
 
+//デフォルト(false)
+void Ball::setDrawFlag(bool tf) {
+	can_draw = tf;
+}
 //デフォルト(1)
 void Ball::setScale(float s) {
 	scale = s;
@@ -47,6 +52,9 @@ void Ball::setSphereFineness(float slices, float stacks) {
 /*************************    描画    *************************/
 
 void Ball::draw() {
+	if (can_draw == false)
+		return;
+
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glTranslatef(place.x, place.y, place.z);

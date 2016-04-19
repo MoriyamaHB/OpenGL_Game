@@ -4,6 +4,7 @@ class Ball {
 
 private:
 	Vector3 place;
+	bool can_draw;
 	float scale;
 	float material[4];
 	float sphere_slices, sphere_stacks;
@@ -15,6 +16,7 @@ public:
 	void init();
 
 	//設定
+	void setDrawFlag(bool tf);
 	void setScale(float s);
 	void setMaterial(float mat[]);
 	void setSphereFineness(float slices, float stacks);
