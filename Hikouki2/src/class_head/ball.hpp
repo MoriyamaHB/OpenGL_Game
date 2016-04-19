@@ -4,7 +4,7 @@ class Ball {
 
 private:
 	Vector3 place;
-	bool can_draw;
+	bool draw_flag;
 	float scale;
 	float material[4];
 	float sphere_slices, sphere_stacks;
