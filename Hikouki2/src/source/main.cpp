@@ -1,8 +1,8 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
 
-GLfloat light0pos[] = { 5.0, 3.0, 0.0, 1.0 };
-Ball ball_test(3.0f,2.0f,0.0f);//テストです.あとで削除予定
+GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
+Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
 
 //drawが長くなるのでオブジェクトだけ分割
 static void drawObjects() {
@@ -22,7 +22,7 @@ static void drawObjects() {
 
 	//球を描画
 	ball_test.setDrawFlag(true);
-	ball_test.setScale((float)fps.getFrameCount()/1000);
+	ball_test.setScale((float) fps.getFrameCount() / 1000);
 	ball_test.draw();
 }
 
@@ -43,7 +43,12 @@ void draw(void) {
 	camera.setGluLookAt(); //視点をセット
 
 	//ライト
+	//カメラの視点座標に配置
+	glPushMatrix();
+	Vector3 cam_vec = camera.getStateWatchCoordinates();
+	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
+	glPopMatrix();
 
 	//オブジェクト描画
 	drawObjects();
