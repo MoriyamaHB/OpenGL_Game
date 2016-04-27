@@ -6,17 +6,17 @@ public:
 	Camera3D3P();
 
 	//初期化
-	void initCoordinates();
+	void InitCoordinates();
 
 	//getter
-	Vector3 getStateWatchCoordinates() const;
+	Vector3 GetStateWatchCoordinates() const;
 
 	//カメラ移動
-	void transfarAndRotateByMouse();
-	void transfarByKey();
+	void TransfarAndRotateByMouse();
+	void TransfarByKey();
 
 	//gluLookAtを設定する
-	void setGluLookAt() const;
+	void SetGluLookAt() const;
 
 private:
 	float x_;
@@ -40,17 +40,17 @@ public:
 	Camera3D1P();
 
 	//初期化
-	void initCoordinates();
+	void InitCoordinates();
 
 	//getter
-	Vector3 getStateWatchCoordinates() const;
+	Vector3 GetStateWatchCoordinates() const;
 
 	//カメラ移動
-	void transfarAndRotateByMouse();
-	void transfarByKey();
+	void TransfarAndRotateByMouse();
+	void TransfarByKey();
 
 	//gluLookAtを設定する
-	void setGluLookAt() const;
+	void SetGluLookAt() const;
 
 private:
 	float x_;

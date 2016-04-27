@@ -1,7 +1,7 @@
 #include "../head/GV.h"
 
 //カメラ座標を初期化する
-void Camera3D3P::initCoordinates() {
+void Camera3D3P::InitCoordinates() {
 	x_ = 0;
 	y_ = 5;
 	z_ = 0;
@@ -16,16 +16,16 @@ void Camera3D3P::initCoordinates() {
 }
 
 Camera3D3P::Camera3D3P() {
-	initCoordinates();
+	InitCoordinates();
 }
 
 //カメラ視点座標をVector3クラスで返します
-Vector3 Camera3D3P::getStateWatchCoordinates() const {
+Vector3 Camera3D3P::GetStateWatchCoordinates() const {
 	return Vector3(gx_, gy_, gz_);
 }
 
 //カメラ座標をマウスの移動から計算する(3人称視点)
-void Camera3D3P::transfarAndRotateByMouse() {
+void Camera3D3P::TransfarAndRotateByMouse() {
 
 	//マウス移動の取得
 	int mouse_dx, mouse_dy;
@@ -55,7 +55,7 @@ void Camera3D3P::transfarAndRotateByMouse() {
 
 //カメラ座標をキー入力から計算する(3人称視点)
 //qが入力されているときはここでカメラが初期化されます
-void Camera3D3P::transfarByKey() {
+void Camera3D3P::TransfarByKey() {
 
 	//カメラの移動
 	if (getStateKeyOfSmallAlphabet('w') == 1) {
@@ -83,22 +83,22 @@ void Camera3D3P::transfarByKey() {
 
 	//q入力時_カメラの初期化
 	if (getStateKeyOfSmallAlphabet('q') == 1)
-		initCoordinates();
+		InitCoordinates();
 }
 
 //gluLookAtを設定する
-void Camera3D3P::setGluLookAt() const {
+void Camera3D3P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
 }
 
 //-------------------------------------------------------------------------------------------
 
 Camera3D1P::Camera3D1P() {
-	initCoordinates();
+	InitCoordinates();
 }
 
 //カメラ座標を初期化する
-void Camera3D1P::initCoordinates() {
+void Camera3D1P::InitCoordinates() {
 	x_ = 0;
 	y_ = 3;
 	z_ = -10;
@@ -113,12 +113,12 @@ void Camera3D1P::initCoordinates() {
 }
 
 //カメラ視点座標をVector3クラスで返します
-Vector3 Camera3D1P::getStateWatchCoordinates() const {
+Vector3 Camera3D1P::GetStateWatchCoordinates() const {
 	return Vector3(gx_, gy_, gz_);
 }
 
 //カメラ座標をマウスの移動から計算する(3人称視点)
-void Camera3D1P::transfarAndRotateByMouse() {
+void Camera3D1P::TransfarAndRotateByMouse() {
 
 	//マウス移動の取得
 	int mouse_dx, mouse_dy;
@@ -148,7 +148,7 @@ void Camera3D1P::transfarAndRotateByMouse() {
 
 //カメラ座標をキー入力から計算する(3人称視点)
 //qが入力されているときはここでカメラが初期化されます
-void Camera3D1P::transfarByKey() {
+void Camera3D1P::TransfarByKey() {
 
 	//カメラの移動
 	if (getStateKeyOfSmallAlphabet('w') == 1) {
@@ -176,11 +176,11 @@ void Camera3D1P::transfarByKey() {
 
 	//q入力時_カメラの初期化
 	if (getStateKeyOfSmallAlphabet('q') == 1)
-		initCoordinates();
+		InitCoordinates();
 }
 
 //gluLookAtを設定する
-void Camera3D1P::setGluLookAt() const {
+void Camera3D1P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
 }
 

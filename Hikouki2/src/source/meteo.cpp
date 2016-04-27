@@ -17,7 +17,7 @@ Meteo::Meteo(Vector3 point) :
 
 void Meteo::Init() {
 	fall_speed_ = 0.01;
-	setMaterial (uMaterial4fv_brown);
+	set_material (uMaterial4fv_brown);
 }
 
 /*************************    移動    *************************/

@@ -10,7 +10,7 @@ static void drawObjects() {
 
 	//赤い箱
 	glPushMatrix();
-	Vector3 cam_vec = camera.getStateWatchCoordinates();
+	Vector3 cam_vec = camera.GetStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
 	glutSolidCube(0.01);
@@ -22,15 +22,15 @@ static void drawObjects() {
 	glPopMatrix();
 
 	//球を描画
-	ball_test.setDrawFlag(true);
-	ball_test.setScale((float) fps.getFrameCount() / 1000);
-	ball_test.draw();
+	ball_test.set_draw_flag(true);
+	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
+	ball_test.Draw();
 
 	//隕石描画
-	meteo.setDrawFlag(true);
-	meteo.setScale(2);
+	meteo.set_draw_flag(true);
+	meteo.set_scale(2);
 	meteo.Fall();
-	meteo.draw();
+	meteo.Draw();
 }
 
 //OpenGLコールバック関数
@@ -41,18 +41,18 @@ void draw(void) {
 	glLoadIdentity(); //モデルビュー変換行列の初期化
 
 	//fps
-	fps.update();
-	fps.draw(10, 25);
+	fps.Update();
+	fps.Draw(10, 25);
 
 	//カメラ
-	camera.transfarAndRotateByMouse(); //カメラ移動計算(マウス)
-	camera.transfarByKey(); //カメラ移動計算(キー)
-	camera.setGluLookAt(); //視点をセット
+	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
+	camera.TransfarByKey(); //カメラ移動計算(キー)
+	camera.SetGluLookAt(); //視点をセット
 
 	//ライト
 	//カメラの視点座標に配置
 	glPushMatrix();
-	Vector3 cam_vec = camera.getStateWatchCoordinates();
+	Vector3 cam_vec = camera.GetStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
@@ -61,7 +61,7 @@ void draw(void) {
 	drawObjects();
 
 	//画面出力文字列描画
-	out_disp.draw();
+	out_disp.Draw();
 
 	//ディスプレイ終了処理
 	glEnd();

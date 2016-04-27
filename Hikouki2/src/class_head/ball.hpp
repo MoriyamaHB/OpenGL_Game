@@ -16,15 +16,15 @@ public:
 	Ball();
 	Ball(float x, float y, float z);
 	Ball(Vector3 point);
-	void init();
+	void Init();
 
 	//設定
-	void setDrawFlag(bool tf);
-	void setScale(float s);
-	void setMaterial(float mat[]);
-	void setSphereFineness(float slices, float stacks);
+	void set_draw_flag(bool tf);
+	void set_scale(float s);
+	void set_material(float mat[]);
+	void SetSphereFineness(float slices, float stacks);
 
 	//描画
-	void draw();
+	void Draw() const;
 };
 

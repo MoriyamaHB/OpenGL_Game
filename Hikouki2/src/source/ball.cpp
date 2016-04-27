@@ -2,22 +2,22 @@
 
 /*************************    コンストラクタ,初期化    *************************/
 Ball::Ball() {
-	init();
+	Init();
 }
 
 Ball::Ball(Vector3 point) {
-	init();
+	Init();
 	place_ = point;
 }
 
 Ball::Ball(float x, float y, float z) {
-	init();
+	Init();
 	place_.x = x;
 	place_.y = y;
 	place_.z = z;
 }
 
-void Ball::init() {
+void Ball::Init() {
 	place_.zero();
 	draw_flag_ = false;
 	scale_ = 1;
@@ -29,22 +29,22 @@ void Ball::init() {
 /*************************    setter    *************************/
 
 //デフォルト(false)
-void Ball::setDrawFlag(bool tf) {
+void Ball::set_draw_flag(bool tf) {
 	draw_flag_ = tf;
 }
 //デフォルト(1)
-void Ball::setScale(float s) {
+void Ball::set_scale(float s) {
 	scale_ = s;
 }
 
 //デフォルト(uMaterial4fv_white)
-void Ball::setMaterial(float mat[]) {
+void Ball::set_material(float mat[]) {
 	for (int i = 0; i < 4; i++)
 		material_[i] = mat[i];
 }
 
 //デフォルト(24,24)
-void Ball::setSphereFineness(float slices, float stacks) {
+void Ball::SetSphereFineness(float slices, float stacks) {
 	sphere_slices_ = slices;
 	sphere_stacks_ = stacks;
 }
@@ -57,7 +57,7 @@ void Ball::Move(float vx, float vy, float vz) {
 
 /*************************    描画    *************************/
 
-void Ball::draw() {
+void Ball::Draw() const {
 	if (draw_flag_ == false)
 		return;
 

@@ -10,12 +10,12 @@ public:
 	Fps();
 
 	//getter
-	int getFrameCount();
+	int GetFrameCount();
 
 	//更新
-	void update();
+	void Update();
 
 	//描画
-	void draw(int x, int y) const;
+	void Draw(int x, int y) const;
 };
 

@@ -8,12 +8,12 @@ Fps::Fps() {
 	fps = 0;
 }
 
-int Fps::getFrameCount(){
+int Fps::GetFrameCount(){
 	return frame_count;
 }
 
 //計測したいスレッドにある関数から毎フレーム呼び出してください
-void Fps::update() {
+void Fps::Update() {
 	GLframe++; //フレーム数を＋１
 	frame_count++; //フレームカウント
 	GLtimenow = glutGet(GLUT_ELAPSED_TIME); //経過時間を取得
@@ -25,8 +25,8 @@ void Fps::update() {
 }
 
 //x,yの位置に計測したfpsの描画を登録します
-void Fps::draw(int x, int y) const {
+void Fps::Draw(int x, int y) const {
 	char str[48];
 	sprintf(str, "%.2f", fps);
-	out_disp.regist(str, uColor4fv_blue);
+	out_disp.Regist(str, uColor4fv_blue);
 }
