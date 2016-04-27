@@ -13,6 +13,7 @@ float uMaterial4fv_white[] = { 0.9, 0.9, 0.9, 1.0 }; //白
 float uMaterial4fv_black[] = { 0.1, 0.1, 0.1, 1.0 }; //黒
 float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
 float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
+float uMaterial4fv_brown[] = { 0.8, 0.45, 0.2, 1.0 }; //茶色
 
 //エラー出力
 void uErrorOut(const char file[], const char func[], int line,

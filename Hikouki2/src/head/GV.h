@@ -16,6 +16,7 @@
 #include"../class_head/fps.hpp"
 #include"../class_head/OutputDisplay.hpp"
 #include"../class_head/ball.hpp"
+#include"../class_head/meteo.hpp"
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL

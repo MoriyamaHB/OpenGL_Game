@@ -19,17 +19,17 @@ public:
 	void setGluLookAt() const;
 
 private:
-	float x;
-	float y;
-	float z;
-	float gx;
-	float gy;
-	float gz;
-	float ux;
-	float uy;
-	float uz;
-	double angle_w;
-	double angle_h;
+	float x_;
+	float y_;
+	float z_;
+	float gx_;
+	float gy_;
+	float gz_;
+	float ux_;
+	float uy_;
+	float uz_;
+	double angle_w_;
+	double angle_h_;
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 };
@@ -53,17 +53,17 @@ public:
 	void setGluLookAt() const;
 
 private:
-	float x;
-	float y;
-	float z;
-	float gx;
-	float gy;
-	float gz;
-	float ux;
-	float uy;
-	float uz;
-	double angle_w;
-	double angle_h;
+	float x_;
+	float y_;
+	float z_;
+	float gx_;
+	float gy_;
+	float gz_;
+	float ux_;
+	float uy_;
+	float uz_;
+	double angle_w_;
+	double angle_h_;
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 };

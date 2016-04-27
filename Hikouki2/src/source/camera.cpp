@@ -2,17 +2,17 @@
 
 //カメラ座標を初期化する
 void Camera3D3P::initCoordinates() {
-	x = 0;
-	y = 5;
-	z = 0;
-	gx = 0;
-	gy = 1;
-	gz = 0;
-	ux = 0;
-	uy = 1;
-	uz = 0;
-	angle_w = PI / 2;
-	angle_h = 0;
+	x_ = 0;
+	y_ = 5;
+	z_ = 0;
+	gx_ = 0;
+	gy_ = 1;
+	gz_ = 0;
+	ux_ = 0;
+	uy_ = 1;
+	uz_ = 0;
+	angle_w_ = PI / 2;
+	angle_h_ = 0;
 }
 
 Camera3D3P::Camera3D3P() {
@@ -21,7 +21,7 @@ Camera3D3P::Camera3D3P() {
 
 //カメラ視点座標をVector3クラスで返します
 Vector3 Camera3D3P::getStateWatchCoordinates() const {
-	return Vector3(gx, gy, gz);
+	return Vector3(gx_, gy_, gz_);
 }
 
 //カメラ座標をマウスの移動から計算する(3人称視点)
@@ -32,24 +32,24 @@ void Camera3D3P::transfarAndRotateByMouse() {
 	getMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 	//マウスの動きをカメラ角度に変換
-	angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-	angle_h += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+	angle_w_ += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
+	angle_h_ += ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
 	//angle_hの角度範囲ををラップする
 	//これによりカメラが縦方向に一周しなくなる
-	if (angle_h < kMinWrapAngleH)
-		angle_h = kMinWrapAngleH;
-	else if (angle_h > kMaxWrapAngleH)
-		angle_h = kMaxWrapAngleH;
+	if (angle_h_ < kMinWrapAngleH)
+		angle_h_ = kMinWrapAngleH;
+	else if (angle_h_ > kMaxWrapAngleH)
+		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	x = cos(angle_w) * cos(angle_h) + gx;
-	z = sin(angle_w) * cos(angle_h) + gz;
-	y = sin(angle_h) + gy;
+	x_ = cos(angle_w_) * cos(angle_h_) + gx_;
+	z_ = sin(angle_w_) * cos(angle_h_) + gz_;
+	y_ = sin(angle_h_) + gy_;
 
 	//todo 一時的なカメラの当たり判定
-	if (y < 0.05)
-		y = 0.05;
+	if (y_ < 0.05)
+		y_ = 0.05;
 
 }
 
@@ -59,27 +59,27 @@ void Camera3D3P::transfarByKey() {
 
 	//カメラの移動
 	if (getStateKeyOfSmallAlphabet('w') == 1) {
-		gx -= CAMERA_SP * cos(angle_w) * cos(angle_h);
-		gz -= CAMERA_SP * sin(angle_w) * cos(angle_h);
-		gy -= CAMERA_SP * sin(angle_h);
+		gx_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
+		gz_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
+		gy_ -= CAMERA_SP * sin(angle_h_);
 	}
 	if (getStateKeyOfSmallAlphabet('s') == 1) {
-		gx += CAMERA_SP * cos(angle_w) * cos(angle_h);
-		gz += CAMERA_SP * sin(angle_w) * cos(angle_h);
-		gy += CAMERA_SP * sin(angle_h);
+		gx_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
+		gz_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
+		gy_ += CAMERA_SP * sin(angle_h_);
 	}
 	if (getStateKeyOfSmallAlphabet('a') == 1) {
-		gx -= CAMERA_SP * cos(angle_w - PI / 2);
-		gz -= CAMERA_SP * sin(angle_w - PI / 2);
+		gx_ -= CAMERA_SP * cos(angle_w_ - PI / 2);
+		gz_ -= CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
 	if (getStateKeyOfSmallAlphabet('d') == 1) {
-		gx -= CAMERA_SP * cos(angle_w + PI / 2);
-		gz -= CAMERA_SP * sin(angle_w + PI / 2);
+		gx_ -= CAMERA_SP * cos(angle_w_ + PI / 2);
+		gz_ -= CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
-	if (gy < 0)
-		gy = 0;
+	if (gy_ < 0)
+		gy_ = 0;
 
 	//q入力時_カメラの初期化
 	if (getStateKeyOfSmallAlphabet('q') == 1)
@@ -88,7 +88,7 @@ void Camera3D3P::transfarByKey() {
 
 //gluLookAtを設定する
 void Camera3D3P::setGluLookAt() const {
-	gluLookAt(x, y, z, gx, gy, gz, ux, uy, uz);
+	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -99,22 +99,22 @@ Camera3D1P::Camera3D1P() {
 
 //カメラ座標を初期化する
 void Camera3D1P::initCoordinates() {
-	x = 0;
-	y = 3;
-	z = -10;
-	gx = 0;
-	gy = 0;
-	gz = 0;
-	ux = 0;
-	uy = 1;
-	uz = 0;
-	angle_w = PI / 2;
-	angle_h = 0;
+	x_ = 0;
+	y_ = 3;
+	z_ = -10;
+	gx_ = 0;
+	gy_ = 0;
+	gz_ = 0;
+	ux_ = 0;
+	uy_ = 1;
+	uz_ = 0;
+	angle_w_ = PI / 2;
+	angle_h_ = 0;
 }
 
 //カメラ視点座標をVector3クラスで返します
 Vector3 Camera3D1P::getStateWatchCoordinates() const {
-	return Vector3(gx, gy, gz);
+	return Vector3(gx_, gy_, gz_);
 }
 
 //カメラ座標をマウスの移動から計算する(3人称視点)
@@ -125,24 +125,24 @@ void Camera3D1P::transfarAndRotateByMouse() {
 	getMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 	//マウスの動きをカメラ角度に変換
-	angle_w += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
-	angle_h -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
+	angle_w_ += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
+	angle_h_ -= ((double) mouse_dy / CAMERA_ROTATE_PX) * 2 * PI;
 
 	//angle_hの角度範囲ををラップする
 	//これによりカメラが縦方向に一周しなくなる
-	if (angle_h < kMinWrapAngleH)
-		angle_h = kMinWrapAngleH;
-	else if (angle_h > kMaxWrapAngleH)
-		angle_h = kMaxWrapAngleH;
+	if (angle_h_ < kMinWrapAngleH)
+		angle_h_ = kMinWrapAngleH;
+	else if (angle_h_ > kMaxWrapAngleH)
+		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	gx = cos(angle_w) * cos(angle_h) + x;
-	gz = sin(angle_w) * cos(angle_h) + z;
-	gy = sin(angle_h) + y;
+	gx_ = cos(angle_w_) * cos(angle_h_) + x_;
+	gz_ = sin(angle_w_) * cos(angle_h_) + z_;
+	gy_ = sin(angle_h_) + y_;
 
 	//todo 一時的なカメラの当たり判定
-	if (gy < -0.9)
-		gy = -0.9;
+	if (gy_ < -0.9)
+		gy_ = -0.9;
 
 }
 
@@ -152,27 +152,27 @@ void Camera3D1P::transfarByKey() {
 
 	//カメラの移動
 	if (getStateKeyOfSmallAlphabet('w') == 1) {
-		x += CAMERA_SP * cos(angle_w) * cos(angle_h);
-		z += CAMERA_SP * sin(angle_w) * cos(angle_h);
-		y += CAMERA_SP * sin(angle_h);
+		x_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
+		z_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
+		y_ += CAMERA_SP * sin(angle_h_);
 	}
 	if (getStateKeyOfSmallAlphabet('s') == 1) {
-		x -= CAMERA_SP * cos(angle_w) * cos(angle_h);
-		z -= CAMERA_SP * sin(angle_w) * cos(angle_h);
-		y -= CAMERA_SP * sin(angle_h);
+		x_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
+		z_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
+		y_ -= CAMERA_SP * sin(angle_h_);
 	}
 	if (getStateKeyOfSmallAlphabet('a') == 1) {
-		x += CAMERA_SP * cos(angle_w - PI / 2);
-		z += CAMERA_SP * sin(angle_w - PI / 2);
+		x_ += CAMERA_SP * cos(angle_w_ - PI / 2);
+		z_ += CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
 	if (getStateKeyOfSmallAlphabet('d') == 1) {
-		x += CAMERA_SP * cos(angle_w + PI / 2);
-		z += CAMERA_SP * sin(angle_w + PI / 2);
+		x_ += CAMERA_SP * cos(angle_w_ + PI / 2);
+		z_ += CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
-	if (y < 0.1)
-		y = 0.1;
+	if (y_ < 0.1)
+		y_ = 0.1;
 
 	//q入力時_カメラの初期化
 	if (getStateKeyOfSmallAlphabet('q') == 1)
@@ -181,6 +181,6 @@ void Camera3D1P::transfarByKey() {
 
 //gluLookAtを設定する
 void Camera3D1P::setGluLookAt() const {
-	gluLookAt(x, y, z, gx, gy, gz, ux, uy, uz);
+	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
 }
 

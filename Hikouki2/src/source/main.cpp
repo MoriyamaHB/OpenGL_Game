@@ -3,6 +3,7 @@
 
 GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
 Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
+Meteo meteo(0.0, 15.0, 0.0);
 
 //drawが長くなるのでオブジェクトだけ分割
 static void drawObjects() {
@@ -24,6 +25,12 @@ static void drawObjects() {
 	ball_test.setDrawFlag(true);
 	ball_test.setScale((float) fps.getFrameCount() / 1000);
 	ball_test.draw();
+
+	//隕石描画
+	meteo.setDrawFlag(true);
+	meteo.setScale(2);
+	meteo.Fall();
+	meteo.draw();
 }
 
 //OpenGLコールバック関数

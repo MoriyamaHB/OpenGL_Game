@@ -3,11 +3,14 @@ class Vector3;
 class Ball {
 
 private:
-	Vector3 place;
-	bool draw_flag;
-	float scale;
-	float material[4];
-	float sphere_slices, sphere_stacks;
+	Vector3 place_;
+	bool draw_flag_;
+	float scale_;
+	float material_[4];
+	float sphere_slices_, sphere_stacks_;
+protected:
+	//移動させる
+	void Move(float vx, float vy, float vz);
 public:
 	//コンストラクタ,初期化
 	Ball();

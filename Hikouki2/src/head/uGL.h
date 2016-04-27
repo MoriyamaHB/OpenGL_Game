@@ -21,6 +21,7 @@ extern float uMaterial4fv_white[];
 extern float uMaterial4fv_black[];
 extern float uMaterial4fv_blue[];
 extern float uMaterial4fv_green[];
+extern float uMaterial4fv_brown[];
 
 //エラー出力
 void uErrorOut(const char file[], const char func[], int line,
