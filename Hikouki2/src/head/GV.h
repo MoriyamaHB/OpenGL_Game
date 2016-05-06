@@ -14,7 +14,7 @@
 #include"../class_head/vector3.h"
 #include"../class_head/camera.hpp"
 #include"../class_head/fps.hpp"
-#include"../class_head/OutputDisplay.hpp"
+#include"../class_head/output_display.hpp"
 #include"../class_head/ball.hpp"
 #include"../class_head/meteo.hpp"
 
