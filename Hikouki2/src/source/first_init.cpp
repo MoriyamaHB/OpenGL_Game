@@ -1,7 +1,7 @@
 #include "../head/GV.h"
 
 //初期化
-void first_init(int argc, char *argv[]) {
+void FirstInit(int argc, char *argv[]) {
 
 	//openGLの初期化,ウィンドウ生成
 	glutInitWindowSize(WINDOW_INI_HEIGHT, WINDOW_INI_WIDTH);
@@ -10,13 +10,13 @@ void first_init(int argc, char *argv[]) {
 	glutCreateWindow(argv[0]);
 
 	//openGLイベント関数
-	glutDisplayFunc (draw);
-	glutKeyboardFunc (checkPushKey);
-	glutKeyboardUpFunc (checkUpkey);
-	glutPassiveMotionFunc (checkMouseMotion);
-	glutMotionFunc(checkMouseMotion);
-	glutReshapeFunc (resize);
-	glutTimerFunc(100, timer, 0);
+	glutDisplayFunc (Draw);
+	glutKeyboardFunc (CheckPushKey);
+	glutKeyboardUpFunc (CheckUpkey);
+	glutPassiveMotionFunc (CheckMouseMotion);
+	glutMotionFunc(CheckMouseMotion);
+	glutReshapeFunc (Resize);
+	glutTimerFunc(100, Timer, 0);
 
 	//その他openGLの設定
 	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する

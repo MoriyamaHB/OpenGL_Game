@@ -18,7 +18,7 @@ int getStateKeyOfSmallAlphabet(unsigned char key) {
 }
 
 //OpenGLコールバック関数
-void checkPushKey(unsigned char key, int x, int y) {
+void CheckPushKey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
 		small_alphabet[key - 'a'] = 1;
@@ -26,7 +26,7 @@ void checkPushKey(unsigned char key, int x, int y) {
 }
 
 //OpenGLコールバック関数
-void checkUpkey(unsigned char key, int x, int y) {
+void CheckUpkey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
 		small_alphabet[key - 'a'] = 0;
@@ -50,7 +50,7 @@ void getMouseMotionAndInit(int *dx, int *dy) {
 
 //OpenGLコールバック関数
 //ボタンを押している時 & 押していない時の両方で呼び出されます
-void checkMouseMotion(int x, int y) {
+void CheckMouseMotion(int x, int y) {
 	static int wrap_flag = 0;
 
 	if (!wrap_flag) {

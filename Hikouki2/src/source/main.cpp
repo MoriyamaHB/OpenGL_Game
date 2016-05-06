@@ -1,16 +1,11 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
 
-enum MainState {
-	START, GAME_INI, GAME
-};
-
-static GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
 static Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
 static Meteo meteo(0.0, 15.0, 0.0);
 
 //drawが長くなるのでオブジェクトだけ分割
-static void drawObjects() {
+static void DrawObjects() {
 
 	//赤い箱
 	glPushMatrix();
@@ -38,7 +33,7 @@ static void drawObjects() {
 }
 
 //ゲームメイン関数
-void GameMain() {
+static void GameMain() {
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
 	glLoadIdentity(); //モデルビュー変換行列の初期化
@@ -57,11 +52,12 @@ void GameMain() {
 	glPushMatrix();
 	Vector3 cam_vec = camera.GetStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
+	GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
 
 	//オブジェクト描画
-	drawObjects();
+	DrawObjects();
 
 	//画面出力文字列描画
 	out_disp.Draw();
@@ -75,7 +71,7 @@ void GameMain() {
 }
 
 //OpenGLコールバック関数
-void draw(void) {
+void Draw(void) {
 	static MainState main_state = START;
 	switch (main_state) {
 	case START:
@@ -96,7 +92,7 @@ void draw(void) {
 }
 
 //OpenGLコールバック関数
-void resize(int w, int h) {
+void Resize(int w, int h) {
 	//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
@@ -111,14 +107,14 @@ void resize(int w, int h) {
 
 //OpenGLコールバック関数
 //FRAME_PER_SECONDSでdraw関数を呼び出します
-void timer(int value) {
-	glutTimerFunc(1000 / FRAME_PER_SECONDS, timer, 0);
+void Timer(int value) {
+	glutTimerFunc(1000 / FRAME_PER_SECONDS, Timer, 0);
 	glutPostRedisplay(); //再描画
 }
 
 //メイン
 int main(int argc, char *argv[]) {
-	first_init(argc, argv);
+	FirstInit(argc, argv);
 	glutMainLoop();
 	return 0;
 }
