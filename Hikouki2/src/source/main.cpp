@@ -1,11 +1,12 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
 
-static Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
-static Meteo meteo(0.0, 15.0, 0.0);
 
 //drawが長くなるのでオブジェクトだけ分割
 static void DrawObjects() {
+
+	static Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
+	static Meteo meteo(0.0, 15.0, 0.0);
 
 	//赤い箱
 	glPushMatrix();
