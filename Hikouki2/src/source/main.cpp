@@ -1,9 +1,13 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
 
-GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
-Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
-Meteo meteo(0.0, 15.0, 0.0);
+enum MainState {
+	START, GAME_INI, GAME
+};
+
+static GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
+static Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
+static Meteo meteo(0.0, 15.0, 0.0);
 
 //drawが長くなるのでオブジェクトだけ分割
 static void drawObjects() {
@@ -33,9 +37,8 @@ static void drawObjects() {
 	meteo.Draw();
 }
 
-//OpenGLコールバック関数
-void draw(void) {
-
+//ゲームメイン関数
+void GameMain() {
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
 	glLoadIdentity(); //モデルビュー変換行列の初期化
@@ -72,17 +75,38 @@ void draw(void) {
 }
 
 //OpenGLコールバック関数
+void draw(void) {
+	static MainState main_state = START;
+	switch (main_state) {
+	case START:
+		main_state = GAME_INI;
+		break;
+	case GAME_INI:
+		main_state = GAME;
+		break;
+	case GAME:
+		GameMain();
+		break;
+	default:
+		uErrorOut(__FILE__, __func__, __LINE__,
+				"不明なmain_statです. スタート状態に移行します.");
+		main_state = START;
+		break;
+	}
+}
+
+//OpenGLコールバック関数
 void resize(int w, int h) {
 	//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 //OpenGLコールバック関数
