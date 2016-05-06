@@ -1,6 +1,6 @@
 #include"../head/GV.h"
 
-/*************************    コンストラクタ,初期化    *************************/
+////////////////////////    コンストラクタ,初期化    ////////////////////////
 Ball::Ball() {
 	Init();
 }
@@ -26,7 +26,7 @@ void Ball::Init() {
 	sphere_slices_ = 24;
 	sphere_stacks_ = 24;
 }
-/*************************    setter    *************************/
+////////////////////////    setter    ////////////////////////
 
 //デフォルト(false)
 void Ball::set_draw_flag(bool tf) {
@@ -48,14 +48,14 @@ void Ball::SetSphereFineness(float slices, float stacks) {
 	sphere_slices_ = slices;
 	sphere_stacks_ = stacks;
 }
-/*************************    移動    *************************/
+////////////////////////    移動    ////////////////////////
 void Ball::Move(float vx, float vy, float vz) {
 	place_.x += vx;
 	place_.y += vy;
 	place_.z += vz;
 }
 
-/*************************    描画    *************************/
+////////////////////////    描画    ////////////////////////
 
 void Ball::Draw() const {
 	if (draw_flag_ == false)
