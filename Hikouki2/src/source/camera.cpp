@@ -29,7 +29,7 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 
 	//マウス移動の取得
 	int mouse_dx, mouse_dy;
-	getMouseMotionAndInit(&mouse_dx, &mouse_dy);
+	TakeMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 	//マウスの動きをカメラ角度に変換
 	angle_w_ += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
@@ -58,21 +58,21 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 void Camera3D3P::TransfarByKey() {
 
 	//カメラの移動
-	if (getStateKeyOfSmallAlphabet('w') == 1) {
+	if (get_small_alphabet('w') == 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		gz_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		gy_ -= CAMERA_SP * sin(angle_h_);
 	}
-	if (getStateKeyOfSmallAlphabet('s') == 1) {
+	if (get_small_alphabet('s') == 1) {
 		gx_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		gz_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		gy_ += CAMERA_SP * sin(angle_h_);
 	}
-	if (getStateKeyOfSmallAlphabet('a') == 1) {
+	if (get_small_alphabet('a') == 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_ - PI / 2);
 		gz_ -= CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
-	if (getStateKeyOfSmallAlphabet('d') == 1) {
+	if (get_small_alphabet('d') == 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_ + PI / 2);
 		gz_ -= CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
@@ -82,7 +82,7 @@ void Camera3D3P::TransfarByKey() {
 		gy_ = 0;
 
 	//q入力時_カメラの初期化
-	if (getStateKeyOfSmallAlphabet('q') == 1)
+	if (get_small_alphabet('q') == 1)
 		InitCoordinates();
 }
 
@@ -122,7 +122,7 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 
 	//マウス移動の取得
 	int mouse_dx, mouse_dy;
-	getMouseMotionAndInit(&mouse_dx, &mouse_dy);
+	TakeMouseMotionAndInit(&mouse_dx, &mouse_dy);
 
 	//マウスの動きをカメラ角度に変換
 	angle_w_ += ((double) mouse_dx / CAMERA_ROTATE_PX) * 2 * PI;
@@ -151,21 +151,21 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 void Camera3D1P::TransfarByKey() {
 
 	//カメラの移動
-	if (getStateKeyOfSmallAlphabet('w') == 1) {
+	if (get_small_alphabet('w') == 1) {
 		x_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		z_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		y_ += CAMERA_SP * sin(angle_h_);
 	}
-	if (getStateKeyOfSmallAlphabet('s') == 1) {
+	if (get_small_alphabet('s') == 1) {
 		x_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		z_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		y_ -= CAMERA_SP * sin(angle_h_);
 	}
-	if (getStateKeyOfSmallAlphabet('a') == 1) {
+	if (get_small_alphabet('a') == 1) {
 		x_ += CAMERA_SP * cos(angle_w_ - PI / 2);
 		z_ += CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
-	if (getStateKeyOfSmallAlphabet('d') == 1) {
+	if (get_small_alphabet('d') == 1) {
 		x_ += CAMERA_SP * cos(angle_w_ + PI / 2);
 		z_ += CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
@@ -175,7 +175,7 @@ void Camera3D1P::TransfarByKey() {
 		y_ = 0.1;
 
 	//q入力時_カメラの初期化
-	if (getStateKeyOfSmallAlphabet('q') == 1)
+	if (get_small_alphabet('q') == 1)
 		InitCoordinates();
 }
 

@@ -66,7 +66,7 @@ static void GameMain() {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
-	if (getStateKeyOfSmallAlphabet('e') == 1)
+	if (get_small_alphabet('e') == 1)
 		exit(0);
 }
 

@@ -9,7 +9,7 @@ static unsigned char small_alphabet[26];
 
 //小文字アルファベットの入力状態取得
 //入力なら1,非入力なら0を返します
-int getStateKeyOfSmallAlphabet(unsigned char key) {
+int get_small_alphabet(unsigned char key) {
 	if (key < 'a' || 'z' < key) {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
@@ -42,7 +42,7 @@ static int mouse_dx = 0;
 static int mouse_dy = 0;
 
 //前回の呼び出しからのマウス移動量を返します
-void getMouseMotionAndInit(int *dx, int *dy) {
+void TakeMouseMotionAndInit(int *dx, int *dy) {
 	*dx = mouse_dx;
 	*dy = mouse_dy;
 	mouse_dx = mouse_dy = 0;
