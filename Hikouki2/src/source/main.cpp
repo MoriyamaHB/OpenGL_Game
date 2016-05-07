@@ -6,7 +6,8 @@ Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
 Meteo meteo(0.0, 15.0, 0.0);
 }
 
-static void UpdateObjects() {
+namespace {
+void UpdateObjects() {
 	//球を描画
 	ball_test.set_draw_flag(true);
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
@@ -17,8 +18,10 @@ static void UpdateObjects() {
 	meteo.Fall();
 	control_meteo::Update();
 }
+}
 
 //drawが長くなるのでオブジェクトだけ分割
+namespace {
 static void DrawObjects() {
 
 	//赤い箱
@@ -40,9 +43,11 @@ static void DrawObjects() {
 	//隕石描画
 	meteo.Draw();
 }
+}
 
 //ゲームメイン関数
-static void GameMain() {
+namespace {
+void GameMain() {
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
 	glLoadIdentity(); //モデルビュー変換行列の初期化
@@ -78,6 +83,7 @@ static void GameMain() {
 	glutSwapBuffers();
 	if (get_small_alphabet('e') == 1)
 		exit(0);
+}
 }
 
 //OpenGLコールバック関数

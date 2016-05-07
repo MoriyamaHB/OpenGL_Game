@@ -40,8 +40,10 @@ void CheckUpkey(unsigned char key, int x, int y) {
  */
 
 //マウスの移動量
-static int mouse_dx = 0;
-static int mouse_dy = 0;
+namespace {
+int mouse_dx = 0;
+int mouse_dy = 0;
+}
 
 //前回の呼び出しからのマウス移動量を返します
 void TakeMouseMotionAndInit(int *dx, int *dy) {
