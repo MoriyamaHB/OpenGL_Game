@@ -5,7 +5,9 @@
  */
 
 //キーの入力状態記録
-static unsigned char small_alphabet[26];
+namespace {
+unsigned char small_alphabet[26];
+}
 
 //小文字アルファベットの入力状態取得
 //入力なら1,非入力なら0を返します

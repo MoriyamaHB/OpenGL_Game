@@ -1,12 +1,25 @@
 #define GLOBAL_INSTANCE
 #include "../head/GV.h"
 
+namespace {
+Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
+Meteo meteo(0.0, 15.0, 0.0);
+}
+
+static void UpdateObjects() {
+	//球を描画
+	ball_test.set_draw_flag(true);
+	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
+
+	//隕石描画
+	meteo.set_draw_flag(true);
+	meteo.set_scale(2);
+	meteo.Fall();
+	control_meteo::Update();
+}
 
 //drawが長くなるのでオブジェクトだけ分割
 static void DrawObjects() {
-
-	static Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
-	static Meteo meteo(0.0, 15.0, 0.0);
 
 	//赤い箱
 	glPushMatrix();
@@ -22,14 +35,9 @@ static void DrawObjects() {
 	glPopMatrix();
 
 	//球を描画
-	ball_test.set_draw_flag(true);
-	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 	ball_test.Draw();
 
 	//隕石描画
-	meteo.set_draw_flag(true);
-	meteo.set_scale(2);
-	meteo.Fall();
 	meteo.Draw();
 }
 
@@ -57,7 +65,8 @@ static void GameMain() {
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
 
-	//オブジェクト描画
+	//オブジェクト
+	UpdateObjects();
 	DrawObjects();
 
 	//画面出力文字列描画
@@ -98,12 +107,12 @@ void Resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 }
 
 //OpenGLコールバック関数

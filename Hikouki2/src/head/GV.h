@@ -3,6 +3,7 @@
 #include<GL/freeglut.h>
 #include<stdio.h>
 #include<string.h>
+#include<vector>
 #include"../head/uGL.h"
 
 //自作ヘッダ
@@ -17,6 +18,7 @@
 #include"../class_head/output_display.hpp"
 #include"../class_head/ball.hpp"
 #include"../class_head/meteo.hpp"
+#include"../class_head/control_meteo.hpp"
 
 #ifdef GLOBAL_INSTANCE
 #define GLOBAL
