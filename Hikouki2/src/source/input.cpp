@@ -9,6 +9,7 @@ unsigned char small_alphabet[26];
 
 //小文字アルファベットの入力状態取得
 //入力なら1,非入力なら0を返します
+namespace input {
 int get_small_alphabet(unsigned char key) {
 	if (key < 'a' || 'z' < key) {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
@@ -16,21 +17,26 @@ int get_small_alphabet(unsigned char key) {
 	}
 	return small_alphabet[key - 'a'];
 }
+}
 
 //OpenGLコールバック関数
+namespace input {
 void CheckPushKey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
 		small_alphabet[key - 'a'] = 1;
 	}
 }
+}
 
 //OpenGLコールバック関数
+namespace input {
 void CheckUpkey(unsigned char key, int x, int y) {
 	//小文字アルファベットの取得
 	if ('a' <= key && key <= 'z') {
 		small_alphabet[key - 'a'] = 0;
 	}
+}
 }
 
 ///////////////////////// キー入力 /////////////////////////
@@ -42,14 +48,17 @@ int mouse_dy = 0;
 }
 
 //前回の呼び出しからのマウス移動量を返します
+namespace input {
 void TakeMouseMotionAndInit(int *dx, int *dy) {
 	*dx = mouse_dx;
 	*dy = mouse_dy;
 	mouse_dx = mouse_dy = 0;
 }
+}
 
 //OpenGLコールバック関数
 //ボタンを押している時 & 押していない時の両方で呼び出されます
+namespace input {
 void CheckMouseMotion(int x, int y) {
 	static int wrap_flag = 0;
 
@@ -63,4 +72,5 @@ void CheckMouseMotion(int x, int y) {
 	} else {
 		wrap_flag = 0;
 	}
+}
 }

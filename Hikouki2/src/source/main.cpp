@@ -2,6 +2,9 @@
 #include "../head/GV.h"
 
 namespace {
+Camera3D3P camera;
+OutputDisplay out_disp;
+Fps fps;
 Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
 Meteo meteo(0.0, 15.0, 0.0);
 }
@@ -54,7 +57,7 @@ void GameMain() {
 
 	//fps
 	fps.Update();
-	fps.Draw(10, 25);
+	fps.Draw(10, 25, out_disp);
 
 	//カメラ
 	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
@@ -81,12 +84,13 @@ void GameMain() {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
-	if (get_small_alphabet('e') == 1)
+	if (input::get_small_alphabet('e') == 1)
 		exit(0);
 }
 }
 
 //OpenGLコールバック関数
+namespace hikouki2_main {
 void Draw(void) {
 	static MainState main_state = START;
 	switch (main_state) {
@@ -106,8 +110,10 @@ void Draw(void) {
 		break;
 	}
 }
+}
 
 //OpenGLコールバック関数
+namespace hikouki2_main {
 void Resize(int w, int h) {
 	//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
@@ -120,17 +126,20 @@ void Resize(int w, int h) {
 	//モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);
 }
+}
 
 //OpenGLコールバック関数
 //FRAME_PER_SECONDSでdraw関数を呼び出します
+namespace hikouki2_main {
 void Timer(int value) {
 	glutTimerFunc(1000 / FRAME_PER_SECONDS, Timer, 0);
 	glutPostRedisplay(); //再描画
 }
+}
 
 //メイン
 int main(int argc, char *argv[]) {
-	FirstInit(argc, argv);
+	first_init::FirstInit(argc, argv);
 	glutMainLoop();
 	return 0;
 }

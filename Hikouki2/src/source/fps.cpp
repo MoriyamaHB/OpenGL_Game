@@ -8,7 +8,7 @@ Fps::Fps() {
 	fps = 0;
 }
 
-int Fps::GetFrameCount(){
+int Fps::GetFrameCount() {
 	return frame_count;
 }
 
@@ -25,8 +25,8 @@ void Fps::Update() {
 }
 
 //x,yの位置に計測したfpsの描画を登録します
-void Fps::Draw(int x, int y) const {
+void Fps::Draw(int x, int y, OutputDisplay &output) const {
 	char str[48];
 	sprintf(str, "%.2f", fps);
-	out_disp.Regist(str, uColor4fv_blue);
+	output.Regist(str, uColor4fv_blue);
 }

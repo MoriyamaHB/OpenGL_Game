@@ -8,6 +8,9 @@ namespace control_meteo {
 void Init() {
 	meteo_.pop_back();
 }
+}
+
+namespace control_meteo {
 void Update() {
 
 }

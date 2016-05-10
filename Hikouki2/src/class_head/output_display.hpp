@@ -1,8 +1,4 @@
 class OutputDisplay {
-public:
-	void Regist(const char str[], const float color[], int life = 1);
-	void Draw();
-
 private:
 	const static int kMaxItem = 24; 	//最大登録数
 	const static int kLineHeight = 30; 	//一行分の高さ
@@ -12,4 +8,8 @@ private:
 
 	//空の項目を探す
 	int SerchEmptyItem();
+public:
+	void Regist(const char str[], const float color[], int life = 1);
+	void Draw();
+
 };

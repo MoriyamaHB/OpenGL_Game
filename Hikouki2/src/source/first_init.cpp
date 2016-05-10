@@ -1,6 +1,7 @@
 #include "../head/GV.h"
 
 //初期化
+namespace first_init {
 void FirstInit(int argc, char *argv[]) {
 
 	//openGLの初期化,ウィンドウ生成
@@ -10,13 +11,13 @@ void FirstInit(int argc, char *argv[]) {
 	glutCreateWindow(argv[0]);
 
 	//openGLイベント関数
-	glutDisplayFunc (Draw);
-	glutKeyboardFunc (CheckPushKey);
-	glutKeyboardUpFunc (CheckUpkey);
-	glutPassiveMotionFunc (CheckMouseMotion);
-	glutMotionFunc(CheckMouseMotion);
-	glutReshapeFunc (Resize);
-	glutTimerFunc(100, Timer, 0);
+	glutDisplayFunc(hikouki2_main::Draw);
+	glutKeyboardFunc(input::CheckPushKey);
+	glutKeyboardUpFunc(input::CheckUpkey);
+	glutPassiveMotionFunc(input::CheckMouseMotion);
+	glutMotionFunc(input::CheckMouseMotion);
+	glutReshapeFunc(hikouki2_main::Resize);
+	glutTimerFunc(100, hikouki2_main::Timer, 0);
 
 	//その他openGLの設定
 	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する
@@ -27,4 +28,5 @@ void FirstInit(int argc, char *argv[]) {
 	glEnable (GL_LIGHTING);
 	glEnable (GL_LIGHT0);
 	glDisable(GL_CULL_FACE); //裏表の麺を描画
+}
 }
