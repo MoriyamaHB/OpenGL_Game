@@ -5,7 +5,8 @@
 #include<vector>
 
 //自作ライブラリ
-#include"../head/uGL.h"
+#include"uGL.h"
+#include"cc_util.h"
 
 //データヘッダ
 #include"define.h"

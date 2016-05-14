@@ -6,12 +6,12 @@ std::vector<Meteo*> meteo_;
 
 namespace control_meteo {
 void Init() {
-	meteo_.pop_back();
+
 }
 }
 
 namespace control_meteo {
 void Update() {
-
+	printf("%d\n", cc_util::GetRandom(0, 100));
 }
 }
