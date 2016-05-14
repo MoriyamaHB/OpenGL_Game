@@ -16,11 +16,11 @@ void GameIni() {
 
 namespace {
 void UpdateObjects() {
-	//球を描画
+	//球を更新
 	ball_test.set_draw_flag(true);
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
-	//隕石描画
+	//隕石更新
 	control_meteo::Update(&fps);
 }
 }
