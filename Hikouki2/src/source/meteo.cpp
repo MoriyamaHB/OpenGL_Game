@@ -19,6 +19,11 @@ void Meteo::Init() {
 	fall_speed_ = 0.01;
 	set_material (uMaterial4fv_brown);
 }
+////////////////////////    setter    ////////////////////////
+
+void Meteo::set_fall_speed(float speed) {
+	fall_speed_ = speed;
+}
 
 ////////////////////////    移動    ////////////////////////
 

@@ -5,8 +5,13 @@ namespace {
 Camera3D3P camera;
 OutputDisplay out_disp;
 Fps fps;
-Ball ball_test(3.0f, 2.0f, 0.0f); //テストです.あとで削除予定
-Meteo meteo(0.0, 15.0, 0.0);
+Ball ball_test(3.0, 3.0, 0.0);
+}
+
+namespace {
+void GameIni() {
+	control_meteo::Init();
+}
 }
 
 namespace {
@@ -16,10 +21,7 @@ void UpdateObjects() {
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
 	//隕石描画
-	meteo.set_draw_flag(true);
-	meteo.set_scale(2);
-	meteo.Fall();
-	control_meteo::Update();
+	control_meteo::Update(&fps);
 }
 }
 
@@ -44,7 +46,7 @@ static void DrawObjects() {
 	ball_test.Draw();
 
 	//隕石描画
-	meteo.Draw();
+	control_meteo::Draw();
 }
 }
 
@@ -98,6 +100,7 @@ void Draw(void) {
 		main_state = GAME_INI;
 		break;
 	case GAME_INI:
+		GameIni();
 		main_state = GAME;
 		break;
 	case GAME:

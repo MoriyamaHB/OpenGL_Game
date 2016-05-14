@@ -8,6 +8,8 @@ public:
 	Meteo(float x, float y, float z);
 	Meteo(Vector3 point);
 	void Init();
+	//setter
+	void set_fall_speed(float speed);
 	//移動
 	void Fall();
 private:
