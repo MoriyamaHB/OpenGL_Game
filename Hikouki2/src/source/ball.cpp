@@ -19,7 +19,7 @@ Ball::Ball(float x, float y, float z) {
 
 void Ball::Init() {
 	place_.zero();
-	draw_flag_ = false;
+	can_draw_ = false;
 	scale_ = 1;
 	for (int i = 0; i < 4; i++)
 		material_[i] = uMaterial4fv_white[i];
@@ -30,7 +30,7 @@ void Ball::Init() {
 
 //デフォルト(false)
 void Ball::set_draw_flag(bool tf) {
-	draw_flag_ = tf;
+	can_draw_ = tf;
 }
 //デフォルト(1)
 void Ball::set_scale(float s) {
@@ -58,7 +58,7 @@ void Ball::Move(float vx, float vy, float vz) {
 ////////////////////////    描画    ////////////////////////
 
 void Ball::Draw() const {
-	if (draw_flag_ == false)
+	if (can_draw_ == false)
 		return;
 
 	glMatrixMode (GL_MODELVIEW);
