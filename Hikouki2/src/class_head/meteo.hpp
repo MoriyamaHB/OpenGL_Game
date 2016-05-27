@@ -14,6 +14,8 @@ public:
 	void Fall();
 	//描画
 	void Draw();
+	//定数
+	const static float kMaxHeight = 70; //隕石の出現高度
 private:
 	float fall_speed_;
 };

@@ -35,7 +35,9 @@ void Meteo::Fall() {
 
 ////////////////////////    描画    ////////////////////////
 void Meteo::Draw() {
-	static_cast<Ball>(*this).Draw(); //Ballクラスを描画
+	//Ballクラスを描画
+	static_cast<Ball>(*this).Draw();
+	//影もどきを描画
 	if (place_.y >= 0) {
 		float x = place_.x, y = 0.01, z = place_.z;
 		float radius = scale_;
@@ -48,8 +50,11 @@ void Meteo::Draw() {
 			float y1 = radius * sin(th1_rad);
 			float x2 = radius * cos(th2_rad);
 			float y2 = radius * sin(th2_rad);
-			//float mate[]={
-			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_red);
+
+			glNormal3f(0.0, 1.0, 0.0);
+			float t = place_.y / Meteo::kMaxHeight;
+			float mate[] = { t, t, t, 1.0f };
+			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mate);
 			glBegin(GL_TRIANGLES);
 			glVertex3f(x, y, z);
 			glVertex3f(x1 + x, y, y1 + z);

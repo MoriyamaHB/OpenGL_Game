@@ -15,7 +15,7 @@ void Update(Fps *fps) {
 	//登録
 	if (fps->GetFrameCount() % 120 == 0) {
 		int x = cc_util::GetRandom(-10, 10);
-		int y = cc_util::GetRandom(0, 30);
+		int y = Meteo::kMaxHeight;
 		int z = cc_util::GetRandom(-10, 10);
 		int s = cc_util::GetRandom(1, 5);
 		float speed = cc_util::GetRandom(1, 50) / 100.0;
