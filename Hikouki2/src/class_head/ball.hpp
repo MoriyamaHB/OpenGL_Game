@@ -1,14 +1,12 @@
 class Vector3;
 
 class Ball {
-
-private:
+protected:
 	Vector3 place_;
 	bool can_draw_;
 	float scale_;
 	float material_[4];
 	float sphere_slices_, sphere_stacks_;
-protected:
 	//移動させる
 	void Move(float vx, float vy, float vz);
 public:

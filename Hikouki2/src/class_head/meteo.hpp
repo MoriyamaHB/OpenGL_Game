@@ -12,6 +12,8 @@ public:
 	void set_fall_speed(float speed);
 	//移動
 	void Fall();
+	//描画
+	void Draw();
 private:
 	float fall_speed_;
 };

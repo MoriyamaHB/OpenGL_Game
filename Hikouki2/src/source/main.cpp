@@ -69,9 +69,7 @@ void GameMain() {
 	//ライト
 	//カメラの視点座標に配置
 	glPushMatrix();
-	Vector3 cam_vec = camera.GetStateWatchCoordinates();
-	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
-	GLfloat light0pos[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
 
