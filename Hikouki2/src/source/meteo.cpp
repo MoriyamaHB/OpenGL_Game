@@ -48,7 +48,8 @@ void Meteo::Draw() {
 			float y1 = radius * sin(th1_rad);
 			float x2 = radius * cos(th2_rad);
 			float y2 = radius * sin(th2_rad);
-
+			//float mate[]={
+			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_red);
 			glBegin(GL_TRIANGLES);
 			glVertex3f(x, y, z);
 			glVertex3f(x1 + x, y, y1 + z);
