@@ -10,12 +10,13 @@ public:
 	void Init();
 	//setter
 	void set_fall_speed(float speed);
-	//移動
+	//更新
 	void Fall();
+	bool IsOutOfRange(Vector3 v1, Vector3 v2);
 	//描画
 	void Draw();
 	//定数
-	const static float kMaxHeight = 70; //隕石の出現高度
+	const static float kAppearanceHeight = 70; //隕石の出現高度
 private:
 	float fall_speed_;
 };

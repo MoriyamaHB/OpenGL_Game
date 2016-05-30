@@ -4,6 +4,7 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include <stdio.h>
+#include <utility>
 #include "../class_head/vector3.h"
 
 #define uPI 3.1415926
@@ -67,6 +68,9 @@ extern void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2,
 extern void uDrawGround(int size);
 
 //文字列描画
-void uDrawString(const char str[], int x0, int y0, const float color[]);
+extern void uDrawString(const char str[], int x0, int y0, const float color[]);
+
+//範囲外の時trueを返す
+extern bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2);
 
 #endif /* UGL_H_ */
