@@ -17,7 +17,11 @@ Meteo::Meteo(Vector3 point) :
 
 void Meteo::Init() {
 	fall_speed_ = 0.01;
-	set_material (uMaterial4fv_brown);
+	float r = cc_util::GetRandom(0, 1000)/1000.0;
+	float g = cc_util::GetRandom(0, 1000)/1000.0;
+	float b = cc_util::GetRandom(0, 1000)/1000.0;
+	float mate[4]={r,g,b,1.0};
+	set_material(mate);
 }
 ////////////////////////    setter    ////////////////////////
 
