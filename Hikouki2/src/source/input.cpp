@@ -4,7 +4,7 @@
 
 //キーの入力状態記録
 namespace {
-unsigned char small_alphabet[26];
+unsigned int small_alphabet[26];
 }
 
 //小文字アルファベットの入力状態取得
