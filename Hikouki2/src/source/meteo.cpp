@@ -3,6 +3,10 @@
 ////////////////////////    コンストラクタ,初期化    ////////////////////////
 Meteo::Meteo() {
 	Init();
+	int x = cc_util::GetRandom(-20, 20);
+	int y = Meteo::kAppearanceHeight;
+	int z = cc_util::GetRandom(-20, 20);
+	Move(x, y, z);
 }
 
 Meteo::Meteo(float x, float y, float z) :
@@ -16,17 +20,19 @@ Meteo::Meteo(Vector3 point) :
 }
 
 void Meteo::Init() {
-	fall_speed_ = 0.01;
-	float r = cc_util::GetRandom(0, 1000)/1000.0;
-	float g = cc_util::GetRandom(0, 1000)/1000.0;
-	float b = cc_util::GetRandom(0, 1000)/1000.0;
-	float mate[4]={r,g,b,1.0};
+	//フラグ
+	set_draw_flag(true);
+	//大きさ
+	int s = cc_util::GetRandom(1, 5);
+	set_scale(s);
+	//スピード
+	fall_speed_ = cc_util::GetRandom(1, 50) / 100.0;
+	//マテリアル
+	float r = cc_util::GetRandom(0, 1000) / 1000.0;
+	float g = cc_util::GetRandom(0, 1000) / 1000.0;
+	float b = cc_util::GetRandom(0, 1000) / 1000.0;
+	float mate[4] = { r, g, b, 1.0 };
 	set_material(mate);
-}
-////////////////////////    setter    ////////////////////////
-
-void Meteo::set_fall_speed(float speed) {
-	fall_speed_ = speed;
 }
 
 ////////////////////////    更新    ////////////////////////
@@ -46,9 +52,9 @@ bool Meteo::IsOutOfRange(Vector3 v1, Vector3 v2) {
 
 ////////////////////////    描画    ////////////////////////
 void Meteo::Draw() {
-//Ballクラスを描画
+	//Ballクラスを描画
 	static_cast<Ball>(*this).Draw();
-//影もどきを描画
+	//影もどきを描画
 	if (place_.y >= 0) {
 		float x = place_.x, y = 0.01, z = place_.z;
 		float radius = scale_;
@@ -66,7 +72,7 @@ void Meteo::Draw() {
 			float t = place_.y / Meteo::kAppearanceHeight;
 			float mate[] = { t, t, t, 1.0f };
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mate);
-			glBegin (GL_TRIANGLES);
+			glBegin(GL_TRIANGLES);
 			glVertex3f(x, y, z);
 			glVertex3f(x1 + x, y, y1 + z);
 			glVertex3f(x2 + x, y, y2 + z);
