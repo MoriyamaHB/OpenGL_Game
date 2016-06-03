@@ -33,6 +33,8 @@ void Meteo::Init() {
 	float b = cc_util::GetRandom(0, 1000) / 1000.0;
 	float mate[4] = { r, g, b, 1.0 };
 	set_material(mate);
+	//繊細さ
+	SetSphereFineness(16, 16);
 }
 
 ////////////////////////    更新    ////////////////////////
@@ -58,7 +60,7 @@ void Meteo::Draw() {
 	if (place_.y >= 0) {
 		float x = place_.x, y = 0.01, z = place_.z;
 		float radius = scale_;
-		for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 1.0) {
+		for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 10.0) {
 			float th2 = th1 + 10.0;
 			float th1_rad = th1 / 180.0 * uPI;
 			float th2_rad = th2 / 180.0 * uPI;
@@ -72,7 +74,7 @@ void Meteo::Draw() {
 			float t = place_.y / Meteo::kAppearanceHeight;
 			float mate[] = { t, t, t, 1.0f };
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mate);
-			glBegin(GL_TRIANGLES);
+			glBegin (GL_TRIANGLES);
 			glVertex3f(x, y, z);
 			glVertex3f(x1 + x, y, y1 + z);
 			glVertex3f(x2 + x, y, y2 + z);
