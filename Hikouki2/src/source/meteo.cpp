@@ -1,7 +1,8 @@
 #include "../head/GV.h"
 
 ////////////////////////    コンストラクタ,初期化    ////////////////////////
-Meteo::Meteo() {
+Meteo::Meteo() :
+		Ball() {
 	Init();
 	int x = cc_util::GetRandom(-20, 20);
 	int y = Meteo::kAppearanceHeight;

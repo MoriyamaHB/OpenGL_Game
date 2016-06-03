@@ -15,6 +15,7 @@
 
 //プロジェクトヘッダ
 #include"../class_head/ball.hpp"
+#include"../class_head/bullet.hpp"
 #include"../class_head/camera.hpp"
 #include"../class_head/control_meteo.hpp"
 #include"../class_head/first_init.hpp"
