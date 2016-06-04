@@ -33,5 +33,5 @@ void Bullet::Move() {
 	float vx = speed_ * cos(angle_w_) * cos(angle_h_);
 	float vz = speed_ * sin(angle_w_) * cos(angle_h_);
 	float vy = speed_ * sin(angle_h_);
-	static_cast<Ball*>(this)->Move(vx, vy, vz);
+	Ball::Move(vx, vy, vz);
 }
