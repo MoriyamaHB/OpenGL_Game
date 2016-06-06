@@ -58,21 +58,21 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 void Camera3D3P::TransfarByKey() {
 
 	//カメラの移動
-	if (input::get_small_alphabet('w') == 1) {
+	if (input::get_small_alphabet_frame('w') >= 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		gz_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		gy_ -= CAMERA_SP * sin(angle_h_);
 	}
-	if (input::get_small_alphabet('s') == 1) {
+	if (input::get_small_alphabet_frame('s') >= 1) {
 		gx_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		gz_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		gy_ += CAMERA_SP * sin(angle_h_);
 	}
-	if (input::get_small_alphabet('a') == 1) {
+	if (input::get_small_alphabet_frame('a') >= 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_ - PI / 2);
 		gz_ -= CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
-	if (input::get_small_alphabet('d') == 1) {
+	if (input::get_small_alphabet_frame('d') >= 1) {
 		gx_ -= CAMERA_SP * cos(angle_w_ + PI / 2);
 		gz_ -= CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
@@ -82,7 +82,7 @@ void Camera3D3P::TransfarByKey() {
 		gy_ = 0;
 
 	//q入力時_カメラの初期化
-	if (input::get_small_alphabet('q') == 1)
+	if (input::get_small_alphabet_frame('q') == 1)
 		InitCoordinates();
 }
 
@@ -151,21 +151,21 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 void Camera3D1P::TransfarByKey() {
 
 	//カメラの移動
-	if (input::get_small_alphabet('w') == 1) {
+	if (input::get_small_alphabet_frame('w') >= 1) {
 		x_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		z_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		y_ += CAMERA_SP * sin(angle_h_);
 	}
-	if (input::get_small_alphabet('s') == 1) {
+	if (input::get_small_alphabet_frame('s') >= 1) {
 		x_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
 		z_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
 		y_ -= CAMERA_SP * sin(angle_h_);
 	}
-	if (input::get_small_alphabet('a') == 1) {
+	if (input::get_small_alphabet_frame('a') >= 1) {
 		x_ += CAMERA_SP * cos(angle_w_ - PI / 2);
 		z_ += CAMERA_SP * sin(angle_w_ - PI / 2);
 	}
-	if (input::get_small_alphabet('d') == 1) {
+	if (input::get_small_alphabet_frame('d') >= 1) {
 		x_ += CAMERA_SP * cos(angle_w_ + PI / 2);
 		z_ += CAMERA_SP * sin(angle_w_ + PI / 2);
 	}
@@ -175,7 +175,7 @@ void Camera3D1P::TransfarByKey() {
 		y_ = 0.1;
 
 	//q入力時_カメラの初期化
-	if (input::get_small_alphabet('q') == 1)
+	if (input::get_small_alphabet_frame('q') == 1)
 		InitCoordinates();
 }
 

@@ -84,7 +84,7 @@ void GameMain() {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
-	if (input::get_small_alphabet('e') == 1)
+	if (input::get_small_alphabet_frame('e') == 1)
 		exit(0);
 }
 }
@@ -93,6 +93,10 @@ void GameMain() {
 namespace hikouki2_main {
 void Draw(void) {
 	static MainState main_state = START;
+
+	//ゲーム基本処理
+	input::UpdateFrame();
+
 	switch (main_state) {
 	case START:
 		main_state = GAME_INI;

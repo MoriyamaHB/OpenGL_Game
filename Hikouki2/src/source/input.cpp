@@ -5,17 +5,17 @@
 //キーの入力状態記録
 namespace {
 unsigned int small_alphabet[26];
+unsigned int small_alphabet_frame[26];
 }
 
-//小文字アルファベットの入力状態取得
-//入力なら1,非入力なら0を返します
+//小文字アルファベットの入力フレーム数を返す
 namespace input {
-int get_small_alphabet(unsigned char key) {
+int get_small_alphabet_frame(unsigned char key) {
 	if (key < 'a' || 'z' < key) {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
 	}
-	return small_alphabet[key - 'a'];
+	return small_alphabet_frame[key - 'a'];
 }
 }
 
@@ -71,6 +71,21 @@ void CheckMouseMotion(int x, int y) {
 		glutWarpPointer(ww / 2, wh / 2);
 	} else {
 		wrap_flag = 0;
+	}
+}
+}
+
+///////////////////////// 更新 /////////////////////////
+
+//押しているフレームをカウントする
+namespace input {
+void UpdateFrame() {
+	//小文字アルファベットのフレームカウント
+	for (int i = 0; i < 26; i++) {
+		if (small_alphabet[i] == 1)
+			small_alphabet_frame[i]++;
+		else
+			small_alphabet_frame[i] = 0;
 	}
 }
 }
