@@ -12,7 +12,7 @@ public:
 	Fps();
 
 	//getter
-	int GetFrameCount();
+	int GetFrameCount() const;
 
 	//更新
 	void Update();

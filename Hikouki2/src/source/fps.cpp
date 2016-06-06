@@ -8,7 +8,7 @@ Fps::Fps() {
 	fps = 0;
 }
 
-int Fps::GetFrameCount() {
+int Fps::GetFrameCount() const {
 	return frame_count;
 }
 

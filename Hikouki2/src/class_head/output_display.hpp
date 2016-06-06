@@ -7,7 +7,7 @@ private:
 	OutputItem item_[kMaxItem];
 
 	//空の項目を探す
-	int SerchEmptyItem();
+	int SerchEmptyItem() const;
 public:
 	void Regist(const char str[], const float color[], int life = 1);
 	void Draw();

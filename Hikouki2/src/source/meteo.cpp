@@ -47,14 +47,14 @@ void Meteo::Fall() {
 }
 
 //隕石が範囲外かどうか
-bool Meteo::IsOutOfRange(Vector3 v1, Vector3 v2) {
+bool Meteo::IsOutOfRange(Vector3 v1, Vector3 v2) const {
 	if (uOutOfRange(place_, v1, v2))
 		return true;
 	return false;
 }
 
 ////////////////////////    描画    ////////////////////////
-void Meteo::Draw() {
+void Meteo::Draw() const {
 	//Ballクラスを描画
 	static_cast<Ball>(*this).Draw();
 	//影もどきを描画

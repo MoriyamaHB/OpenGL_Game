@@ -10,9 +10,9 @@ public:
 	void Init();
 	//更新
 	void Fall();
-	bool IsOutOfRange(Vector3 v1, Vector3 v2);
+	bool IsOutOfRange(Vector3 v1, Vector3 v2) const;
 	//描画
-	void Draw();
+	void Draw() const;
 	//定数
 	const static float kAppearanceHeight = 70; //隕石の出現高度
 private:

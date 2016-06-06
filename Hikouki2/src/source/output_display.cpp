@@ -35,7 +35,7 @@ void OutputDisplay::Draw() {
 
 //空のitemの添字を返します
 //なければ-1を返します
-int OutputDisplay::SerchEmptyItem() {
+int OutputDisplay::SerchEmptyItem() const {
 	for (int i = 0; i < kMaxItem; i++)
 		if (item_[i].flag == 0)
 			return i;
