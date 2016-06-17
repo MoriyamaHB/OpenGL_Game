@@ -13,6 +13,8 @@ void Camera3D3P::InitCoordinates() {
 	uz_ = 0;
 	angle_w_ = PI / 2;
 	angle_h_ = 0;
+	speed_ = 0;
+	distance_=1.5;
 }
 
 Camera3D3P::Camera3D3P() {
@@ -25,7 +27,7 @@ Vector3 Camera3D3P::GetStateWatchCoordinates() const {
 }
 
 //カメラ座標をVector3クラスで返します
-Vector3 Camera3D3P::GetStateCoordinates() const{
+Vector3 Camera3D3P::GetStateCoordinates() const {
 	return Vector3(x_, y_, z_);
 }
 
@@ -48,13 +50,9 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	x_ = kCameraDistance * cos(angle_w_) * cos(angle_h_) + gx_;
-	z_ = kCameraDistance * sin(angle_w_) * cos(angle_h_) + gz_;
-	y_ = kCameraDistance * sin(angle_h_) + gy_;
-
-	//todo 一時的なカメラの当たり判定
-//	if (y_ < 0.05)
-//		y_ = 0.05;
+	x_ = distance_ * cos(angle_w_) * cos(angle_h_) + gx_;
+	z_ = distance_ * sin(angle_w_) * cos(angle_h_) + gz_;
+	y_ = distance_ * sin(angle_h_) + gy_;
 
 }
 
@@ -62,29 +60,21 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 //qが入力されているときはここでカメラが初期化されます
 void Camera3D3P::TransfarByKey() {
 
-	//カメラの移動
-	if (input::get_small_alphabet_frame('w') >= 1) {
-		gx_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
-		gz_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
-		gy_ -= CAMERA_SP * sin(angle_h_);
+	//スピード変更
+	if (input::get_small_alphabet_frame('w')) {
+		speed_ += kAcceleration;
 	}
-	if (input::get_small_alphabet_frame('s') >= 1) {
-		gx_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
-		gz_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
-		gy_ += CAMERA_SP * sin(angle_h_);
-	}
-	if (input::get_small_alphabet_frame('a') >= 1) {
-		gx_ -= CAMERA_SP * cos(angle_w_ - PI / 2);
-		gz_ -= CAMERA_SP * sin(angle_w_ - PI / 2);
-	}
-	if (input::get_small_alphabet_frame('d') >= 1) {
-		gx_ -= CAMERA_SP * cos(angle_w_ + PI / 2);
-		gz_ -= CAMERA_SP * sin(angle_w_ + PI / 2);
+	if (input::get_small_alphabet_frame('s')) {
+		speed_ -= kAcceleration;
 	}
 
-	//todo 一時的なカメラ視点位置の当たり判定
-//	if (gy_ < 0)
-//		gy_ = 0;
+	//スピードラップ
+	WrapSpeed();
+
+	//カメラの移動
+	gx_ -= speed_ * cos(angle_w_) * cos(angle_h_);
+	gz_ -= speed_ * sin(angle_w_) * cos(angle_h_);
+	gy_ -= speed_ * sin(angle_h_);
 
 	//q入力時_カメラの初期化
 	if (input::get_small_alphabet_frame('q') == 1)
@@ -94,6 +84,14 @@ void Camera3D3P::TransfarByKey() {
 //gluLookAtを設定する
 void Camera3D3P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
+}
+
+//速度をラップする
+void Camera3D3P::WrapSpeed() {
+	if (speed_ < kMinSpeed)
+		speed_ = kMinSpeed;
+	if (speed_ > kMaxSpeed)
+		speed_ = kMaxSpeed;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -113,8 +111,11 @@ void Camera3D1P::InitCoordinates() {
 	ux_ = 0;
 	uy_ = 1;
 	uz_ = 0;
+	speed_ = 0;
 	angle_w_ = PI / 2;
 	angle_h_ = 0;
+	distance_=1.5;
+	//UpdateDistance();
 }
 
 //カメラ視点座標をVector3クラスで返します
@@ -123,7 +124,7 @@ Vector3 Camera3D1P::GetStateWatchCoordinates() const {
 }
 
 //カメラ座標をVector3クラスで返します
-Vector3 Camera3D1P::GetStateCoordinates() const{
+Vector3 Camera3D1P::GetStateCoordinates() const {
 	return Vector3(x_, y_, z_);
 }
 
@@ -146,13 +147,9 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	gx_ = kCameraDistance * cos(angle_w_) * cos(angle_h_) + x_;
-	gz_ = kCameraDistance * sin(angle_w_) * cos(angle_h_) + z_;
-	gy_ = kCameraDistance * sin(angle_h_) + y_;
-
-	//todo 一時的なカメラの当たり判定
-//	if (gy_ < -0.9)
-//		gy_ = -0.9;
+	gx_ = distance_ * cos(angle_w_) * cos(angle_h_) + x_;
+	gz_ = distance_ * sin(angle_w_) * cos(angle_h_) + z_;
+	gy_ = distance_ * sin(angle_h_) + y_;
 
 }
 
@@ -160,29 +157,21 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 //qが入力されているときはここでカメラが初期化されます
 void Camera3D1P::TransfarByKey() {
 
-	//カメラの移動
-	if (input::get_small_alphabet_frame('w') >= 1) {
-		x_ += CAMERA_SP * cos(angle_w_) * cos(angle_h_);
-		z_ += CAMERA_SP * sin(angle_w_) * cos(angle_h_);
-		y_ += CAMERA_SP * sin(angle_h_);
+	//スピード変更
+	if (input::get_small_alphabet_frame('w')) {
+		speed_ += kAcceleration;
 	}
-	if (input::get_small_alphabet_frame('s') >= 1) {
-		x_ -= CAMERA_SP * cos(angle_w_) * cos(angle_h_);
-		z_ -= CAMERA_SP * sin(angle_w_) * cos(angle_h_);
-		y_ -= CAMERA_SP * sin(angle_h_);
-	}
-	if (input::get_small_alphabet_frame('a') >= 1) {
-		x_ += CAMERA_SP * cos(angle_w_ - PI / 2);
-		z_ += CAMERA_SP * sin(angle_w_ - PI / 2);
-	}
-	if (input::get_small_alphabet_frame('d') >= 1) {
-		x_ += CAMERA_SP * cos(angle_w_ + PI / 2);
-		z_ += CAMERA_SP * sin(angle_w_ + PI / 2);
+	if (input::get_small_alphabet_frame('s')) {
+		speed_ -= kAcceleration;
 	}
 
-	//todo 一時的なカメラ視点位置の当たり判定
-//	if (y_ < 0.1)
-//		y_ = 0.1;
+	//スピードラップ
+	WrapSpeed();
+
+	//カメラの移動
+	x_ += speed_ * cos(angle_w_) * cos(angle_h_);
+	z_ += speed_ * sin(angle_w_) * cos(angle_h_);
+	y_ += speed_ * sin(angle_h_);
 
 	//q入力時_カメラの初期化
 	if (input::get_small_alphabet_frame('q') == 1)
@@ -193,4 +182,13 @@ void Camera3D1P::TransfarByKey() {
 void Camera3D1P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
 }
+
+//速度をラップする
+void Camera3D1P::WrapSpeed() {
+	if (speed_ < kMinSpeed)
+		speed_ = kMinSpeed;
+	if (speed_ > kMaxSpeed)
+		speed_ = kMaxSpeed;
+}
+
 

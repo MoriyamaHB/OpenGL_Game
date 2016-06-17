@@ -19,7 +19,7 @@ void Init() {
 namespace control_meteo {
 void Update(Fps *fps, Vector3 player_place) {
 	//登録
-	if (fps->GetFrameCount() % 5 == 0) {
+	if (fps->GetFrameCount() % 3 == 0) {
 		Meteo *m = new Meteo(player_place);
 		meteo_.push_back(m);
 	}
@@ -34,6 +34,7 @@ void Update(Fps *fps, Vector3 player_place) {
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end();) {
 		//範囲外の時消滅
+		//プレイヤーの場所を足して考える
 		Vector3 range1 = kMeteoRange1 + player_place;
 		Vector3 range2 = kMeteoRange2 + player_place;
 		if ((*itr)->IsOutOfRange(range1, range2)) {

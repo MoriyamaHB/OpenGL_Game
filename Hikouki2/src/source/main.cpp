@@ -28,7 +28,6 @@ void UpdateObjects() {
 //drawが長くなるのでオブジェクトだけ分割
 namespace {
 static void DrawObjects() {
-
 	//赤い箱
 	glPushMatrix();
 	Vector3 cam_vec = camera.GetStateWatchCoordinates();
@@ -126,7 +125,7 @@ void Resize(int w, int h) {
 	//透視変換行列設定
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
-	gluPerspective(80.0, (double) w / (double) h, 0.1, 100.0);
+	gluPerspective(80.0, (double) w / (double) h, 0.1, 150.0);
 
 	//モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);

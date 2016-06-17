@@ -31,11 +31,18 @@ private:
 	float uz_;
 	double angle_w_;
 	double angle_h_;
+	double speed_;
+	double distance_;
 	//カメラの角度限度
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
-	//視点からカメラの距離
-	const static double kCameraDistance = 5;
+	//カメラの速度関連
+	const static double kAcceleration = 0.01; //加速度
+	const static double kMaxSpeed = 1; //最高速度
+	const static double kMinSpeed = 0; //最低速度
+
+	//速度をラップする
+	void WrapSpeed();
 };
 
 //1人称 & 自由飛行のカメラ移動計算を行います
@@ -69,9 +76,16 @@ private:
 	float uz_;
 	double angle_w_;
 	double angle_h_;
+	double speed_;
+	double distance_;
 	//カメラの角度限度
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
-	//視点からカメラの距離
-	const static double kCameraDistance = 5;
+	//カメラの速度関連
+	const static double kAcceleration = 0.01; //加速度
+	const static double kMaxSpeed = 1; //最高速度
+	const static double kMinSpeed = 0; //最低速度
+
+	//速度をラップする
+	void WrapSpeed();
 };
