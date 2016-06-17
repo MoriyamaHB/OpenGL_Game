@@ -32,6 +32,7 @@ private:
 	double angle_h_;
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
+	const static double kCameraDistance = 5;
 };
 
 //1人称 & 自由飛行のカメラ移動計算を行います
@@ -66,4 +67,5 @@ private:
 	double angle_h_;
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
+	const static double kCameraDistance = 5;
 };

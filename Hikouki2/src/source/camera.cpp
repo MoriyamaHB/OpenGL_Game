@@ -43,9 +43,9 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	x_ = cos(angle_w_) * cos(angle_h_) + gx_;
-	z_ = sin(angle_w_) * cos(angle_h_) + gz_;
-	y_ = sin(angle_h_) + gy_;
+	x_ = kCameraDistance * cos(angle_w_) * cos(angle_h_) + gx_;
+	z_ = kCameraDistance * sin(angle_w_) * cos(angle_h_) + gz_;
+	y_ = kCameraDistance * sin(angle_h_) + gy_;
 
 	//todo 一時的なカメラの当たり判定
 	if (y_ < 0.05)
@@ -136,9 +136,9 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	gx_ = cos(angle_w_) * cos(angle_h_) + x_;
-	gz_ = sin(angle_w_) * cos(angle_h_) + z_;
-	gy_ = sin(angle_h_) + y_;
+	gx_ = kCameraDistance * cos(angle_w_) * cos(angle_h_) + x_;
+	gz_ = kCameraDistance * sin(angle_w_) * cos(angle_h_) + z_;
+	gy_ = kCameraDistance * sin(angle_h_) + y_;
 
 	//todo 一時的なカメラの当たり判定
 	if (gy_ < -0.9)

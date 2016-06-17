@@ -34,7 +34,7 @@ static void DrawObjects() {
 	Vector3 cam_vec = camera.GetStateWatchCoordinates();
 	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(0.01);
+	glutSolidCube(0.5);
 	glPopMatrix();
 
 	//地面描画
@@ -126,7 +126,7 @@ void Resize(int w, int h) {
 	//透視変換行列設定
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
-	gluPerspective(30.0, (double) w / (double) h, 0.1, 100.0);
+	gluPerspective(80.0, (double) w / (double) h, 0.1, 100.0);
 
 	//モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);
