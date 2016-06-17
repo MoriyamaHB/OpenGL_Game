@@ -10,6 +10,7 @@ public:
 
 	//getter
 	Vector3 GetStateWatchCoordinates() const;
+	Vector3 GetStateCoordinates() const;
 
 	//カメラ移動
 	void TransfarAndRotateByMouse();
@@ -30,8 +31,10 @@ private:
 	float uz_;
 	double angle_w_;
 	double angle_h_;
+	//カメラの角度限度
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
+	//視点からカメラの距離
 	const static double kCameraDistance = 5;
 };
 
@@ -45,6 +48,7 @@ public:
 
 	//getter
 	Vector3 GetStateWatchCoordinates() const;
+	Vector3 GetStateCoordinates() const;
 
 	//カメラ移動
 	void TransfarAndRotateByMouse();
@@ -65,7 +69,9 @@ private:
 	float uz_;
 	double angle_w_;
 	double angle_h_;
+	//カメラの角度限度
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
+	//視点からカメラの距離
 	const static double kCameraDistance = 5;
 };

@@ -21,7 +21,7 @@ void UpdateObjects() {
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
 	//隕石更新
-	control_meteo::Update(&fps);
+	control_meteo::Update(&fps,camera.GetStateCoordinates());
 }
 }
 

@@ -14,7 +14,7 @@ public:
 	//描画
 	void Draw() const;
 	//定数
-	const static float kAppearanceHeight = 70; //隕石の出現高度
+	const static float kAppearanceDistance = 150; //プレイヤーと隕石の出現距離,削除距離を考慮すること
 private:
 	float fall_speed_;
 };

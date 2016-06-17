@@ -1,9 +1,9 @@
 #include "../head/GV.h"
 
 namespace {
-//隕石の範囲
+//隕石の範囲,隕石の出現距離を考慮すること
 const Vector3 kMeteoRange1(200, 200, 200);
-const Vector3 kMeteoRange2(-200, -10, -200);
+const Vector3 kMeteoRange2(-200, -200, -200);
 }
 
 namespace {
@@ -17,10 +17,10 @@ void Init() {
 }
 
 namespace control_meteo {
-void Update(Fps *fps) {
+void Update(Fps *fps, Vector3 player_place) {
 	//登録
-	if (fps->GetFrameCount() % 10 == 0) {
-		Meteo *m = new Meteo();
+	if (fps->GetFrameCount() % 5 == 0) {
+		Meteo *m = new Meteo(player_place);
 		meteo_.push_back(m);
 	}
 	//更新
@@ -33,7 +33,10 @@ void Update(Fps *fps) {
 	//for文でitr++すると削除した次の要素に移動できない可能性があるのでeraseの戻り値を使う
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end();) {
-		if ((*itr)->IsOutOfRange(kMeteoRange1, kMeteoRange2)) {
+		//範囲外の時消滅
+		Vector3 range1 = kMeteoRange1 + player_place;
+		Vector3 range2 = kMeteoRange2 + player_place;
+		if ((*itr)->IsOutOfRange(range1, range2)) {
 			delete (*itr);
 			itr = meteo_.erase(itr);
 		} else

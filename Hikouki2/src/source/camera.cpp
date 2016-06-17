@@ -24,6 +24,11 @@ Vector3 Camera3D3P::GetStateWatchCoordinates() const {
 	return Vector3(gx_, gy_, gz_);
 }
 
+//カメラ座標をVector3クラスで返します
+Vector3 Camera3D3P::GetStateCoordinates() const{
+	return Vector3(x_, y_, z_);
+}
+
 //カメラ座標をマウスの移動から計算する(3人称視点)
 void Camera3D3P::TransfarAndRotateByMouse() {
 
@@ -48,8 +53,8 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 	y_ = kCameraDistance * sin(angle_h_) + gy_;
 
 	//todo 一時的なカメラの当たり判定
-	if (y_ < 0.05)
-		y_ = 0.05;
+//	if (y_ < 0.05)
+//		y_ = 0.05;
 
 }
 
@@ -78,8 +83,8 @@ void Camera3D3P::TransfarByKey() {
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
-	if (gy_ < 0)
-		gy_ = 0;
+//	if (gy_ < 0)
+//		gy_ = 0;
 
 	//q入力時_カメラの初期化
 	if (input::get_small_alphabet_frame('q') == 1)
@@ -117,6 +122,11 @@ Vector3 Camera3D1P::GetStateWatchCoordinates() const {
 	return Vector3(gx_, gy_, gz_);
 }
 
+//カメラ座標をVector3クラスで返します
+Vector3 Camera3D1P::GetStateCoordinates() const{
+	return Vector3(x_, y_, z_);
+}
+
 //カメラ座標をマウスの移動から計算する(3人称視点)
 void Camera3D1P::TransfarAndRotateByMouse() {
 
@@ -141,8 +151,8 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 	gy_ = kCameraDistance * sin(angle_h_) + y_;
 
 	//todo 一時的なカメラの当たり判定
-	if (gy_ < -0.9)
-		gy_ = -0.9;
+//	if (gy_ < -0.9)
+//		gy_ = -0.9;
 
 }
 
@@ -171,8 +181,8 @@ void Camera3D1P::TransfarByKey() {
 	}
 
 	//todo 一時的なカメラ視点位置の当たり判定
-	if (y_ < 0.1)
-		y_ = 0.1;
+//	if (y_ < 0.1)
+//		y_ = 0.1;
 
 	//q入力時_カメラの初期化
 	if (input::get_small_alphabet_frame('q') == 1)
