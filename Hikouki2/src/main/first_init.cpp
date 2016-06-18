@@ -11,14 +11,14 @@ void FirstInit(int argc, char *argv[]) {
 	glutCreateWindow(argv[0]);
 
 	//openGLイベント関数
-	glutDisplayFunc(hikouki2_main::Draw);
+	glutDisplayFunc(opengl_game_main::DisplayFunc);
 	glutKeyboardFunc(input::CheckPushKey);
 	glutKeyboardUpFunc(input::CheckUpkey);
 	glutPassiveMotionFunc(input::CheckMouseMotion);
 	glutMouseFunc(input::CheckMouse);
 	glutMotionFunc(input::CheckMouseMotion);
-	glutReshapeFunc(hikouki2_main::Resize);
-	glutTimerFunc(100, hikouki2_main::Timer, 0);
+	glutReshapeFunc(opengl_game_main::Resize);
+	glutTimerFunc(100, opengl_game_main::Timer, 0);
 
 	//その他openGLの設定
 	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する

@@ -66,9 +66,6 @@ static void DrawObjects() {
 //ゲームメイン関数
 namespace {
 void GameMain() {
-	//ディスプレイ初期化
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
-	glLoadIdentity(); //モデルビュー変換行列の初期化
 
 	//---------------------------    更新    ---------------------------
 	//fps
@@ -84,14 +81,7 @@ void GameMain() {
 	fps.Draw(10, 25); //fps登録
 	camera.DisplayInfo(); //カメラの情報を表示登録
 	DrawObjects();	//オブジェクト
-	//画面出力文字列描画
-	output_display::Draw();
-	//ディスプレイ終了処理
-	glEnd();
-	glEndList();
-	glutSwapBuffers();
-	if (input::get_small_alphabet_frame('e') == 1)
-		exit(0);
+
 }
 }
 
@@ -103,12 +93,16 @@ void GameFin() {
 }
 
 //OpenGLコールバック関数
-namespace hikouki2_main {
-void Draw(void) {
+namespace opengl_game_main {
+void DisplayFunc(void) {
 	static MainState main_state = START;
 
-//ゲーム基本処理
-	input::UpdateFrame();
+	//ディスプレイ初期化
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
+	glLoadIdentity(); //モデルビュー変換行列の初期化
+
+	//基本処理
+	input::UpdateFrame(); //入力状態更新
 
 	switch (main_state) {
 	case START:
@@ -130,11 +124,21 @@ void Draw(void) {
 		main_state = START;
 		break;
 	}
+
+	//基本描画
+	output_display::Draw(); //画面出力文字列描画
+
+	//ディスプレイ終了処理
+	glEnd();
+	glEndList();
+	glutSwapBuffers();
+	if (input::get_small_alphabet_frame('e') == 1)
+		exit(0);
 }
 }
 
 //OpenGLコールバック関数
-namespace hikouki2_main {
+namespace opengl_game_main {
 void Resize(int w, int h) {
 //ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
@@ -150,8 +154,8 @@ void Resize(int w, int h) {
 }
 
 //OpenGLコールバック関数
-//FRAME_PER_SECONDSでdraw関数を呼び出します
-namespace hikouki2_main {
+//FRAME_PER_SECONDSでDisplayFunc関数を呼び出します
+namespace opengl_game_main {
 void Timer(int value) {
 	glutTimerFunc(1000 / FRAME_PER_SECONDS, Timer, 0);
 	glutPostRedisplay(); //再描画
