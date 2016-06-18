@@ -25,7 +25,7 @@ void Meteo::Init() {
 	float mate[4] = { r, g, b, 1.0 };
 	set_material(mate);
 	//繊細さ
-	SetSphereFineness(16, 16);
+	SetSphereFineness(14, 14);
 }
 
 ////////////////////////    更新    ////////////////////////

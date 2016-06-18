@@ -75,9 +75,9 @@ void GameMain() {
 	UpdateObjects();
 
 	//---------------------------    描画    ---------------------------
-	DrawObjects();	//オブジェクト
-	camera.DisplayInfo(); //カメラの情報を表示登録
 	fps.Draw(10, 25); //fps登録
+	camera.DisplayInfo(); //カメラの情報を表示登録
+	DrawObjects();	//オブジェクト
 	//画面出力文字列描画
 	output_display::Draw();
 	//ディスプレイ終了処理
