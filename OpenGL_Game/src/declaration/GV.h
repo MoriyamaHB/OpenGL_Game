@@ -1,10 +1,10 @@
 //標準ライブラリ
-#include<GL/freeglut.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<vector>
-#include<math.h>
+#include <GL/freeglut.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <vector>
+#include <math.h>
 
 //自作ライブラリ
 #include "../util/cc_util.h"
@@ -30,4 +30,5 @@
 #include "../meteo/control_meteo.hpp"
 #include "../meteo/meteo.hpp"
 #include "../player/camera.hpp"
+#include "../player/player.h"
 

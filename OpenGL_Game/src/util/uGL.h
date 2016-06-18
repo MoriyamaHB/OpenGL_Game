@@ -75,4 +75,8 @@ extern void uDrawString(const char str[], int x0, int y0, const float color[]);
 //範囲外の時trueを返す
 extern bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2);
 
+//球と球の当たり判定
+extern bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2,
+		double r2);
+
 #endif /* UGL_H_ */

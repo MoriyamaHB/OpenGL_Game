@@ -261,3 +261,11 @@ bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2) {
 		return true;
 	return false;
 }
+
+//球と球の当たり判定
+bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2, double r2) {
+	if (pow(b2.x - b1.x, 2) + pow(b2.y - b1.y, 2) + pow(b2.z - b1.z, 2)
+			<= pow(r1 + r2, 2))
+		return true;
+	return false;
+}

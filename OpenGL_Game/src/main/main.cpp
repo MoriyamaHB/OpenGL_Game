@@ -13,6 +13,7 @@ void GameIni() {
 	control_meteo::Init();
 	control_bullet::Init();
 	camera.InitCoordinates();
+	player::Init();
 }
 }
 
@@ -27,6 +28,8 @@ void UpdateObjects() {
 	//弾更新
 	control_bullet::Update(camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates(), camera.get_speed());
+	//プレイヤー更新
+	player::Update(camera.GetStateWatchCoordinates());
 }
 }
 
@@ -41,14 +44,6 @@ static void DrawObjects() {
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
 
-	//赤い箱
-	glPushMatrix();
-	Vector3 cam_vec = camera.GetStateWatchCoordinates();
-	glTranslated(cam_vec.x, cam_vec.y, cam_vec.z);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(0.5);
-	glPopMatrix();
-
 	//地面描画
 	glPushMatrix();
 	uDrawGround(50);
@@ -56,6 +51,9 @@ static void DrawObjects() {
 
 	//球を描画
 	ball_test.Draw();
+
+	//プレイヤー描画
+	player::Draw();
 
 	//隕石描画
 	control_meteo::Draw();
