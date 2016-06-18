@@ -22,11 +22,25 @@ void Init() {
 }
 
 namespace control_bullet {
-void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
+void Update(Vector3 camera_place, Vector3 camera_viewpoint,
+		double camera_speed) {
 	//登録
+	if (input::get_mouse_left_button_frame() == 1) {
+		if (bullet_.size() < kMaxBulletNum) { //最大数を下回っている
+			//登録場所を少し上にずらす
+			camera_viewpoint.y += 0.5;
+			//毎フレームの移動角度(3座標)を計算
+			Vector3 each_move_angle = camera_viewpoint - camera_place;
+			//登録
+			Bullet *b = new Bullet(camera_viewpoint, each_move_angle,
+					camera_speed);
+			bullet_.push_back(b);
+		}
+	}
 	//更新
 	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
 			itr != bullet_.end(); ++itr) {
+		(*itr)->Move();
 	}
 	//削除
 	for (std::vector<Bullet*>::iterator itr = bullet_.begin();

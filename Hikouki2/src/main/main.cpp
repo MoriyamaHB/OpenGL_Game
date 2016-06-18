@@ -25,8 +25,8 @@ void UpdateObjects() {
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
 	//弾更新
-	control_bullet::Update(&fps, camera.GetStateCoordinates(),
-			camera.GetStateWatchCoordinates());
+	control_bullet::Update(camera.GetStateCoordinates(),
+			camera.GetStateWatchCoordinates(), camera.get_speed());
 }
 }
 

@@ -7,7 +7,7 @@ public:
 	Meteo(Vector3 point, Vector3 each_move_angle);
 	void Init();
 	//更新
-	void Fall();
+	void Move();
 	bool IsOutOfRange(Vector3 v1, Vector3 v2) const;
 	//描画
 	void Draw() const;

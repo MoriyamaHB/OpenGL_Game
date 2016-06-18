@@ -58,6 +58,13 @@ void TakeMouseMotionAndInit(int *dx, int *dy) {
 }
 }
 
+//左マウスクリックフレーム数を取得
+namespace input {
+int get_mouse_left_button_frame() {
+	return mouse_left_button_frame;
+}
+}
+
 //OpenGLコールバック関数
 //マウスクリックしたor放した時に呼び出されます
 namespace input {

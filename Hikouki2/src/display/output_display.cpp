@@ -5,12 +5,12 @@ const int kMaxItem = 24; 	//最大登録数
 const int kLineHeight = 30; 	//一行分の高さ
 const int kStartWidth = 10; 	//描画開始座標x
 const int kStartHeight = 23; //描画開始座標y
-OutputItem item_[kMaxItem];
+OutputItem item[kMaxItem];
 }
 
 namespace output_display {
 void Init() {
-	memset(item_, 0, sizeof(item_));
+	memset(item, 0, sizeof(item));
 }
 }
 
@@ -19,7 +19,7 @@ void Init() {
 namespace {
 int SerchEmptyItem() {
 	for (int i = 0; i < kMaxItem; i++)
-		if (item_[i].flag == 0)
+		if (item[i].flag == 0)
 			return i;
 	return -1;
 }
@@ -35,11 +35,11 @@ void Regist(const char str[], const float color[], int life) {
 	}
 
 	//項目に登録する
-	strcpy(item_[n].str, str);
+	strcpy(item[n].str, str);
 	for (int i = 0; i < 4; i++)
-		item_[n].color[i] = color[i];
-	item_[n].life = life;
-	item_[n].flag = 1;
+		item[n].color[i] = color[i];
+	item[n].life = life;
+	item[n].flag = 1;
 }
 }
 
@@ -50,14 +50,14 @@ namespace output_display {
 void Draw() {
 	int dn = 0; //描画回数
 	for (int i = 0; i < kMaxItem; i++)
-		if (item_[i].flag == 1) {
+		if (item[i].flag == 1) {
 			//項目描画
-			uDrawString(item_[i].str, kStartWidth,
-					kStartHeight + kLineHeight * dn, item_[i].color);
+			uDrawString(item[i].str, kStartWidth,
+					kStartHeight + kLineHeight * dn, item[i].color);
 			dn++;
 			//削除処理
-			if (--item_[i].life <= 0)
-				item_[i].flag = 0;
+			if (--item[i].life <= 0)
+				item[i].flag = 0;
 		}
 }
 }

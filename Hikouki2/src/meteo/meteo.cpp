@@ -6,7 +6,7 @@
 Meteo::Meteo(Vector3 point, Vector3 each_move_angle) :
 		Ball() {
 	Init();
-	Move(point.x, point.y, point.z);
+	Ball::Move(point.x, point.y, point.z);
 	each_move_angle_ = each_move_angle;
 }
 
@@ -30,9 +30,9 @@ void Meteo::Init() {
 
 ////////////////////////    更新    ////////////////////////
 
-//重力による移動を行う
-void Meteo::Fall() {
-	Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
+//移動を行う
+void Meteo::Move() {
+	Ball::Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
 			speed_ * each_move_angle_.z);
 }
 

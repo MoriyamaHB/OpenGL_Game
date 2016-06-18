@@ -45,7 +45,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//更新
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end(); ++itr) {
-		(*itr)->Fall();
+		(*itr)->Move();
 	}
 	//削除
 	//eraseを使うため場合分けして次のitrを決める

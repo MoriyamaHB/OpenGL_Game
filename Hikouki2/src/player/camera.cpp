@@ -37,6 +37,11 @@ void Camera3D3P::GetAngle(double *angle_w, double *angle_h) const {
 	*angle_h = angle_h_;
 }
 
+//カメラ速度をgetする
+double Camera3D3P::get_speed() {
+	return speed_;
+}
+
 //カメラ座標をマウスの移動から計算する(3人称視点)
 void Camera3D3P::TransfarAndRotateByMouse() {
 

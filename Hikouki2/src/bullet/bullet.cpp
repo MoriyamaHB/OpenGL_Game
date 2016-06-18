@@ -1,39 +1,30 @@
 #include "../declaration/GV.h"
 
 ////////////////////////    コンストラクタ,初期化    ////////////////////////
-Bullet::Bullet(float ang_w, float ang_h) :
-		Ball() {
-	Init(ang_w, ang_h);
+Bullet::Bullet(Vector3 point, Vector3 each_move_angle, double camera_speed) {
+	Init();
+	speed_ = camera_speed + 0.1; //スピード
+	Ball::Move(point.x, point.y, point.z);
+	each_move_angle_ = each_move_angle;
 }
 
-Bullet::Bullet(float x, float y, float z, float ang_w, float ang_h) :
-		Ball(x, y, z) {
-	Init(ang_w, ang_h);
-}
-
-Bullet::Bullet(Vector3 point, float ang_w, float ang_h) :
-		Ball(point) {
-	Init(ang_w, ang_h);
-}
-
-void Bullet::Init(float ang_w, float ang_h) {
+void Bullet::Init() {
 	//フラグ
 	set_draw_flag(true);
-	//スピード
-	speed_ = 10;
-	//角度
-	angle_w_ = ang_w;
-	angle_h_ = ang_h;
+	//大きさ
+	set_scale(0.3);
+	//マテリアル
+	set_material (uMaterial4fv_red);
+	//繊細さ
+	SetSphereFineness(4, 2);
 }
 
 ////////////////////////    更新    ////////////////////////
 
 //移動
 void Bullet::Move() {
-	float vx = speed_ * cos(angle_w_) * cos(angle_h_);
-	float vz = speed_ * sin(angle_w_) * cos(angle_h_);
-	float vy = speed_ * sin(angle_h_);
-	Ball::Move(vx, vy, vz);
+	Ball::Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
+			speed_ * each_move_angle_.z);
 }
 
 //隕石が範囲外かどうか
