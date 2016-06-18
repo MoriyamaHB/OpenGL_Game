@@ -14,7 +14,7 @@ void Camera3D3P::InitCoordinates() {
 	angle_w_ = PI / 2;
 	angle_h_ = 0;
 	speed_ = 0;
-	distance_=1.5;
+	distance_ = 1.5;
 }
 
 Camera3D3P::Camera3D3P() {
@@ -81,6 +81,13 @@ void Camera3D3P::TransfarByKey() {
 		InitCoordinates();
 }
 
+//カメラの情報を表示（速度)
+void Camera3D3P::DisplayInfo(OutputDisplay &disp) const {
+	char string[256];
+	sprintf(string, "speed:%.0f%%", ((speed_ - kMinSpeed) / kMaxSpeed) * 100.0);
+	disp.Regist(string, uColor4fv_red, 1);
+}
+
 //gluLookAtを設定する
 void Camera3D3P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
@@ -114,7 +121,7 @@ void Camera3D1P::InitCoordinates() {
 	speed_ = 0;
 	angle_w_ = PI / 2;
 	angle_h_ = 0;
-	distance_=1.5;
+	distance_ = 1.5;
 	//UpdateDistance();
 }
 
@@ -178,6 +185,13 @@ void Camera3D1P::TransfarByKey() {
 		InitCoordinates();
 }
 
+//カメラの情報を表示（速度)
+void Camera3D1P::DisplayInfo(OutputDisplay &disp) const {
+	char string[256];
+	sprintf(string, "speed:%.0f%%", ((speed_ - kMinSpeed) / kMaxSpeed) * 100.0);
+	disp.Regist(string, uColor4fv_red, 1);
+}
+
 //gluLookAtを設定する
 void Camera3D1P::SetGluLookAt() const {
 	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
@@ -190,5 +204,4 @@ void Camera3D1P::WrapSpeed() {
 	if (speed_ > kMaxSpeed)
 		speed_ = kMaxSpeed;
 }
-
 

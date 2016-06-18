@@ -21,7 +21,7 @@ void UpdateObjects() {
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
 	//隕石更新
-	control_meteo::Update(&fps,camera.GetStateCoordinates());
+	control_meteo::Update(&fps, camera.GetStateCoordinates());
 }
 }
 
@@ -64,6 +64,7 @@ void GameMain() {
 	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.TransfarByKey(); //カメラ移動計算(キー)
 	camera.SetGluLookAt(); //視点をセット
+	camera.DisplayInfo(out_disp); //カメラの情報を表示
 
 	//ライト
 	//カメラの視点座標に配置

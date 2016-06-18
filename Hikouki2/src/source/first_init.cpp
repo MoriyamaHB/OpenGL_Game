@@ -22,7 +22,7 @@ void FirstInit(int argc, char *argv[]) {
 	//その他openGLの設定
 	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する
 	glutSetCursor (GLUT_CURSOR_CROSSHAIR);
-	glClearColor(1.0, 1.0, 1.0, 0.0); //塗りつぶし色を白に設定
+	glClearColor(0.61176, 0.65490, 0.88627, 0.0); //塗りつぶし色を空色に設定
 	glEnable (GL_DEPTH_TEST);
 	glEnable (GL_CULL_FACE);
 	glEnable (GL_LIGHTING);

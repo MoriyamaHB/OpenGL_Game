@@ -27,6 +27,6 @@ void Fps::Update() {
 //x,yの位置に計測したfpsの描画を登録します
 void Fps::Draw(int x, int y, OutputDisplay &output) const {
 	char str[48];
-	sprintf(str, "%.2f", fps);
+	sprintf(str, "fps:%.2f", fps);
 	output.Regist(str, uColor4fv_blue);
 }
