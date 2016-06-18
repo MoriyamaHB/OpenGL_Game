@@ -2,7 +2,7 @@
 #include "../head/GV.h"
 
 namespace {
-Camera3D1P camera;
+Camera3D3P camera;
 OutputDisplay out_disp;
 Fps fps;
 Ball ball_test(3.0, 3.0, 0.0);
