@@ -21,8 +21,6 @@ void UpdateObjects() {
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
 	//隕石更新
-	double ang_w, ang_h;
-	camera.GetAngle(&ang_w, &ang_h);
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
 }
@@ -31,6 +29,14 @@ void UpdateObjects() {
 //drawが長くなるのでオブジェクトだけ分割
 namespace {
 static void DrawObjects() {
+
+	//ライト
+	//カメラの視点座標に配置
+	glPushMatrix();
+	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
+	glPopMatrix();
+
 	//赤い箱
 	glPushMatrix();
 	Vector3 cam_vec = camera.GetStateWatchCoordinates();
@@ -59,30 +65,23 @@ void GameMain() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
 	glLoadIdentity(); //モデルビュー変換行列の初期化
 
+	//---------------------------    更新    ---------------------------
 	//fps
 	fps.Update();
-	fps.Draw(10, 25, out_disp);
-
 	//カメラ
 	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.TransfarByKey(); //カメラ移動計算(キー)
 	camera.SetGluLookAt(); //視点をセット
-	camera.DisplayInfo(out_disp); //カメラの情報を表示
-
-	//ライト
-	//カメラの視点座標に配置
-	glPushMatrix();
-	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };
-	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
-	glPopMatrix();
-
 	//オブジェクト
 	UpdateObjects();
+
+	//---------------------------    描画    ---------------------------
+	//オブジェクト
 	DrawObjects();
-
 	//画面出力文字列描画
+	camera.DisplayInfo(out_disp); //カメラの情報を表示
+	fps.Draw(10, 25, out_disp);
 	out_disp.Draw();
-
 	//ディスプレイ終了処理
 	glEnd();
 	glEndList();
