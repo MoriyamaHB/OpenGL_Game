@@ -1,4 +1,3 @@
-
 #define GLOBAL_INSTANCE
 #include "../declaration/GV.h"
 
@@ -22,7 +21,10 @@ void UpdateObjects() {
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 
 	//隕石更新
-	control_meteo::Update(&fps, camera.GetStateCoordinates());
+	double ang_w, ang_h;
+	camera.GetAngle(&ang_w, &ang_h);
+	control_meteo::Update(&fps, camera.GetStateCoordinates(),
+			camera.GetStateWatchCoordinates());
 }
 }
 
@@ -127,7 +129,7 @@ void Resize(int w, int h) {
 	//透視変換行列設定
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
-	gluPerspective(80.0, (double) w / (double) h, 0.1, 150.0);
+	gluPerspective(80.0, (double) w / (double) h, 0.1, 200.0);
 
 	//モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);

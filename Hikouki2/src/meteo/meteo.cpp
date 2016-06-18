@@ -1,23 +1,13 @@
 #include "../declaration/GV.h"
 
 ////////////////////////    コンストラクタ,初期化    ////////////////////////
-Meteo::Meteo() :
+
+//each_move_angle * speedずつ各座標軸で移動を行います
+Meteo::Meteo(Vector3 point, Vector3 each_move_angle) :
 		Ball() {
 	Init();
-}
-
-Meteo::Meteo(float x, float y, float z) :
-		Ball(x, y, z) {
-	Init();
-}
-
-Meteo::Meteo(Vector3 point) :
-		Ball() {
-	Init();
-	int x = point.x + cc_util::GetRandom(-30, 30);
-	int y = point.y + cc_util::GetRandom(-30, 30);
-	int z = point.z + Meteo::kAppearanceDistance;
-	Move(x, y, z);
+	Move(point.x, point.y, point.z);
+	each_move_angle_ = each_move_angle;
 }
 
 void Meteo::Init() {
@@ -27,7 +17,7 @@ void Meteo::Init() {
 	int s = cc_util::GetRandom(1, 8);
 	set_scale(s);
 	//スピード
-	fall_speed_ = cc_util::GetRandom(1, 50) / 100.0;
+	speed_ = cc_util::GetRandom(1, 50) / 100.0;
 	//マテリアル
 	float r = cc_util::GetRandom(0, 1000) / 1000.0;
 	float g = cc_util::GetRandom(0, 1000) / 1000.0;
@@ -41,9 +31,9 @@ void Meteo::Init() {
 ////////////////////////    更新    ////////////////////////
 
 //重力による移動を行う
-//テストとしてy方向に毎フレーム0.01ずつ移動する
 void Meteo::Fall() {
-	Move(0.0, 0.0, -fall_speed_);
+	Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
+			speed_ * each_move_angle_.z);
 }
 
 //隕石が範囲外かどうか

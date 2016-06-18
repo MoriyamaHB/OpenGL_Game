@@ -2,8 +2,8 @@
 
 namespace {
 //隕石の範囲,隕石の出現距離を考慮すること
-const Vector3 kMeteoRange1(200, 200, 200);
-const Vector3 kMeteoRange2(-200, -200, -200);
+const Vector3 kMeteoRange1(400, 400, 400);
+const Vector3 kMeteoRange2(-400, -400, -400);
 }
 
 namespace {
@@ -17,10 +17,21 @@ void Init() {
 }
 
 namespace control_meteo {
-void Update(Fps *fps, Vector3 player_place) {
+void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
 	if (fps->GetFrameCount() % 3 == 0) {
-		Meteo *m = new Meteo(player_place);
+		//登録場所を計算
+		//視点の先の場所を計算
+		Vector3 register_place = 100 * (camera_viewpoint - camera_place)
+				+ camera_place;
+		//乱数によりバラけさせる
+		register_place.x += cc_util::GetRandom(-30, 30);
+		register_place.y += cc_util::GetRandom(-30, 30);
+		register_place.z += cc_util::GetRandom(-30, 30);
+		//毎フレームの移動角度(3座標)を計算
+		Vector3 each_move_angle = camera_place - camera_viewpoint;
+		//登録
+		Meteo *m = new Meteo(register_place, each_move_angle);
 		meteo_.push_back(m);
 	}
 	//更新
@@ -35,8 +46,8 @@ void Update(Fps *fps, Vector3 player_place) {
 			itr != meteo_.end();) {
 		//範囲外の時消滅
 		//プレイヤーの場所を足して考える
-		Vector3 range1 = kMeteoRange1 + player_place;
-		Vector3 range2 = kMeteoRange2 + player_place;
+		Vector3 range1 = kMeteoRange1 + camera_place;
+		Vector3 range2 = kMeteoRange2 + camera_place;
 		if ((*itr)->IsOutOfRange(range1, range2)) {
 			delete (*itr);
 			itr = meteo_.erase(itr);
