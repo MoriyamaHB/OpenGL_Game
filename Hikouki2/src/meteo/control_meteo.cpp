@@ -19,20 +19,22 @@ void Init() {
 namespace control_meteo {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
-	if (fps->GetFrameCount() % 3 == 0) {
-		//登録場所を計算
-		//視点の先の場所を計算
-		Vector3 register_place = 100 * (camera_viewpoint - camera_place)
-				+ camera_place;
-		//乱数によりバラけさせる
-		register_place.x += cc_util::GetRandom(-30, 30);
-		register_place.y += cc_util::GetRandom(-30, 30);
-		register_place.z += cc_util::GetRandom(-30, 30);
-		//毎フレームの移動角度(3座標)を計算
-		Vector3 each_move_angle = camera_place - camera_viewpoint;
-		//登録
-		Meteo *m = new Meteo(register_place, each_move_angle);
-		meteo_.push_back(m);
+	if (fps->GetFrameCount() % 3 == 0) { //登録フレームである
+		if (meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
+			//登録場所を計算
+			//視点の先の場所を計算
+			Vector3 register_place = 100 * (camera_viewpoint - camera_place)
+					+ camera_place;
+			//乱数によりバラけさせる
+			register_place.x += cc_util::GetRandom(-30, 30);
+			register_place.y += cc_util::GetRandom(-30, 30);
+			register_place.z += cc_util::GetRandom(-30, 30);
+			//毎フレームの移動角度(3座標)を計算
+			Vector3 each_move_angle = camera_place - camera_viewpoint;
+			//登録
+			Meteo *m = new Meteo(register_place, each_move_angle);
+			meteo_.push_back(m);
+		}
 	}
 	//更新
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
