@@ -3,7 +3,6 @@
 
 namespace {
 Camera3D3P camera;
-OutputDisplay out_disp;
 Fps fps;
 Ball ball_test(3.0, 3.0, 0.0);
 }
@@ -76,12 +75,11 @@ void GameMain() {
 	UpdateObjects();
 
 	//---------------------------    描画    ---------------------------
-	//オブジェクト
-	DrawObjects();
+	DrawObjects();	//オブジェクト
+	camera.DisplayInfo(); //カメラの情報を表示登録
+	fps.Draw(10, 25); //fps登録
 	//画面出力文字列描画
-	camera.DisplayInfo(out_disp); //カメラの情報を表示
-	fps.Draw(10, 25, out_disp);
-	out_disp.Draw();
+	output_display::Draw();
 	//ディスプレイ終了処理
 	glEnd();
 	glEndList();

@@ -34,8 +34,10 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			//登録
 			Meteo *m = new Meteo(register_place, each_move_angle);
 			meteo_.push_back(m);
+		} else {
 		}
 	}
+
 	//更新
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end(); ++itr) {
@@ -66,5 +68,9 @@ void Draw() {
 			itr != meteo_.end(); ++itr) {
 		(*itr)->Draw();
 	}
+	//隕石数を表示登録
+	char string[256];
+	sprintf(string, "meteo:%d", meteo_.size());
+	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }

@@ -1,5 +1,3 @@
-class OutputDisplay;
-
 class Fps {
 private:
 	int GLframe; //フレーム数
@@ -18,6 +16,6 @@ public:
 	void Update();
 
 	//描画
-	void Draw(int x, int y, OutputDisplay &output) const;
+	void Draw(int x, int y) const;
 };
 

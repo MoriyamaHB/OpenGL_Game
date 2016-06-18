@@ -1,5 +1,4 @@
 class Vector3;
-class OutputDisplay;
 
 //3人称 & 自由飛行のカメラ移動計算を行います
 class Camera3D3P {
@@ -19,7 +18,7 @@ public:
 	void TransfarByKey();
 
 	//カメラの情報を表示（速度)
-	void DisplayInfo(OutputDisplay &disp) const;
+	void DisplayInfo() const;
 
 	//gluLookAtを設定する
 	void SetGluLookAt() const;
