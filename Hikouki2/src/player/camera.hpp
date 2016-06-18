@@ -12,6 +12,7 @@ public:
 	//getter
 	Vector3 GetStateWatchCoordinates() const;
 	Vector3 GetStateCoordinates() const;
+	void GetAngle(double *angle_w, double *angle_h) const;
 
 	//カメラ移動
 	void TransfarAndRotateByMouse();
@@ -41,7 +42,7 @@ protected:
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 	//カメラの速度関連
-	const static double kAcceleration = 0.005; //加速度
+	const static double kAcceleration = 0.008; //加速度
 	const static double kMaxSpeed = 1; //最高速度
 	const static double kMinSpeed = 0; //最低速度
 

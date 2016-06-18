@@ -31,6 +31,12 @@ Vector3 Camera3D3P::GetStateCoordinates() const {
 	return Vector3(x_, y_, z_);
 }
 
+//カメラ角度をgetする
+void Camera3D3P::GetAngle(double *angle_w, double *angle_h) const {
+	*angle_w = angle_w_;
+	*angle_h = angle_h_;
+}
+
 //カメラ座標をマウスの移動から計算する(3人称視点)
 void Camera3D3P::TransfarAndRotateByMouse() {
 
