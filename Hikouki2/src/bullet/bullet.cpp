@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 ////////////////////////    コンストラクタ,初期化    ////////////////////////
 Bullet::Bullet(float ang_w, float ang_h) :

@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 namespace {
 //隕石の範囲,隕石の出現距離を考慮すること

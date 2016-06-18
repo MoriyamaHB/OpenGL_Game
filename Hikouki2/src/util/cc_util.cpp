@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 namespace {
 bool has_inited_srand = false;
 }

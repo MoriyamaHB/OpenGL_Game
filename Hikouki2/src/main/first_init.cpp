@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 //初期化
 namespace first_init {

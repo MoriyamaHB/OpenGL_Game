@@ -5,7 +5,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <utility>
-#include "../class_head/vector3.h"
+
+#include "vector3.h"
 
 #define uPI 3.1415926
 

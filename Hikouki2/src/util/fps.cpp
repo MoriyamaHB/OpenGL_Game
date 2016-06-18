@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 Fps::Fps() {
 	GLframe = 0;

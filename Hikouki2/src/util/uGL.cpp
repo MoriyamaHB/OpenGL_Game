@@ -1,4 +1,4 @@
-#include "../head/uGL.h"
+#include "uGL.h"
 
 //色(4fv)
 float uColor4fv_brack[] = { 0.0f, 0.0f, 0.0f, 1.0f }; //黒
@@ -252,6 +252,7 @@ bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2) {
 	//v1が小さくなるように入れ替え
 	if (v1.x > v2.x)
 		std::swap(v1, v2);
+
 	if (!(place.x >= v1.x && place.x <= v2.x))
 		return true;
 	if (!(place.y >= v1.y && place.y <= v2.y))

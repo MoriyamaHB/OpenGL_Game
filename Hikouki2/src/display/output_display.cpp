@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 //画面出力文字の登録
 void OutputDisplay::Regist(const char str[], const float color[], int life) {

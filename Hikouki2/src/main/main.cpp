@@ -1,5 +1,6 @@
+
 #define GLOBAL_INSTANCE
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 namespace {
 Camera3D3P camera;

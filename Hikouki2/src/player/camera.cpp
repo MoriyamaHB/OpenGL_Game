@@ -1,4 +1,4 @@
-#include "../head/GV.h"
+#include "../declaration/GV.h"
 
 //カメラ座標を初期化する
 void Camera3D3P::InitCoordinates() {
