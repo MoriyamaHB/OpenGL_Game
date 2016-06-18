@@ -35,3 +35,10 @@ void Bullet::Move() {
 	float vy = speed_ * sin(angle_h_);
 	Ball::Move(vx, vy, vz);
 }
+
+//隕石が範囲外かどうか
+bool Bullet::IsOutOfRange(Vector3 v1, Vector3 v2) const {
+	if (uOutOfRange(place_, v1, v2))
+		return true;
+	return false;
+}

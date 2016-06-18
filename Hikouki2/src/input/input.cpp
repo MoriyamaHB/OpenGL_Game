@@ -45,6 +45,8 @@ void CheckUpkey(unsigned char key, int x, int y) {
 namespace {
 int mouse_dx = 0;
 int mouse_dy = 0;
+bool is_down_mouse_left_button = false;
+int mouse_left_button_frame = 0;
 }
 
 //前回の呼び出しからのマウス移動量を返します
@@ -53,6 +55,18 @@ void TakeMouseMotionAndInit(int *dx, int *dy) {
 	*dx = mouse_dx;
 	*dy = mouse_dy;
 	mouse_dx = mouse_dy = 0;
+}
+}
+
+//OpenGLコールバック関数
+//マウスクリックしたor放した時に呼び出されます
+namespace input {
+void CheckMouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		is_down_mouse_left_button = true;
+	} else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+		is_down_mouse_left_button = false;
+	}
 }
 }
 
@@ -87,5 +101,22 @@ void UpdateFrame() {
 		else
 			small_alphabet_frame[i] = 0;
 	}
+	//左マウスクリック
+	if (is_down_mouse_left_button)
+		mouse_left_button_frame++;
+	else
+		mouse_left_button_frame = 0;
+}
+}
+
+///////////////////////// 初期化 /////////////////////////
+namespace input {
+void Init() {
+	memset(small_alphabet, 0, sizeof(small_alphabet));
+	memset(small_alphabet_frame, 0, sizeof(small_alphabet_frame));
+	mouse_dx = 0;
+	mouse_dy = 0;
+	is_down_mouse_left_button = false;
+	mouse_left_button_frame = 0;
 }
 }

@@ -12,7 +12,12 @@ std::vector<Meteo*> meteo_;
 
 namespace control_meteo {
 void Init() {
-
+	//全要素の削除
+	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
+			itr != meteo_.end();) {
+		delete (*itr);
+		itr = meteo_.erase(itr);
+	}
 }
 }
 
@@ -34,7 +39,6 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			//登録
 			Meteo *m = new Meteo(register_place, each_move_angle);
 			meteo_.push_back(m);
-		} else {
 		}
 	}
 

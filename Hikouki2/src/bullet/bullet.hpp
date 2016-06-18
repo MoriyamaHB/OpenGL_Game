@@ -10,6 +10,7 @@ public:
 	void Init(float ang_w, float ang_h);
 	//更新
 	void Move();
+	bool IsOutOfRange(Vector3 v1, Vector3 v2) const;
 private:
 	float speed_;
 	float angle_w_;

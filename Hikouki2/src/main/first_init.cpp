@@ -15,6 +15,7 @@ void FirstInit(int argc, char *argv[]) {
 	glutKeyboardFunc(input::CheckPushKey);
 	glutKeyboardUpFunc(input::CheckUpkey);
 	glutPassiveMotionFunc(input::CheckMouseMotion);
+	glutMouseFunc(input::CheckMouse);
 	glutMotionFunc(input::CheckMouseMotion);
 	glutReshapeFunc(hikouki2_main::Resize);
 	glutTimerFunc(100, hikouki2_main::Timer, 0);
@@ -30,5 +31,9 @@ void FirstInit(int argc, char *argv[]) {
 	glEnable (GL_LIGHTING);
 	glEnable (GL_LIGHT0);
 	glDisable(GL_CULL_FACE); //裏表の麺を描画
+
+	//プロジェクト上で必要な初期化
+	input::Init();
+	output_display::Init();
 }
 }

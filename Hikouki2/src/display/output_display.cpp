@@ -8,6 +8,12 @@ const int kStartHeight = 23; //描画開始座標y
 OutputItem item_[kMaxItem];
 }
 
+namespace output_display {
+void Init() {
+	memset(item_, 0, sizeof(item_));
+}
+}
+
 //空のitemの添字を返します
 //なければ-1を返します
 namespace {

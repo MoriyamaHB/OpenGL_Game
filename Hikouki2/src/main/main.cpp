@@ -7,9 +7,12 @@ Fps fps;
 Ball ball_test(3.0, 3.0, 0.0);
 }
 
+//ゲーム初期化
 namespace {
 void GameIni() {
 	control_meteo::Init();
+	control_bullet::Init();
+	camera.InitCoordinates();
 }
 }
 
@@ -18,9 +21,11 @@ void UpdateObjects() {
 	//球を更新
 	ball_test.set_draw_flag(true);
 	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
-
 	//隕石更新
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
+			camera.GetStateWatchCoordinates());
+	//弾更新
+	control_bullet::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
 }
 }
@@ -54,6 +59,7 @@ static void DrawObjects() {
 
 	//隕石描画
 	control_meteo::Draw();
+	control_bullet::Draw();
 }
 }
 
@@ -89,12 +95,19 @@ void GameMain() {
 }
 }
 
+//ゲーム終了
+namespace {
+void GameFin() {
+	output_display::Init();
+}
+}
+
 //OpenGLコールバック関数
 namespace hikouki2_main {
 void Draw(void) {
 	static MainState main_state = START;
 
-	//ゲーム基本処理
+//ゲーム基本処理
 	input::UpdateFrame();
 
 	switch (main_state) {
@@ -108,6 +121,9 @@ void Draw(void) {
 	case GAME:
 		GameMain();
 		break;
+	case GAME_FIN:
+		GameFin();
+		break;
 	default:
 		uErrorOut(__FILE__, __func__, __LINE__,
 				"不明なmain_statです. スタート状態に移行します.");
@@ -120,15 +136,15 @@ void Draw(void) {
 //OpenGLコールバック関数
 namespace hikouki2_main {
 void Resize(int w, int h) {
-	//ビューポート設定
+//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
-	//透視変換行列設定
+//透視変換行列設定
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(80.0, (double) w / (double) h, 0.1, 200.0);
 
-	//モデルビュー変換行列の指定
+//モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);
 }
 }

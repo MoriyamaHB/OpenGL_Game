@@ -1,6 +1,7 @@
 //標準ライブラリ
 #include<GL/freeglut.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 #include<vector>
 #include<math.h>
@@ -20,6 +21,7 @@
 #include "../util/vector3.h"
 
 //プロジェクトヘッダ
+#include "../bullet/control_bullet.h"
 #include "../bullet/bullet.hpp"
 #include "../display/output_display.hpp"
 #include "../input/input.hpp"
