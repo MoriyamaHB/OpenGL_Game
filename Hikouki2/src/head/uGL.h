@@ -15,6 +15,7 @@ extern float uColor4fv_white[];
 extern float uColor4fv_red[];
 extern float uColor4fv_green[];
 extern float uColor4fv_blue[];
+extern float uColor4fv_sky_brue[];
 
 //材質(4fv)
 extern float uMaterial4fv_red[];

@@ -6,6 +6,7 @@ float uColor4fv_white[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //白
 float uColor4fv_red[] = { 1.0f, 0.0f, 0.0f, 1.0f }; //赤
 float uColor4fv_green[] = { 0.0f, 1.0f, 0.0f, 1.0f }; //緑
 float uColor4fv_blue[] = { 0.0f, 0.0f, 1.0f, 1.0f }; //青
+float uColor4fv_sky_brue[] = { 0.61176, 0.65490, 0.88627, 0.0 }; //空色
 
 //材質(4fv)
 float uMaterial4fv_red[] = { 0.8, 0.2, 0.2, 1.0 }; //赤

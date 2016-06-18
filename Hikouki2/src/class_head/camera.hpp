@@ -41,7 +41,7 @@ protected:
 	const static double kMinWrapAngleH = -PI / 2 + 0.0001;
 	const static double kMaxWrapAngleH = PI / 2 - 0.0001;
 	//カメラの速度関連
-	const static double kAcceleration = 0.01; //加速度
+	const static double kAcceleration = 0.005; //加速度
 	const static double kMaxSpeed = 1; //最高速度
 	const static double kMinSpeed = 0; //最低速度
 
@@ -55,6 +55,4 @@ public:
 	//カメラ移動
 	void TransfarAndRotateByMouse();
 	void TransfarByKey();
-
-private:
 };
