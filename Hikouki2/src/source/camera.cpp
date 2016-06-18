@@ -102,39 +102,6 @@ void Camera3D3P::WrapSpeed() {
 }
 
 //-------------------------------------------------------------------------------------------
-
-Camera3D1P::Camera3D1P() {
-	InitCoordinates();
-}
-
-//カメラ座標を初期化する
-void Camera3D1P::InitCoordinates() {
-	x_ = 0;
-	y_ = 3;
-	z_ = -10;
-	gx_ = 0;
-	gy_ = 0;
-	gz_ = 0;
-	ux_ = 0;
-	uy_ = 1;
-	uz_ = 0;
-	speed_ = 0;
-	angle_w_ = PI / 2;
-	angle_h_ = 0;
-	distance_ = 1.5;
-	//UpdateDistance();
-}
-
-//カメラ視点座標をVector3クラスで返します
-Vector3 Camera3D1P::GetStateWatchCoordinates() const {
-	return Vector3(gx_, gy_, gz_);
-}
-
-//カメラ座標をVector3クラスで返します
-Vector3 Camera3D1P::GetStateCoordinates() const {
-	return Vector3(x_, y_, z_);
-}
-
 //カメラ座標をマウスの移動から計算する(3人称視点)
 void Camera3D1P::TransfarAndRotateByMouse() {
 
@@ -154,9 +121,10 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 		angle_h_ = kMaxWrapAngleH;
 
 	//カメラ角度を視点位置に反映
-	gx_ = distance_ * cos(angle_w_) * cos(angle_h_) + x_;
-	gz_ = distance_ * sin(angle_w_) * cos(angle_h_) + z_;
-	gy_ = distance_ * sin(angle_h_) + y_;
+	//速度が上がると離れるようにspeed*2をdistance_に足している
+	gx_ = (distance_ + speed_ * 2) * cos(angle_w_) * cos(angle_h_) + x_;
+	gz_ = (distance_ + speed_ * 2) * sin(angle_w_) * cos(angle_h_) + z_;
+	gy_ = (distance_ + speed_ * 2) * sin(angle_h_) + y_;
 
 }
 
@@ -184,24 +152,3 @@ void Camera3D1P::TransfarByKey() {
 	if (input::get_small_alphabet_frame('q') == 1)
 		InitCoordinates();
 }
-
-//カメラの情報を表示（速度)
-void Camera3D1P::DisplayInfo(OutputDisplay &disp) const {
-	char string[256];
-	sprintf(string, "speed:%.0f%%", ((speed_ - kMinSpeed) / kMaxSpeed) * 100.0);
-	disp.Regist(string, uColor4fv_red, 1);
-}
-
-//gluLookAtを設定する
-void Camera3D1P::SetGluLookAt() const {
-	gluLookAt(x_, y_, z_, gx_, gy_, gz_, ux_, uy_, uz_);
-}
-
-//速度をラップする
-void Camera3D1P::WrapSpeed() {
-	if (speed_ < kMinSpeed)
-		speed_ = kMinSpeed;
-	if (speed_ > kMaxSpeed)
-		speed_ = kMaxSpeed;
-}
-
