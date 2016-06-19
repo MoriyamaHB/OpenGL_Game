@@ -9,6 +9,9 @@ private:
 public:
 	Fps();
 
+	//初期化
+	void Init();
+
 	//getter
 	int GetFrameCount() const;
 

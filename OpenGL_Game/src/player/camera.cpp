@@ -86,10 +86,6 @@ void Camera3D3P::TransfarByKey() {
 	gx_ -= speed_ * cos(angle_w_) * cos(angle_h_);
 	gz_ -= speed_ * sin(angle_w_) * cos(angle_h_);
 	gy_ -= speed_ * sin(angle_h_);
-
-	//q入力時_カメラの初期化
-	if (input::get_small_alphabet_frame('q') == 1)
-		InitCoordinates();
 }
 
 //カメラの情報を表示（速度)

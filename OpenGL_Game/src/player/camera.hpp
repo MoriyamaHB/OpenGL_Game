@@ -43,7 +43,7 @@ protected:
 	const static double kMaxWrapAngleH = PI / 2 - 0.001;
 	//カメラの速度関連
 	const static double kAcceleration = 0.008; //加速度
-	const static double kMaxSpeed = 1; //最高速度
+	const static double kMaxSpeed = 1.5; //最高速度
 	const static double kMinSpeed = 0; //最低速度
 
 	//速度をラップする

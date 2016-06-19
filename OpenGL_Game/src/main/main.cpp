@@ -59,8 +59,6 @@ namespace {
 void GameMain() {
 
 	//---------------------------    更新    ---------------------------
-	//fps
-	fps.Update();
 	//カメラ
 	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.TransfarByKey(); //カメラ移動計算(キー)
@@ -69,7 +67,6 @@ void GameMain() {
 	UpdateObjects();
 
 	//---------------------------    描画    ---------------------------
-	fps.Draw(10, 25); //fps登録
 	camera.DisplayInfo(); //カメラの情報を表示登録
 	DrawObjects();	//オブジェクト
 
@@ -86,7 +83,7 @@ void GameFin() {
 //OpenGLコールバック関数
 namespace opengl_game_main {
 void DisplayFunc(void) {
-	static MainState main_state = START;
+	static MainState main_state = START_INI;
 
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
@@ -94,8 +91,17 @@ void DisplayFunc(void) {
 
 	//基本処理
 	input::UpdateFrame(); //入力状態更新
+	fps.Update(); //fps
 
 	switch (main_state) {
+	case START_INI:
+		//プロジェクト上で必要な初期化
+		input::Init();
+		output_display::Init();
+		fps.Init();
+		//次に進む
+		main_state = START;
+		break;
 	case START:
 		main_state = GAME_INI;
 		break;
@@ -112,11 +118,12 @@ void DisplayFunc(void) {
 	default:
 		uErrorOut(__FILE__, __func__, __LINE__,
 				"不明なmain_statです. スタート状態に移行します.");
-		main_state = START;
+		main_state = START_INI;
 		break;
 	}
 
 	//基本描画
+	fps.Draw(10, 25); //fps登録
 	output_display::Draw(); //画面出力文字列描画
 
 	//ディスプレイ終了処理
@@ -125,6 +132,9 @@ void DisplayFunc(void) {
 	glutSwapBuffers();
 	if (input::get_small_alphabet_frame('e') == 1)
 		exit(0);
+	//q入力時初期状態に移行
+	if (input::get_small_alphabet_frame('q') == 1)
+		main_state = START_INI;
 }
 }
 
@@ -137,7 +147,7 @@ void Resize(int w, int h) {
 //透視変換行列設定
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
-	gluPerspective(80.0, (double) w / (double) h, 0.1, 200.0);
+	gluPerspective(75.0, (double) w / (double) h, 0.1, 200.0);
 
 //モデルビュー変換行列の指定
 	glMatrixMode (GL_MODELVIEW);

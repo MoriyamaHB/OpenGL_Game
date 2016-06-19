@@ -31,9 +31,5 @@ void FirstInit(int argc, char *argv[]) {
 	glEnable (GL_LIGHTING);
 	glEnable (GL_LIGHT0);
 	glDisable(GL_CULL_FACE); //裏表の麺を描画
-
-	//プロジェクト上で必要な初期化
-	input::Init();
-	output_display::Init();
 }
 }

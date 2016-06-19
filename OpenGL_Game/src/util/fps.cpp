@@ -8,6 +8,14 @@ Fps::Fps() {
 	fps = 0;
 }
 
+void Fps::Init() {
+	GLframe = 0;
+	GLtimenow = 0;
+	GLtimebase = 0;
+	frame_count = 0;
+	fps = 0;
+}
+
 int Fps::GetFrameCount() const {
 	return frame_count;
 }
