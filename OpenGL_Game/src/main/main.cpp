@@ -4,7 +4,6 @@
 namespace {
 Camera3D3P camera;
 Fps fps;
-Ball ball_test(3.0, 3.0, 0.0);
 }
 
 //ゲーム初期化
@@ -19,9 +18,6 @@ void GameIni() {
 
 namespace {
 void UpdateObjects() {
-	//球を更新
-	ball_test.set_draw_flag(true);
-	ball_test.set_scale((float) fps.GetFrameCount() / 1000);
 	//隕石更新
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
@@ -48,9 +44,6 @@ static void DrawObjects() {
 	glPushMatrix();
 	uDrawGround(50);
 	glPopMatrix();
-
-	//球を描画
-	ball_test.Draw();
 
 	//プレイヤー描画
 	player::Draw();
