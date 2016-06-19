@@ -1,30 +1,31 @@
 #include "../declaration/GV.h"
 
 namespace {
-float scale;
-Vector3 place;
+Square square;
 int hit_meteo_cnt;
 }
 
 //プレイヤーの場所を返す
 namespace player {
 Vector3 get_place() {
-	return place;
+	return square.get_place_();
 }
 }
 
 //プレイヤーの大きさを返す
 namespace player {
 float get_scale() {
-	return scale;
+	return square.get_scale_();
 }
 }
 
 //初期化
 namespace player {
 void Init() {
-	scale = 0.5;
-	place.zero();
+	square.Init();
+	square.set_draw_flag(true);
+	square.set_material(uMaterial4fv_red);
+	square.set_scale(0.5);
 	hit_meteo_cnt = 0;
 }
 }
@@ -33,7 +34,7 @@ void Init() {
 namespace player {
 void Update(Vector3 p) {
 	//移動
-	::place = p;
+	square.Move(p);
 }
 }
 
@@ -48,11 +49,7 @@ void HitMeteo() {
 namespace player {
 void Draw() {
 	//箱描画
-	glPushMatrix();
-	glTranslated(place.x, place.y, place.z);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, uMaterial4fv_red);
-	glutSolidCube(0.5);
-	glPopMatrix();
+	square.Draw();
 	//ヒット情報登録
 	char string[24];
 	sprintf(string, "hit_meteo_cnt:%d", hit_meteo_cnt);

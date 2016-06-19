@@ -6,7 +6,7 @@
 Meteo::Meteo(Vector3 point, Vector3 each_move_angle) :
 		Ball() {
 	Init();
-	Ball::Move(point.x, point.y, point.z);
+	Ball::MoveDiff(point);
 	each_move_angle_ = each_move_angle;
 }
 
@@ -32,8 +32,8 @@ void Meteo::Init() {
 
 //移動を行う
 void Meteo::Move() {
-	Ball::Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
-			speed_ * each_move_angle_.z);
+	Vector3 move_diff = speed_ * each_move_angle_;
+	Ball::MoveDiff(move_diff);
 }
 
 //隕石が範囲外かどうか

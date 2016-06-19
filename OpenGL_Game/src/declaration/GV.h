@@ -16,7 +16,9 @@
 #include "struct.h"
 
 //継承元or便利ヘッダ
+#include "../util/solid.h"
 #include "../util/ball.h"
+#include "../util/square.h"
 #include "../util/fps.hpp"
 #include "../util/vector3.h"
 

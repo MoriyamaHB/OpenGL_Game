@@ -4,7 +4,7 @@
 Bullet::Bullet(Vector3 point, Vector3 each_move_angle, double camera_speed) {
 	Init();
 	speed_ = camera_speed + 0.1; //スピード
-	Ball::Move(point.x, point.y, point.z);
+	Ball::MoveDiff(point);
 	each_move_angle_ = each_move_angle;
 }
 
@@ -23,8 +23,8 @@ void Bullet::Init() {
 
 //移動
 void Bullet::Move() {
-	Ball::Move(speed_ * each_move_angle_.x, speed_ * each_move_angle_.y,
-			speed_ * each_move_angle_.z);
+	Vector3 move_diff = speed_ * each_move_angle_;
+	Ball::MoveDiff(move_diff);
 }
 
 //隕石が範囲外かどうか
