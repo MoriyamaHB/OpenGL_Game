@@ -45,6 +45,12 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//更新
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end(); ++itr) {
+		//プレイヤーへの当たり判定
+		if (uIsCollisionBallAndBall((*itr)->get_place_(), (*itr)->get_scale_(),
+				player::get_place(), player::get_scale())) {
+			player::HitMeteo();
+		}
+		//移動
 		(*itr)->Move();
 	}
 	//削除

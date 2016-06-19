@@ -48,6 +48,14 @@ void Ball::SetSphereFineness(float slices, float stacks) {
 	sphere_slices_ = slices;
 	sphere_stacks_ = stacks;
 }
+////////////////////////    getter    ////////////////////////
+Vector3 Ball::get_place_() {
+	return place_;
+}
+
+float Ball::get_scale_() {
+	return scale_;
+}
 ////////////////////////    移動    ////////////////////////
 void Ball::Move(float vx, float vy, float vz) {
 	place_.x += vx;

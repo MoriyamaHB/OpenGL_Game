@@ -22,6 +22,10 @@ public:
 	void set_material(float mat[]);
 	void SetSphereFineness(float slices, float stacks);
 
+	//get
+	Vector3 get_place_();
+	float get_scale_();
+
 	//描画
 	void Draw() const;
 };
