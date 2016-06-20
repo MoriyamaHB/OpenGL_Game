@@ -119,9 +119,10 @@ void DisplayFunc(void) {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
+	//エスケープキーで終了
 	if (input::get_keyboard_frame('\033') == 1)
 		exit(0);
-	//q入力時初期状態に移行
+	//q入力で初期状態に移行
 	if (input::get_keyboard_frame('q') == 1)
 		main_state = START_INI;
 }
