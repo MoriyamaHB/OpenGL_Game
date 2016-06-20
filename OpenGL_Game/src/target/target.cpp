@@ -14,7 +14,7 @@ void Target::Init() {
 	//フラグ
 	set_draw_flag(true);
 	//大きさ
-	int s = cc_util::GetRandom(1, 8);
+	int s = cc_util::GetRandom(6, 18);
 	set_scale(s);
 	//スピード
 	speed_ = cc_util::GetRandom(1, 50) / 100.0;
@@ -72,7 +72,7 @@ void Init() {
 namespace control_target {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
-	if (fps->GetFrameCount() % 5 == 0) { //登録フレームである
+	if (fps->GetFrameCount() % 45 == 0) { //登録フレームである
 		if ((int) target_.size() < kMaxTargetNum) { //最大数を下回っている
 			//登録場所を計算
 			//視点の先の場所を計算

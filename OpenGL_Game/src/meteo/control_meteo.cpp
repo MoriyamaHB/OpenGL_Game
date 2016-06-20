@@ -24,7 +24,7 @@ void Init() {
 namespace control_meteo {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
-	if (fps->GetFrameCount() % 5 == 0) { //登録フレームである
+	if (fps->GetFrameCount() % 3 == 0) { //登録フレームである
 		if ((int) meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
 			//登録場所を計算
 			//視点の先の場所を計算
