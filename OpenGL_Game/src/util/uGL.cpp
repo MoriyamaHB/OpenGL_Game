@@ -198,7 +198,7 @@ void uDrawGround(int size) {
 	glBegin (GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
 	for (int j = -size / 2; j < size / 2; j++) {
-		for (int i = -size / 2; i < size; i++) {
+		for (int i = -size / 2; i < size / 2; i++) {
 			//RGB設定
 			if (((i + j) % 2) == 0)
 				glColor4fv(uColor4fv_white);

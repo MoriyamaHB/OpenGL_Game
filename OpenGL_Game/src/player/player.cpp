@@ -3,7 +3,7 @@
 namespace {
 Square square;
 int hit_meteo_cnt;
-int hit_target_cnt;
+int get_target;
 }
 
 //プレイヤーの場所を返す
@@ -28,7 +28,7 @@ void Init() {
 	square.set_material(uMaterial4fv_red);
 	square.set_scale(0.5);
 	hit_meteo_cnt = 0;
-	hit_target_cnt = 0;
+	get_target = 0;
 }
 }
 
@@ -47,7 +47,7 @@ void HitMeteo() {
 }
 //ターゲットにあたった時に呼び出される
 void HitTarget() {
-	hit_target_cnt++;
+	get_target++;
 }
 }
 
@@ -60,7 +60,7 @@ void Draw() {
 	char string[24];
 	sprintf(string, "hit_meteo_cnt:%d", hit_meteo_cnt);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "hit_target_cnt:%d", hit_target_cnt);
+	sprintf(string, "get_target:%d", get_target);
 	output_display::Regist(string, uColor4fv_green, 1);
 }
 }

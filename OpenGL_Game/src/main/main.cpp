@@ -17,8 +17,16 @@ void GameIni() {
 }
 }
 
+//ゲームメイン関数
 namespace {
-void UpdateObjects() {
+void GameMain() {
+
+	//---------------------------    更新    ---------------------------
+
+	//カメラ
+	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
+	camera.TransfarByKey(); //カメラ移動計算(キー)
+	camera.SetGluLookAt(); //視点をセット
 	//隕石更新
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
@@ -30,50 +38,26 @@ void UpdateObjects() {
 			camera.GetStateWatchCoordinates(), camera.get_speed());
 	//プレイヤー更新
 	player::Update(camera.GetStateWatchCoordinates());
-}
-}
 
-//drawが長くなるのでオブジェクトだけ分割
-namespace {
-static void DrawObjects() {
+	//---------------------------    描画    ---------------------------
 
+	//カメラの情報を表示登録
+	camera.DisplayInfo();
 	//ライト
-	//カメラの視点座標に配置
 	glPushMatrix();
-	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };
+	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };	//カメラの視点座標に配置
 	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
 	glPopMatrix();
-
 	//地面描画
 	glPushMatrix();
-	uDrawGround(50);
+	uDrawGround(20);
 	glPopMatrix();
-
 	//プレイヤー描画
 	player::Draw();
-
 	//隕石描画
 	control_meteo::Draw();
 	control_target::Draw();
 	control_bullet::Draw();
-}
-}
-
-//ゲームメイン関数
-namespace {
-void GameMain() {
-
-	//---------------------------    更新    ---------------------------
-	//カメラ
-	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
-	camera.TransfarByKey(); //カメラ移動計算(キー)
-	camera.SetGluLookAt(); //視点をセット
-	//オブジェクト
-	UpdateObjects();
-
-	//---------------------------    描画    ---------------------------
-	camera.DisplayInfo(); //カメラの情報を表示登録
-	DrawObjects();	//オブジェクト
 
 }
 }
