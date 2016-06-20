@@ -25,7 +25,7 @@ namespace control_meteo {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
 	if (fps->GetFrameCount() % 5 == 0) { //登録フレームである
-		if ((int)meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
+		if ((int) meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
 			//登録場所を計算
 			//視点の先の場所を計算
 			Vector3 register_place = 100 * (camera_viewpoint - camera_place)
@@ -46,9 +46,12 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end(); ++itr) {
 		//プレイヤーへの当たり判定
-		if (uIsCollisionBallAndBall((*itr)->get_place_(), (*itr)->get_scale_(),
-				player::get_place(), player::get_scale())) {
-			player::HitMeteo();
+		if (player::get_player_state() == PLAY) {			//プレイ中なら
+			if (uIsCollisionBallAndBall((*itr)->get_place(),
+					(*itr)->get_scale(), player::get_place(),
+					player::get_scale())) {
+				player::HitMeteo();
+			}
 		}
 		//移動
 		(*itr)->Move();

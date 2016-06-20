@@ -94,12 +94,15 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	for (std::vector<Target*>::iterator itr = target_.begin();
 			itr != target_.end(); ++itr) {
 		//プレイヤーへの当たり判定
-		if (uIsCollisionBallAndBall((*itr)->get_place_(), (*itr)->get_scale_(),
-				player::get_place(), player::get_scale())) {
-			player::HitTarget();
-			delete (*itr);
-			itr = target_.erase(itr);
-			break;
+		if (player::get_player_state() == PLAY) {			//プレイ中なら
+			if (uIsCollisionBallAndBall((*itr)->get_place(),
+					(*itr)->get_scale(), player::get_place(),
+					player::get_scale())) {
+				player::HitTarget();
+				delete (*itr);
+				itr = target_.erase(itr);
+				break;
+			}
 		}
 		//移動
 		(*itr)->Move();

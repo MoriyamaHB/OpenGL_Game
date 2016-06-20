@@ -24,8 +24,9 @@ public:
 	void Move(Vector3 v);
 
 	//get
-	Vector3 get_place_() const;
-	float get_scale_() const;
+	Vector3 get_place() const;
+	float get_scale() const;
+	bool get_draw_flag() const;
 
 	//描画
 	virtual void Draw() const {

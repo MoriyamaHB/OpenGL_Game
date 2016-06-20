@@ -22,13 +22,13 @@ Solid::~Solid() {
 
 void Solid::Init() {
 	place_.zero();
-	can_draw_ = false;
+	can_draw_ = true;
 	scale_ = 1;
 	memcpy(material_, uMaterial4fv_white, sizeof(float) * 4);
 }
 ////////////////////////    setter    ////////////////////////
 
-//デフォルト(false)
+//デフォルト(true)
 void Solid::set_draw_flag(bool tf) {
 	can_draw_ = tf;
 }
@@ -43,12 +43,16 @@ void Solid::set_material(float mat[]) {
 }
 
 ////////////////////////    getter    ////////////////////////
-Vector3 Solid::get_place_() const {
+Vector3 Solid::get_place() const {
 	return place_;
 }
 
-float Solid::get_scale_() const {
+float Solid::get_scale() const {
 	return scale_;
+}
+
+bool Solid::get_draw_flag() const {
+	return can_draw_;
 }
 ////////////////////////    移動    ////////////////////////
 void Solid::MoveDiff(Vector3 v) {

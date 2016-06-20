@@ -37,7 +37,7 @@ void GameMain() {
 	control_bullet::Update(camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates(), camera.get_speed());
 	//プレイヤー更新
-	player::Update(camera.GetStateWatchCoordinates());
+	player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount());
 
 	//---------------------------    描画    ---------------------------
 
