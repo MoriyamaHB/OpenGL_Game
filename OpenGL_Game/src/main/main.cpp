@@ -119,10 +119,10 @@ void DisplayFunc(void) {
 	glEnd();
 	glEndList();
 	glutSwapBuffers();
-	if (input::get_small_alphabet_frame('e') == 1)
+	if (input::get_keyboard_frame('\033') == 1)
 		exit(0);
 	//q入力時初期状態に移行
-	if (input::get_small_alphabet_frame('q') == 1)
+	if (input::get_keyboard_frame('q') == 1)
 		main_state = START_INI;
 }
 }

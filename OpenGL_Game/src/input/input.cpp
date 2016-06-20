@@ -4,27 +4,34 @@
 
 //キーの入力状態記録
 namespace {
-unsigned int small_alphabet[26];
-unsigned int small_alphabet_frame[26];
+unsigned int keyboard[26];
+unsigned int keyboard_frame[26];
+unsigned int escape;
+unsigned int escape_frame;
 }
 
-//小文字アルファベットの入力フレーム数を返す
+//キーボードの入力フレーム数を返す
 namespace input {
-int get_small_alphabet_frame(unsigned char key) {
-	if (key < 'a' || 'z' < key) {
+int get_keyboard_frame(unsigned char key) {
+	if ('a' <= key && key <= 'z') {
+		return keyboard_frame[key - 'a'];
+	} else if (key == '\033') {
+		return escape_frame;
+	} else {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
 	}
-	return small_alphabet_frame[key - 'a'];
 }
 }
 
 //OpenGLコールバック関数
 namespace input {
 void CheckPushKey(unsigned char key, int x, int y) {
-	//小文字アルファベットの取得
+//キーボードの取得
 	if ('a' <= key && key <= 'z') {
-		small_alphabet[key - 'a'] = 1;
+		keyboard[key - 'a'] = 1;
+	} else if (key == '\033') {
+		escape = 1;
 	}
 }
 }
@@ -32,9 +39,11 @@ void CheckPushKey(unsigned char key, int x, int y) {
 //OpenGLコールバック関数
 namespace input {
 void CheckUpkey(unsigned char key, int x, int y) {
-	//小文字アルファベットの取得
+//キーボードの取得
 	if ('a' <= key && key <= 'z') {
-		small_alphabet[key - 'a'] = 0;
+		keyboard[key - 'a'] = 0;
+	} else if (key == '\033') {
+		escape = 0;
 	}
 }
 }
@@ -101,13 +110,17 @@ void CheckMouseMotion(int x, int y) {
 //押しているフレームをカウントする
 namespace input {
 void UpdateFrame() {
-	//小文字アルファベットのフレームカウント
+	//キーボードのフレームカウント
 	for (int i = 0; i < 26; i++) {
-		if (small_alphabet[i] == 1)
-			small_alphabet_frame[i]++;
+		if (keyboard[i] == 1)
+			keyboard_frame[i]++;
 		else
-			small_alphabet_frame[i] = 0;
+			keyboard_frame[i] = 0;
 	}
+	if (escape)
+		escape_frame++;
+	else
+		escape_frame = 0;
 	//左マウスクリック
 	if (is_down_mouse_left_button)
 		mouse_left_button_frame++;
@@ -119,8 +132,10 @@ void UpdateFrame() {
 ///////////////////////// 初期化 /////////////////////////
 namespace input {
 void Init() {
-	memset(small_alphabet, 0, sizeof(small_alphabet));
-	memset(small_alphabet_frame, 0, sizeof(small_alphabet_frame));
+	memset(keyboard, 0, sizeof(keyboard));
+	memset(keyboard_frame, 0, sizeof(keyboard_frame));
+	escape = 0;
+	escape_frame = 0;
 	mouse_dx = 0;
 	mouse_dy = 0;
 	is_down_mouse_left_button = false;

@@ -72,10 +72,10 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 void Camera3D3P::TransfarByKey() {
 
 	//スピード変更
-	if (input::get_small_alphabet_frame('w')) {
+	if (input::get_keyboard_frame('w')) {
 		speed_ += kAcceleration;
 	}
-	if (input::get_small_alphabet_frame('s')) {
+	if (input::get_keyboard_frame('s')) {
 		speed_ -= kAcceleration;
 	}
 
@@ -140,10 +140,10 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 void Camera3D1P::TransfarByKey() {
 
 	//スピード変更
-	if (input::get_small_alphabet_frame('w')) {
+	if (input::get_keyboard_frame('w')) {
 		speed_ += kAcceleration;
 	}
-	if (input::get_small_alphabet_frame('s')) {
+	if (input::get_keyboard_frame('s')) {
 		speed_ -= kAcceleration;
 	}
 
@@ -156,6 +156,6 @@ void Camera3D1P::TransfarByKey() {
 	y_ += speed_ * sin(angle_h_);
 
 	//q入力時_カメラの初期化
-	if (input::get_small_alphabet_frame('q') == 1)
+	if (input::get_keyboard_frame('q') == 1)
 		InitCoordinates();
 }
