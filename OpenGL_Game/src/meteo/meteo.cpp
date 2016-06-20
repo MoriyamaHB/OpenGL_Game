@@ -46,7 +46,7 @@ bool Meteo::IsOutOfRange(Vector3 v1, Vector3 v2) const {
 ////////////////////////    描画    ////////////////////////
 void Meteo::Draw() const {
 	//Ballクラスを描画
-	static_cast<Ball>(*this).Draw();
+	Ball::Draw();
 	//影もどきを描画
 //	if (place_.y >= 0) {
 //		float x = place_.x, y = 0.01, z = place_.z;

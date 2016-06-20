@@ -22,6 +22,6 @@ void Square::Draw() const {
 	glPushMatrix();
 	glTranslatef(place_.x, place_.y, place_.z);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_);
-	glutSolidCube(0.5);
+	glutSolidCube(scale_);
 	glPopMatrix();
 }

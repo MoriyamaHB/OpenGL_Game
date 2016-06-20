@@ -10,6 +10,7 @@ Fps fps;
 namespace {
 void GameIni() {
 	control_meteo::Init();
+	control_target::Init();
 	control_bullet::Init();
 	camera.InitCoordinates();
 	player::Init();
@@ -20,6 +21,9 @@ namespace {
 void UpdateObjects() {
 	//隕石更新
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),
+			camera.GetStateWatchCoordinates());
+	//ターゲット更新
+	control_target::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
 	//弾更新
 	control_bullet::Update(camera.GetStateCoordinates(),
@@ -50,6 +54,7 @@ static void DrawObjects() {
 
 	//隕石描画
 	control_meteo::Draw();
+	control_target::Draw();
 	control_bullet::Draw();
 }
 }
