@@ -26,7 +26,7 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 		double camera_speed) {
 	//登録
 	if (input::get_mouse_left_button_frame() == 1) {
-		if ((int)bullet_.size() < kMaxBulletNum) { //最大数を下回っている
+		if ((int) bullet_.size() < kMaxBulletNum) { //最大数を下回っている
 			//登録場所を少し上にずらす
 			camera_viewpoint.y += 0.5;
 			//毎フレームの移動角度(3座標)を計算
@@ -66,8 +66,7 @@ void Draw() {
 		(*itr)->Draw();
 	}
 	//弾数を表示登録
-	char string[256];
-	sprintf(string, "bullet:%d", bullet_.size());
-	output_display::Regist(string, uColor4fv_blue, 1);
+	output_display::Regist(uPrintfString("bullet:%d", bullet_.size()),
+			uColor4fv_blue, 1);
 }
 }

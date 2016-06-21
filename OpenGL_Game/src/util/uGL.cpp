@@ -16,6 +16,49 @@ const float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
 const float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
 const float uMaterial4fv_brown[] = { 0.8, 0.45, 0.2, 1.0 }; //茶色
 
+static int u3d_2d_flag = 0;
+
+//3D設定から2Dの設定に変更します
+//関数の最後にu2Dto3D関数で3Dに戻してください
+static void u3Dto2D() {
+	if (u3d_2d_flag != 0) {
+		uErrorOut(__FILE__, __func__, __LINE__, "正しく呼びだされていない可能性があります");
+		return;
+	}
+	//ライト削除
+	glDisable (GL_LIGHTING);
+	// 平行投影にする
+	glMatrixMode (GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, glutGet(GLUT_INIT_WINDOW_WIDTH),
+			glutGet(GLUT_INIT_WINDOW_HEIGHT), 0);
+	glMatrixMode (GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	u3d_2d_flag = 1;
+}
+
+//2D設定から3Dの設定に戻す
+//u3Dto2D関数で変更した設定を戻すことを前提としています
+static void u2Dto3D() {
+	if (u3d_2d_flag != 1) {
+		uErrorOut(__FILE__, __func__, __LINE__, "正しく呼びだされていない可能性があります");
+		return;
+	}
+
+	// 投射投影に戻す
+	glPopMatrix();
+	glMatrixMode (GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode (GL_MODELVIEW);
+	//ライトを戻す
+	glEnable (GL_LIGHTING);
+
+	u3d_2d_flag = 0;
+}
+
 //エラー出力
 void uErrorOut(const char file[], const char func[], int line,
 		const char message[]) {
@@ -25,24 +68,30 @@ void uErrorOut(const char file[], const char func[], int line,
 
 //2D上にの点を描画する(size=直径)
 void uPoint2D(int x, int y, float size) {
+	u3Dto2D();
 	glPointSize(size);
 	glBegin (GL_POINTS);
 	glVertex2i(x, y);
 	glEnd();
+	u2Dto3D();
 }
 
 //2D上に線を描画する
 void uLine2D(int x1, int y1, int x2, int y2, float width) {
+	u3Dto2D();
 	glLineWidth(width);
 	glBegin (GL_LINES);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glEnd();
+	u2Dto3D();
 }
 
 //2D上に四角形を描画する
 void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
-		float width) {
+		float width, const float color[]) {
+	u3Dto2D();
+	glColor4fv(color);
 	glLineWidth(width);
 	glBegin (GL_LINE_LOOP);
 	glVertex2i(x1, y1);
@@ -50,9 +99,13 @@ void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
 	glVertex2i(x3, y3);
 	glVertex2i(x4, y4);
 	glEnd();
+	u2Dto3D();
 }
 
-void uSquare2D(int x1, int y1, int x2, int y2, float width) {
+void uSquare2D(int x1, int y1, int x2, int y2, float width,
+		const float color[]) {
+	u3Dto2D();
+	glColor4fv(color);
 	glLineWidth(width);
 	glBegin (GL_LINE_LOOP);
 	glVertex2i(x1, y1);
@@ -60,30 +113,38 @@ void uSquare2D(int x1, int y1, int x2, int y2, float width) {
 	glVertex2i(x2, y2);
 	glVertex2i(x1, y2);
 	glEnd();
+	u2Dto3D();
 }
 
 //2D上に四角形を描画する(塗りつぶし)
 void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
-		int y4) {
+		int y4, const float color[]) {
+	u3Dto2D();
+	glColor4fv(color);
 	glBegin (GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x3, y3);
 	glVertex2i(x4, y4);
 	glEnd();
+	u2Dto3D();
 }
 
-void uSquareFill2D(int x1, int y1, int x2, int y2) {
+void uSquareFill2D(int x1, int y1, int x2, int y2, const float color[]) {
+	u3Dto2D();
+	glColor4fv(color);
 	glBegin (GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x1, y2);
 	glEnd();
+	u2Dto3D();
 }
 
 //2D上に円を描画
 void uCircle2D(float radius, int x, int y) {
+	u3Dto2D();
 	for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 1.0) {
 		float th2 = th1 + 10.0;
 		float th1_rad = th1 / 180.0 * uPI;
@@ -99,10 +160,12 @@ void uCircle2D(float radius, int x, int y) {
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
 	}
+	u2Dto3D();
 }
 
 //2D上に円を描画(塗りつぶし)
 void uCircle2DFill(float radius, int x, int y) {
+	u3Dto2D();
 	for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 1.0) {
 		float th2 = th1 + 10.0;
 		float th1_rad = th1 / 180.0 * uPI;
@@ -119,10 +182,12 @@ void uCircle2DFill(float radius, int x, int y) {
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
 	}
+	u2Dto3D();
 }
 
 //2D上に楕円を描画
 void uOval2D(float radius, int x, int y, float ovalx, float ovaly) {
+	u3Dto2D();
 	for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 1.0) {
 		float th2 = th1 + 10.0;
 		float th1_rad = th1 / 180.0 * uPI;
@@ -138,10 +203,12 @@ void uOval2D(float radius, int x, int y, float ovalx, float ovaly) {
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
 	}
+	u2Dto3D();
 }
 
 //2D上に楕円を描画(塗りつぶし)
 void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
+	u3Dto2D();
 	for (float th1 = 0.0; th1 <= 360.0; th1 = th1 + 1.0) {
 		float th2 = th1 + 10.0;
 		float th1_rad = th1 / 180.0 * uPI;
@@ -158,11 +225,13 @@ void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
 	}
+	u2Dto3D();
 }
 
 //三角形を描画
 void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[]) {
+	u3Dto2D();
 	glBegin (GL_TRIANGLES);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
@@ -171,11 +240,13 @@ void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 	glColor4fv(color3);
 	glVertex3f(v3.x, v3.y, v3.z);
 	glEnd();
+	u2Dto3D();
 }
 
 //四角形を描画
 void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[], Vector3 v4, float color4[]) {
+	u3Dto2D();
 	glBegin (GL_QUADS);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
@@ -186,6 +257,7 @@ void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 	glColor4fv(color4);
 	glVertex3f(v4.x, v4.y, v4.z);
 	glEnd();
+	u2Dto3D();
 }
 
 //黒白の地面を描画
@@ -220,32 +292,32 @@ void uDrawGround(int size) {
 	glPopMatrix();
 }
 
+//可変長引数で文字列を返す
+//printfのように引数を渡すとそれを文字列にして返す
+const TCHAR* uPrintfString(const TCHAR* format, ...) {
+	static TCHAR strBuffer_g[1024];
+	va_list args;
+	va_start(args, format);
+
+#if _DEBUG
+	int len = _vsctprintf( format, args );
+	if ( len >= 1024 )
+	_ASSERT(0);
+#endif
+
+	_vstprintf(strBuffer_g, format, args);
+	return strBuffer_g;
+}
+
 //文字列描画
 void uDrawString(const char str[], int x0, int y0, const float color[]) {
-	glDisable (GL_LIGHTING);
-
-	// 平行投影にする
-	glMatrixMode (GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	gluOrtho2D(0, glutGet(GLUT_INIT_WINDOW_WIDTH),
-			glutGet(GLUT_INIT_WINDOW_HEIGHT), 0);
-	glMatrixMode (GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
+	u3Dto2D();
 	// 画面上にテキスト描画
 	glColor4fv(color);
 	glRasterPos2f(x0, y0);
 	for (; *str; str++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *str);
-
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-
-	glEnable(GL_LIGHTING);
+	u2Dto3D();
 }
 
 //範囲外の時trueを返す

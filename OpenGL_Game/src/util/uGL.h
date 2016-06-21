@@ -5,6 +5,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <utility>
+#include <stdarg.h>
+#include <tchar.h>
 
 #include "vector3.h"
 
@@ -38,13 +40,14 @@ extern void uLine2D(int x1, int y1, int x2, int y2, float width);
 
 //2D上に四角形を描画する
 extern void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
-		int y4, float width);
-extern void uSquare2D(int x1, int y1, int x2, int y2, float width);
+		int y4, float width, const float color[]);
+extern void uSquare2D(int x1, int y1, int x2, int y2, float width,
+		const float color[]);
 
 //2D上に四角形を描画する(塗りつぶし)
 extern void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3,
-		int x4, int y4);
-extern void uSquareFill2D(int x1, int y1, int x2, int y2);
+		int x4, int y4, const float color[]);
+extern void uSquareFill2D(int x1, int y1, int x2, int y2, const float color[]);
 
 //2D上に円を描画
 extern void uCircle2D(float radius, int x, int y);
@@ -68,6 +71,9 @@ extern void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2,
 
 //黒白の地面を描画
 extern void uDrawGround(int size);
+
+//可変長引数で文字列を返す
+const TCHAR* uPrintfString(const TCHAR* format, ...);
 
 //文字列描画
 extern void uDrawString(const char str[], int x0, int y0, const float color[]);

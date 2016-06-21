@@ -90,9 +90,10 @@ void Camera3D3P::TransfarByKey() {
 
 //カメラの情報を表示（速度)
 void Camera3D3P::DisplayInfo() const {
-	char string[256];
-	sprintf(string, "speed:%.0f%%", ((speed_ - kMinSpeed) / kMaxSpeed) * 100.0);
-	output_display::Regist(string, uColor4fv_red, 1);
+	output_display::Regist(
+			uPrintfString("speed:%.0f%%",
+					((speed_ - kMinSpeed) / kMaxSpeed) * 100.0), uColor4fv_red,
+			1);
 }
 
 //gluLookAtを設定する
