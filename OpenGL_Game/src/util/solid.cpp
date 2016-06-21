@@ -38,7 +38,7 @@ void Solid::set_scale(float s) {
 }
 
 //デフォルト(uMaterial4fv_white)
-void Solid::set_material(float mat[]) {
+void Solid::set_material(const float mat[]) {
 	memcpy(material_, mat, sizeof(float) * 4);
 }
 

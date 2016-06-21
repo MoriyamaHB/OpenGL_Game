@@ -1,20 +1,20 @@
 #include "uGL.h"
 
 //色(4fv)
-float uColor4fv_brack[] = { 0.0f, 0.0f, 0.0f, 1.0f }; //黒
-float uColor4fv_white[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //白
-float uColor4fv_red[] = { 1.0f, 0.0f, 0.0f, 1.0f }; //赤
-float uColor4fv_green[] = { 0.0f, 1.0f, 0.0f, 1.0f }; //緑
-float uColor4fv_blue[] = { 0.0f, 0.0f, 1.0f, 1.0f }; //青
-float uColor4fv_sky_brue[] = { 0.61176f, 0.65490f, 0.88627f, 1.0f }; //空色
+const float uColor4fv_brack[] = { 0.0f, 0.0f, 0.0f, 1.0f }; //黒
+const float uColor4fv_white[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //白
+const float uColor4fv_red[] = { 1.0f, 0.0f, 0.0f, 1.0f }; //赤
+const float uColor4fv_green[] = { 0.0f, 1.0f, 0.0f, 1.0f }; //緑
+const float uColor4fv_blue[] = { 0.0f, 0.0f, 1.0f, 1.0f }; //青
+const float uColor4fv_sky_brue[] = { 0.61176f, 0.65490f, 0.88627f, 1.0f }; //空色
 
 //材質(4fv)
-float uMaterial4fv_red[] = { 0.8, 0.2, 0.2, 1.0 }; //赤
-float uMaterial4fv_white[] = { 0.9, 0.9, 0.9, 1.0 }; //白
-float uMaterial4fv_black[] = { 0.1, 0.1, 0.1, 1.0 }; //黒
-float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
-float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
-float uMaterial4fv_brown[] = { 0.8, 0.45, 0.2, 1.0 }; //茶色
+const float uMaterial4fv_red[] = { 0.8, 0.2, 0.2, 1.0 }; //赤
+const float uMaterial4fv_white[] = { 0.9, 0.9, 0.9, 1.0 }; //白
+const float uMaterial4fv_black[] = { 0.1, 0.1, 0.1, 1.0 }; //黒
+const float uMaterial4fv_blue[] = { 0.1, 0.1, 0.9, 1.0 }; //青
+const float uMaterial4fv_green[] = { 0.1, 0.9, 0.1, 1.0 }; //緑
+const float uMaterial4fv_brown[] = { 0.8, 0.45, 0.2, 1.0 }; //茶色
 
 //エラー出力
 void uErrorOut(const char file[], const char func[], int line,
@@ -194,7 +194,7 @@ void uDrawGround(int size) {
 		uErrorOut(__FILE__, __func__, __LINE__, "サイズ指定値が不正です");
 		return;
 	}
-
+	glPushMatrix();
 	glBegin (GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
 	for (int j = -size / 2; j < size / 2; j++) {
@@ -217,6 +217,7 @@ void uDrawGround(int size) {
 		}
 	}
 	glEnd();
+	glPopMatrix();
 }
 
 //文字列描画

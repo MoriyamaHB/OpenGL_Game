@@ -4,6 +4,7 @@
 namespace {
 Camera3D3P camera;
 Fps fps;
+const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
 //ゲーム初期化
@@ -41,17 +42,12 @@ void GameMain() {
 
 	//---------------------------    描画    ---------------------------
 
+	//ライト
+	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
 	//カメラの情報を表示登録
 	camera.DisplayInfo();
-	//ライト
-	glPushMatrix();
-	GLfloat light0pos[] = { 0.0, 15.0, 0.0, 1.0 };	//カメラの視点座標に配置
-	glLightfv(GL_LIGHT0, GL_POSITION, light0pos);
-	glPopMatrix();
 	//地面描画
-	glPushMatrix();
 	uDrawGround(20);
-	glPopMatrix();
 	//プレイヤー描画
 	player::Draw();
 	//隕石描画

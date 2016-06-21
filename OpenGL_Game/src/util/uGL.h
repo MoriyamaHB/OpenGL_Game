@@ -11,20 +11,20 @@
 #define uPI 3.1415926
 
 //色(4fv)
-extern float uColor4fv_brack[];
-extern float uColor4fv_white[];
-extern float uColor4fv_red[];
-extern float uColor4fv_green[];
-extern float uColor4fv_blue[];
-extern float uColor4fv_sky_brue[];
+extern const float uColor4fv_brack[];
+extern const float uColor4fv_white[];
+extern const float uColor4fv_red[];
+extern const float uColor4fv_green[];
+extern const float uColor4fv_blue[];
+extern const float uColor4fv_sky_brue[];
 
 //材質(4fv)
-extern float uMaterial4fv_red[];
-extern float uMaterial4fv_white[];
-extern float uMaterial4fv_black[];
-extern float uMaterial4fv_blue[];
-extern float uMaterial4fv_green[];
-extern float uMaterial4fv_brown[];
+extern const float uMaterial4fv_red[];
+extern const float uMaterial4fv_white[];
+extern const float uMaterial4fv_black[];
+extern const float uMaterial4fv_blue[];
+extern const float uMaterial4fv_green[];
+extern const float uMaterial4fv_brown[];
 
 //エラー出力
 void uErrorOut(const char file[], const char func[], int line,

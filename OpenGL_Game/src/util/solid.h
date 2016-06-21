@@ -17,7 +17,7 @@ public:
 	//設定
 	void set_draw_flag(bool tf);
 	void set_scale(float s);
-	void set_material(float mat[]);
+	void set_material(const float mat[]);
 
 	//移動させる
 	void MoveDiff(Vector3 v);
