@@ -91,7 +91,6 @@ void Draw() {
 			uColor4fv_green, 1);
 	output_display::Regist(uPrintfString("get_target:%d", get_target),
 			uColor4fv_green, 1);
-	uSquareFill2D(10, 10, hit_meteo * 10, 40, uColor4fv_red);
 }
 }
 
