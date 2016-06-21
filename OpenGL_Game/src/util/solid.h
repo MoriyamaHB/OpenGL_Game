@@ -11,7 +11,8 @@ public:
 	Solid();
 	Solid(float x, float y, float z);
 	Solid(Vector3 point);
-	virtual ~Solid();
+	virtual ~Solid() {
+	}
 	void Init();
 
 	//設定
@@ -29,6 +30,5 @@ public:
 	bool get_draw_flag() const;
 
 	//描画
-	virtual void Draw() const {
-	}
+	virtual void Draw() const=0;
 };

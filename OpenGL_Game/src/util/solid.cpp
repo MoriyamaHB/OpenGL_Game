@@ -17,9 +17,6 @@ Solid::Solid(float x, float y, float z) {
 	place_.z = z;
 }
 
-Solid::~Solid() {
-}
-
 void Solid::Init() {
 	place_.zero();
 	can_draw_ = true;
