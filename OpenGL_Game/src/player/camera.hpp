@@ -12,7 +12,10 @@ public:
 	Vector3 GetStateWatchCoordinates() const;
 	Vector3 GetStateCoordinates() const;
 	void GetAngle(double *angle_w, double *angle_h) const;
-	double get_speed();
+	double get_speed() const;
+
+	//setter
+	void set_speed(double sp);
 
 	//カメラ移動
 	void TransfarAndRotateByMouse();

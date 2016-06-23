@@ -1,6 +1,7 @@
 #include "../declaration/GV.h"
 
 namespace {
+Camera3D3P *camera;
 Square square; //playerの四角
 int hit_meteo; //隕石衝突回数
 int get_target; //ターゲット獲得数
@@ -33,7 +34,8 @@ PlayerState get_player_state() {
 
 //初期化
 namespace player {
-void Init() {
+void Init(Camera3D3P *c) {
+	camera = c;
 	player_state = PLAY;
 	square.Init();
 	square.set_draw_flag(true);
@@ -72,6 +74,7 @@ void HitMeteo() {
 		hit_meteo++;
 		player_state = DIE;
 		die_cnt = now_frame_cnt;
+		camera->set_speed(0);
 	}
 }
 //ターゲットにあたった時に呼び出される

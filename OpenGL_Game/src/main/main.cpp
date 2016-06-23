@@ -14,7 +14,7 @@ void GameIni() {
 	control_target::Init();
 	control_bullet::Init();
 	camera.InitCoordinates();
-	player::Init();
+	player::Init(&camera);
 }
 }
 
