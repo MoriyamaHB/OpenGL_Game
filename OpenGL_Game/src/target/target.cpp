@@ -79,9 +79,9 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			Vector3 register_place = 100 * (camera_viewpoint - camera_place)
 					+ camera_place;
 			//乱数によりバラけさせる
-			register_place.x += cc_util::GetRandom(-30, 30);
-			register_place.y += cc_util::GetRandom(-30, 30);
-			register_place.z += cc_util::GetRandom(-30, 30);
+			register_place.x += cc_util::GetRandom(-20, 20);
+			register_place.y += cc_util::GetRandom(-20, 20);
+			register_place.z += cc_util::GetRandom(-20, 20);
 			//毎フレームの移動角度(3座標)を計算
 			Vector3 each_move_angle = camera_place - camera_viewpoint;
 			//登録

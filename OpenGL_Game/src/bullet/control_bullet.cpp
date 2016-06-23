@@ -56,8 +56,8 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 			itr++;
 		}
 	}
-	bool is_loop_end = false;
 	//隕石との当たり判定による削除
+	bool is_loop_end = false;
 	for (std::vector<Bullet*>::iterator itr_b = bullet_.begin();
 			itr_b != bullet_.end();) {
 		for (std::vector<Meteo*>::iterator itr_m =
