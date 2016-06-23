@@ -38,34 +38,61 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 		}
 	}
 	//更新
-	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
-			itr != bullet_.end(); ++itr) {
-		(*itr)->Move();
+	for (std::vector<Bullet*>::iterator itr_b = bullet_.begin();
+			itr_b != bullet_.end(); ++itr_b) {
+		(*itr_b)->Move();
 	}
 	//削除
+	//範囲外の時消滅
 	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
 			itr != bullet_.end();) {
-		//範囲外の時消滅
 		//プレイヤーの場所を足して考える
 		Vector3 range1 = kBulletRange1 + camera_place;
 		Vector3 range2 = kBulletRange2 + camera_place;
 		if ((*itr)->IsOutOfRange(range1, range2)) {
 			delete (*itr);
 			itr = bullet_.erase(itr);
-		} else
+		} else {
 			itr++;
+		}
+	}
+	bool is_loop_end = false;
+	//隕石との当たり判定による削除
+	for (std::vector<Bullet*>::iterator itr_b = bullet_.begin();
+			itr_b != bullet_.end();) {
+		for (std::vector<Meteo*>::iterator itr_m =
+				control_meteo::meteo_.begin();
+				itr_m != control_meteo::meteo_.end();) {
+			if (uIsCollisionBallAndBall((*itr_b)->get_place(),
+					(*itr_b)->get_scale(), (*itr_m)->get_place(),
+					(*itr_m)->get_scale())) {			//当たっていたら
+				//削除
+				delete (*itr_m);
+				delete (*itr_b);
+				itr_m = control_meteo::meteo_.erase(itr_m);
+				itr_b = bullet_.erase(itr_b);
+				is_loop_end = true;
+			} else {
+				itr_m++;
+			}
+		}
+		if (is_loop_end) {
+			is_loop_end = false;
+			break;
+		}
+		itr_b++;
 	}
 }
 }
 
 namespace control_bullet {
 void Draw() {
-	//描画
+//描画
 	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
 			itr != bullet_.end(); ++itr) {
 		(*itr)->Draw();
 	}
-	//弾数を表示登録
+//弾数を表示登録
 	output_display::Regist(uPrintfString("bullet:%d", bullet_.size()),
 			uColor4fv_blue, 1);
 }
