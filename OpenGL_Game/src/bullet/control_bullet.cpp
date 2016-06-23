@@ -72,6 +72,7 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 				itr_m = control_meteo::meteo_.erase(itr_m);
 				itr_b = bullet_.erase(itr_b);
 				is_loop_end = true;
+				break;
 			} else {
 				itr_m++;
 			}

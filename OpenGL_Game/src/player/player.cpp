@@ -8,7 +8,7 @@ int get_target; //ターゲット獲得数
 PlayerState player_state; //プレイヤーの状態
 int die_cnt; //死んだ時のフレームカウント
 int now_frame_cnt; //フレームカウント
-const int kRestorationCount = 100; //死んでから復活までのカウント数
+const int kRestorationCount = 150; //死んでから復活までのカウント数
 }
 
 //プレイヤーの場所を返す
