@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_INPUT_INPUT_H_
+#define OPENGLGAME_INPUT_INPUT_H_
+
 namespace input {
 int get_keyboard_frame(unsigned char key);
 void CheckPushKey(unsigned char key, int x, int y);
@@ -9,3 +12,5 @@ void CheckMouseMotion(int x, int y);
 void UpdateFrame();
 void Init();
 }
+
+#endif

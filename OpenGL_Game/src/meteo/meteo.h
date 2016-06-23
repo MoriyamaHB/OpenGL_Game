@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_METEO_METEO_H_
+#define OPENGLGAME_METEO_METEO_H_
+
 class Ball;
 class Vector3;
 
@@ -18,3 +21,5 @@ private:
 	float speed_; //移動するスピード
 	Vector3 each_move_angle_; //毎フレームの移動角度
 };
+
+#endif

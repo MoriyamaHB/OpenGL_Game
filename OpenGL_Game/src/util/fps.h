@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_UTIL_FPS_H_
+#define OPENGLGAME_UTIL_FPS_H_
+
 class Fps {
 private:
 	int GLframe; //フレーム数
@@ -21,4 +24,6 @@ public:
 	//描画
 	void Draw(int x, int y) const;
 };
+
+#endif
 

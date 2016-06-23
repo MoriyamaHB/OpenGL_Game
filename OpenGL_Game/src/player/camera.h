@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_PLAYER_CAMERA_H_
+#define OPENGLGAME_PLAYER_CAMERA_H_
+
 class Vector3;
 
 //3人称 & 自由飛行のカメラ移動計算を行います
@@ -60,3 +63,5 @@ public:
 	void TransfarAndRotateByMouse();
 	void TransfarByKey();
 };
+
+#endif

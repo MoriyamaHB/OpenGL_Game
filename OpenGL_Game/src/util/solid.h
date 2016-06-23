@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_UTIL_SOLID_H_
+#define OPENGLGAME_UTIL_SOLID_H_
+
 class Vector3;
 
 class Solid {
@@ -32,3 +35,5 @@ public:
 	//描画
 	virtual void Draw() const=0;
 };
+
+#endif

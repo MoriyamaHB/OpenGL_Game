@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_BULLET_BULLET_H_
+#define OPENGLGAME_BULLET_BULLET_H_
+
 class Ball;
 class Vector3;
 
@@ -13,3 +16,5 @@ private:
 	float speed_; //スピード
 	Vector3 each_move_angle_; //毎フレームの移動角度
 };
+
+#endif

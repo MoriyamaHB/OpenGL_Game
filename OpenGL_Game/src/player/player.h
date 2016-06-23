@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_PLAYER_PLAYER_H_
+#define OPENGLGAME_PLAYER_PLAYER_H_
+
 enum PlayerState {
 	PLAY, DIE
 };
@@ -12,3 +15,5 @@ void HitMeteo(); //隕石があたった時に呼び出す
 void HitTarget(); //ターゲットがあたった時に呼び出す
 void Draw(); //描画
 }
+
+#endif

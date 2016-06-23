@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_UTIL_BALL_H_
+#define OPENGLGAME_UTIL_BALL_H_
+
 class Vector3;
 
 class Ball: public Solid {
@@ -16,4 +19,6 @@ public:
 	//描画
 	void Draw() const;
 };
+
+#endif
 

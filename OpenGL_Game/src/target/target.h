@@ -1,3 +1,6 @@
+#ifndef OPENGLGAME_TARGET_TARGET_H_
+#define OPENGLGAME_TARGET_TARGET_H_
+
 class Square;
 class Vector3;
 class Fps;
@@ -20,8 +23,6 @@ private:
 	Vector3 each_move_angle_; //毎フレームの移動角度
 };
 
-
-
 namespace control_target {
 const int kMaxTargetNum = 1000;
 
@@ -29,4 +30,6 @@ void Init();
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint);
 void Draw();
 }
+
+#endif
 

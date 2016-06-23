@@ -4,10 +4,12 @@ namespace {
 //隕石の範囲,隕石の出現距離を考慮すること
 const Vector3 kMeteoRange1(400, 400, 400);
 const Vector3 kMeteoRange2(-400, -400, -400);
+//実際に隕石を格納するデータ構造
+std::vector<Meteo*> meteo_;
 }
 
-namespace {
-std::vector<Meteo*> meteo_;
+namespace control_meteo {
+std::vector<CollisionBall*> collision_meteo_; //当たり判定用のグローバルデータ
 }
 
 namespace control_meteo {
@@ -38,7 +40,10 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			Vector3 each_move_angle = camera_place - camera_viewpoint;
 			//登録
 			Meteo *m = new Meteo(register_place, each_move_angle);
+			//CollisionBall *cb = new CollisionBall { register_place,
+			//m->get_scale() };
 			meteo_.push_back(m);
+			//collision_meteo_.push_back(cb);
 		}
 	}
 
