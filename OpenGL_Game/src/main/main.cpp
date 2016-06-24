@@ -55,6 +55,8 @@ int StartMain() {
 	glPopMatrix();
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
+	//文字描画
+	uDrawString("Please press 'a' key to start.", 450, 100, uColor4fv_red);
 	return 0;
 }
 }
