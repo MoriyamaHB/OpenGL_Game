@@ -94,7 +94,8 @@ void Draw() {
 		(*itr)->Draw();
 	}
 //弾数を表示登録
-	output_display::Regist(uPrintfString("bullet:%d", bullet_.size()),
-			uColor4fv_blue, 1);
+	char string[256];
+	sprintf(string, "bullet:%d", bullet_.size());
+	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }

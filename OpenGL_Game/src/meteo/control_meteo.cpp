@@ -83,7 +83,8 @@ void Draw() {
 		(*itr)->Draw();
 	}
 	//隕石数を表示登録
-	output_display::Regist(uPrintfString("meteo:%d", meteo_.size()),
-			uColor4fv_blue, 1);
+	char string[256];
+	sprintf(string, "meteo:%d", meteo_.size());
+	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }

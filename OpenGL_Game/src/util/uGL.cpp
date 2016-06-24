@@ -294,20 +294,20 @@ void uDrawGround(int size) {
 
 //可変長引数で文字列を返す
 //printfのように引数を渡すとそれを文字列にして返す
-const TCHAR* uPrintfString(const TCHAR* format, ...) {
-	static TCHAR strBuffer_g[1024];
-	va_list args;
-	va_start(args, format);
-
-#if _DEBUG
-	int len = _vsctprintf( format, args );
-	if ( len >= 1024 )
-	_ASSERT(0);
-#endif
-
-	_vstprintf(strBuffer_g, format, args);
-	return strBuffer_g;
-}
+//const TCHAR* uPrintfString(const TCHAR* format, ...) {
+//	static TCHAR strBuffer_g[1024];
+//	va_list args;
+//	va_start(args, format);
+//
+//#if _DEBUG
+//	int len = _vsctprintf( format, args );
+//	if ( len >= 1024 )
+//	_ASSERT(0);
+//#endif
+//
+//	_vstprintf(strBuffer_g, format, args);
+//	return strBuffer_g;
+//}
 
 //文字列描画
 void uDrawString(const char str[], int x0, int y0, const float color[]) {

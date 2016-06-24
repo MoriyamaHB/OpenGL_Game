@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <utility>
 #include <stdarg.h>
-#include <tchar.h>
 
 #include "vector3.h"
 
@@ -73,7 +72,8 @@ extern void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2,
 extern void uDrawGround(int size);
 
 //可変長引数で文字列を返す
-const TCHAR* uPrintfString(const TCHAR* format, ...);
+//linux環境では使えないみたいなのでコメントアウト
+//const TCHAR* uPrintfString(const TCHAR* format, ...);
 
 //文字列描画
 extern void uDrawString(const char str[], int x0, int y0, const float color[]);

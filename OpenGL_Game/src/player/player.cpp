@@ -90,10 +90,11 @@ void Draw() {
 	//箱描画
 	square.Draw();
 	//ヒット情報登録
-	output_display::Regist(uPrintfString("hit_meteo:%d", hit_meteo),
-			uColor4fv_green, 1);
-	output_display::Regist(uPrintfString("get_target:%d", get_target),
-			uColor4fv_green, 1);
+	char string[256];
+	sprintf(string, "hit_meteo:%d", hit_meteo);
+	output_display::Regist(string, uColor4fv_green, 1);
+	sprintf(string, "get_target:%d", get_target);
+	output_display::Regist(string, uColor4fv_green, 1);
 }
 }
 
