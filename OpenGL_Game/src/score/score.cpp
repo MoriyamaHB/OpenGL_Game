@@ -6,6 +6,7 @@ Score::Score() {
 
 void Score::Init() {
 	total_score_ = 0;
+	memset(each_score_, 0, sizeof(each_score_));
 }
 
 void Score::Update() {
