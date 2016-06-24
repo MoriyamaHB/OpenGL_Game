@@ -4,6 +4,9 @@
 class Score;
 
 namespace opengl_game_main {
+enum MainState {
+	kStartIni, kstart, kGameIni, kGame, kGameFin
+};
 extern Score score;
 void DisplayFunc(void);
 void Resize(int w, int h);

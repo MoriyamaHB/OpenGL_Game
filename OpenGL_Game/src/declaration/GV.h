@@ -12,7 +12,6 @@
 
 //データヘッダ
 #include "define.h"
-#include "enum.h"
 #include "struct.h"
 
 //継承元or便利ヘッダ
@@ -27,8 +26,8 @@
 #include "../bullet/bullet.h"
 #include "../display/output_display.h"
 #include "../input/input.h"
-#include "../main/first_init.hpp"
-#include "../main/main.hpp"
+#include "../main/first_init.h"
+#include "../main/main.h"
 #include "../meteo/control_meteo.h"
 #include "../meteo/meteo.h"
 #include "../player/camera.h"
