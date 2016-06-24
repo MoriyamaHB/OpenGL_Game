@@ -141,15 +141,15 @@ void DisplayFunc(void) {
 //OpenGLコールバック関数
 namespace opengl_game_main {
 void Resize(int w, int h) {
-//ビューポート設定
+	//ビューポート設定
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
-//透視変換行列設定
+	//透視変換行列設定
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(75.0, (double) w / (double) h, 0.1, 200.0);
 
-//モデルビュー変換行列の指定
+	//モデルビュー変換行列の指定
 	glMatrixMode(GL_MODELVIEW);
 }
 }
