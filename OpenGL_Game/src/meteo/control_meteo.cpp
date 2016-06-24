@@ -58,7 +58,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 				if (distance <= kAddScoreMaxDistance) {
 					opengl_game_main::score.add_score(
 							(distance / kAddScoreMaxDistance) * kAddScoreFactor,
-							NEAR_METEO);
+							Score::kNearMeteo);
 				}
 			}
 		}

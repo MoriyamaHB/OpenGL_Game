@@ -1,3 +1,3 @@
 enum MainState {
-	START_INI, START, GAME_INI, GAME, GAME_FIN
+	kStartIni, kstart, kGameIni, kGame, kGameFin
 };

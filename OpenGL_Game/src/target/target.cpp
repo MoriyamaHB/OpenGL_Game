@@ -102,7 +102,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 				player::HitTarget();
 				opengl_game_main::score.add_score(
 						(int) (kGetTargetScoreFactor * (*itr)->get_scale()),
-						GET_TARGET);			//スコア加算
+						Score::kGetTarget);			//スコア加算
 				delete (*itr);
 				itr = target_.erase(itr);
 				break;

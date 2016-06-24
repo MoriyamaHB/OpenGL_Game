@@ -77,7 +77,7 @@ void GameFin() {
 //OpenGLコールバック関数
 namespace opengl_game_main {
 void DisplayFunc(void) {
-	static MainState main_state = START_INI;
+	static MainState main_state = kStartIni;
 
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
@@ -88,31 +88,31 @@ void DisplayFunc(void) {
 	fps.Update(); //fps
 
 	switch (main_state) {
-	case START_INI:
+	case kStartIni:
 		//プロジェクト上で必要な初期化
 		input::Init();
 		output_display::Init();
 		fps.Init();
 		//次に進む
-		main_state = START;
+		main_state = kstart;
 		break;
-	case START:
-		main_state = GAME_INI;
+	case kstart:
+		main_state = kGameIni;
 		break;
-	case GAME_INI:
+	case kGameIni:
 		GameIni();
-		main_state = GAME;
+		main_state = kGame;
 		break;
-	case GAME:
+	case kGame:
 		GameMain();
 		break;
-	case GAME_FIN:
+	case kGameFin:
 		GameFin();
 		break;
 	default:
 		uErrorOut(__FILE__, __func__, __LINE__,
 				"不明なmain_statです. スタート状態に移行します.");
-		main_state = START_INI;
+		main_state = kStartIni;
 		break;
 	}
 
@@ -129,7 +129,7 @@ void DisplayFunc(void) {
 		exit(0);
 	//q入力で初期状態に移行
 	if (input::get_keyboard_frame('q') == 1)
-		main_state = START_INI;
+		main_state = kStartIni;
 }
 }
 
