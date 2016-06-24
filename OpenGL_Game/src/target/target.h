@@ -25,6 +25,7 @@ private:
 
 namespace control_target {
 const int kMaxTargetNum = 1000;
+const int kGetTargetScoreFactor = 100;
 
 void Init();
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint);

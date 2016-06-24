@@ -98,7 +98,10 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
 					(*itr)->get_scale(), player::get_place(),
 					player::get_scale())) {
+				//あたった時の処理
 				player::HitTarget();
+				opengl_game_main::score.add_score(
+						(int) (kGetTargetScoreFactor * (*itr)->get_scale()));//スコア加算
 				delete (*itr);
 				itr = target_.erase(itr);
 				break;
