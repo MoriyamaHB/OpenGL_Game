@@ -11,7 +11,7 @@ int now_frame_cnt; //フレームカウント
 int remaining_lives; //残機数
 
 const int kRestorationCount = 150; //死んでから復活までのカウント数
-const int kInitRemainingLives = 10; //初期残機数
+const int kInitRemainingLives = 1; //初期残機数
 }
 
 //プレイヤーの場所を返す

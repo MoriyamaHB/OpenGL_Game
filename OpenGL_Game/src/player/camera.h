@@ -22,6 +22,7 @@ public:
 
 	//カメラ移動
 	void TransfarAndRotateByMouse();
+	void TransfarAndRotateByParam(int dx,int dy);
 	void TransfarByKey();
 
 	//カメラの情報を表示（速度)

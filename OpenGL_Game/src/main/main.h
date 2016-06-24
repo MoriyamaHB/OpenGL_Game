@@ -5,7 +5,7 @@ class Score;
 
 namespace opengl_game_main {
 enum MainState {
-	kStartIni, kstart, kGameIni, kGame, kGameFin
+	kProjectIni, kStartIni, kStart, kGameIni, kGame
 };
 extern Score score;
 void DisplayFunc(void);

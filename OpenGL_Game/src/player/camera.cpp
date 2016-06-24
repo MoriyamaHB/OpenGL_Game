@@ -73,6 +73,27 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 
 }
 
+//カメラ座標をパラメータから計算する(3人称視点)
+void Camera3D3P::TransfarAndRotateByParam(int dx,int dy) {
+
+	//マウスの動きをカメラ角度に変換
+	angle_w_ += ((double) dx / CAMERA_ROTATE_PX) * 2 * PI;
+	angle_h_ += ((double) dy / CAMERA_ROTATE_PX) * 2 * PI;
+
+	//angle_hの角度範囲ををラップする
+	//これによりカメラが縦方向に一周しなくなる
+	if (angle_h_ < kMinWrapAngleH)
+		angle_h_ = kMinWrapAngleH;
+	else if (angle_h_ > kMaxWrapAngleH)
+		angle_h_ = kMaxWrapAngleH;
+
+	//カメラ角度を視点位置に反映
+	x_ = distance_ * cos(angle_w_) * cos(angle_h_) + gx_;
+	z_ = distance_ * sin(angle_w_) * cos(angle_h_) + gz_;
+	y_ = distance_ * sin(angle_h_) + gy_;
+
+}
+
 //カメラ座標をキー入力から計算する(3人称視点)
 //qが入力されているときはここでカメラが初期化されます
 void Camera3D3P::TransfarByKey() {
