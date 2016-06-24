@@ -1,9 +1,5 @@
 #include "../declaration/GV.h"
 
-namespace {
-bool has_pressed_any_key_or_mouse;
-}
-
 ///////////////////////// キー入力 /////////////////////////
 
 //キーの入力状態記録
@@ -37,7 +33,6 @@ void CheckPushKey(unsigned char key, int x, int y) {
 	} else if (key == '\033') {
 		escape = 1;
 	}
-	has_pressed_any_key_or_mouse=true;
 }
 }
 
@@ -88,7 +83,6 @@ void CheckMouse(int button, int state, int x, int y) {
 	} else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
 		is_down_mouse_left_button = false;
 	}
-	has_pressed_any_key_or_mouse=true;
 }
 }
 
@@ -146,6 +140,5 @@ void Init() {
 	mouse_dy = 0;
 	is_down_mouse_left_button = false;
 	mouse_left_button_frame = 0;
-	has_pressed_any_key_or_mouse = false;
 }
 }
