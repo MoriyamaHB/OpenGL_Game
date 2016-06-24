@@ -7,6 +7,10 @@ Fps fps;
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
+namespace opengl_game_main {
+Score score;
+}
+
 //ゲーム初期化
 namespace {
 void GameIni() {
@@ -15,6 +19,7 @@ void GameIni() {
 	control_bullet::Init();
 	camera.InitCoordinates();
 	player::Init(&camera);
+	opengl_game_main::score.Init();
 }
 }
 
@@ -39,6 +44,8 @@ void GameMain() {
 			camera.GetStateWatchCoordinates(), camera.get_speed());
 	//プレイヤー更新
 	player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount());
+	//スコア更新
+	opengl_game_main::score.Update();
 
 	//---------------------------    描画    ---------------------------
 
@@ -48,12 +55,14 @@ void GameMain() {
 	camera.DisplayInfo();
 	//地面描画
 	uDrawGround(20);
-	//プレイヤー描画
-	player::Draw();
 	//隕石描画
 	control_meteo::Draw();
 	control_target::Draw();
 	control_bullet::Draw();
+	//プレイヤー描画
+	player::Draw();
+	//スコア描画
+	opengl_game_main::score.Draw();
 
 }
 }
@@ -131,12 +140,12 @@ void Resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 //透視変換行列設定
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(75.0, (double) w / (double) h, 0.1, 200.0);
 
 //モデルビュー変換行列の指定
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 }
 }
 

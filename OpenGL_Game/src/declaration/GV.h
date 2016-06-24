@@ -33,4 +33,5 @@
 #include "../meteo/meteo.h"
 #include "../player/camera.h"
 #include "../player/player.h"
+#include "../score/score.h"
 #include "../target/target.h"
