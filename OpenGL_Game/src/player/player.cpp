@@ -54,7 +54,9 @@ void Init(Camera3D3P *c) {
 
 //更新
 namespace player {
-void Update(Vector3 p, int now_cnt) {
+int Update(Vector3 p, int now_cnt) {
+	if(remaining_lives<0)//残機がマイナスなら
+		return -1;
 	now_frame_cnt = now_cnt; //カウント更新
 	square.Move(p);	//移動
 	//die中
@@ -68,6 +70,7 @@ void Update(Vector3 p, int now_cnt) {
 			square.set_draw_flag(true);
 		}
 	}
+	return 0;
 }
 }
 
@@ -79,6 +82,7 @@ void HitMeteo() {
 		player_state = DIE;
 		die_cnt = now_frame_cnt;
 		camera->set_speed(0);
+		remaining_lives--;
 	}
 }
 //ターゲットにあたった時に呼び出される
@@ -99,6 +103,8 @@ void Draw() {
 	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "get_target:%d", get_target);
 	output_display::Regist(string, uColor4fv_green, 1);
+	sprintf(string, "zanki_num:%d", remaining_lives);
+	output_display::Regist(string, uColor4fv_red, 1);
 }
 }
 

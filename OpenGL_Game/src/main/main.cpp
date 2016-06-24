@@ -25,7 +25,7 @@ void GameIni() {
 
 //ゲームメイン関数
 namespace {
-void GameMain() {
+int GameMain() {
 
 	//---------------------------    更新    ---------------------------
 
@@ -43,7 +43,9 @@ void GameMain() {
 	control_bullet::Update(camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates(), camera.get_speed());
 	//プレイヤー更新
-	player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount());
+	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount())
+			== -1)
+		return -1;
 	//スコア更新
 	opengl_game_main::score.Update();
 
@@ -64,6 +66,7 @@ void GameMain() {
 	//スコア描画
 	opengl_game_main::score.Draw();
 
+	return 0;
 }
 }
 
@@ -104,10 +107,12 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:
-		GameMain();
+		if (GameMain() == -1)
+			main_state = kGameFin;
 		break;
 	case opengl_game_main::kGameFin:
 		GameFin();
+		main_state = kStartIni;
 		break;
 	default:
 		uErrorOut(__FILE__, __func__, __LINE__,
