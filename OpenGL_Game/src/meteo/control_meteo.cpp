@@ -47,11 +47,19 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	for (std::vector<Meteo*>::iterator itr = meteo_.begin();
 			itr != meteo_.end(); ++itr) {
 		//プレイヤーへの当たり判定
+		double distance;
 		if (player::get_player_state() == PLAY) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
 					(*itr)->get_scale(), player::get_place(),
-					player::get_scale(), NULL)) {
+					player::get_scale(), &distance)) {
 				player::HitMeteo();
+			} else {//衝突していないとき
+				//距離が近いほどスコアを加算
+				if (distance <= kAddScoreMaxDistance) {
+					opengl_game_main::score.add_score(
+							(distance / kAddScoreMaxDistance) * kAddScoreFactor,
+							NEAR_METEO);
+				}
 			}
 		}
 		//移動

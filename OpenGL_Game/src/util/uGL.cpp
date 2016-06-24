@@ -340,8 +340,9 @@ bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2, double r2,
 		double *distance/*距離を格納するポインタ(NULLでも可*/) {
 	double d1 = pow(b2.x - b1.x, 2) + pow(b2.y - b1.y, 2) + pow(b2.z - b1.z, 2);
 	double d2 = pow(r1 + r2, 2);
-	if (distance != NULL)
-		*distance = (r1 + r2) - sqrt(d1);
+	if (distance != NULL) {
+		*distance = sqrt(d1) - (r1 + r2);
+	}
 	if (d1 <= d2)
 		return true;
 	return false;
