@@ -5,10 +5,13 @@ Camera3D3P *camera;
 Square square; //playerの四角
 int hit_meteo; //隕石衝突回数
 int get_target; //ターゲット獲得数
-PlayerState player_state; //プレイヤーの状態
+player::PlayerState player_state; //プレイヤーの状態
 int die_cnt; //死んだ時のフレームカウント
 int now_frame_cnt; //フレームカウント
+int remaining_lives; //残機数
+
 const int kRestorationCount = 150; //死んでから復活までのカウント数
+const int kInitRemainingLives = 10; //初期残機数
 }
 
 //プレイヤーの場所を返す
@@ -45,6 +48,7 @@ void Init(Camera3D3P *c) {
 	get_target = 0;
 	die_cnt = 0;
 	now_frame_cnt = 0;
+	remaining_lives = kInitRemainingLives;
 }
 }
 

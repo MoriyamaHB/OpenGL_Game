@@ -48,7 +48,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			itr != meteo_.end(); ++itr) {
 		//プレイヤーへの当たり判定
 		double distance;
-		if (player::get_player_state() == PLAY) {			//プレイ中なら
+		if (player::get_player_state() == player::PLAY) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
 					(*itr)->get_scale(), player::get_place(),
 					player::get_scale(), &distance)) {
