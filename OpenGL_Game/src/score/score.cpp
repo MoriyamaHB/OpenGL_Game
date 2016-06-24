@@ -23,6 +23,8 @@ void Score::Update() {
 	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "get_target_score: %d", each_score_[kGetTarget]);
 	output_display::Regist(string, uColor4fv_green, 1);
+	sprintf(string, "destruct_meteo: %d", each_score_[kDestructMeteo]);
+	output_display::Regist(string, uColor4fv_green, 1);
 }
 
 void Score::Draw() const {

@@ -67,6 +67,9 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 					(*itr_b)->get_scale(), (*itr_m)->get_place(),
 					(*itr_m)->get_scale(), NULL)) {			//当たっていたら
 				//削除
+				opengl_game_main::score.add_score(
+						(int) (kDestructMeteoScoreFactor * (*itr_m)->get_scale()),
+						Score::kDestructMeteo);	//スコア加算
 				delete (*itr_m);
 				delete (*itr_b);
 				itr_m = control_meteo::meteo_.erase(itr_m);

@@ -3,6 +3,7 @@
 
 namespace control_bullet {
 const int kMaxBulletNum = 1000;
+const double kDestructMeteoScoreFactor = 20;
 
 void Init();
 void Update(Vector3 camera_place, Vector3 camera_viewpoint,

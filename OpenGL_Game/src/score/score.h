@@ -4,7 +4,7 @@
 class Score {
 public:
 	enum ScoreType {
-		kGetTarget = 0, kNearMeteo = 1, kCount
+		kGetTarget = 0, kNearMeteo = 1, kDestructMeteo = 2, kCount
 	};
 
 	Score();
