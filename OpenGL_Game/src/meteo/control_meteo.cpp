@@ -50,7 +50,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 		if (player::get_player_state() == PLAY) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
 					(*itr)->get_scale(), player::get_place(),
-					player::get_scale())) {
+					player::get_scale(), NULL)) {
 				player::HitMeteo();
 			}
 		}

@@ -83,6 +83,6 @@ extern bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2);
 
 //球と球の当たり判定
 extern bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2,
-		double r2);
+		double r2, double *distance);
 
 #endif /* UGL_H_ */

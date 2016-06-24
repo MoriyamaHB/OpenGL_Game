@@ -65,7 +65,7 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 				itr_m != control_meteo::meteo_.end();) {
 			if (uIsCollisionBallAndBall((*itr_b)->get_place(),
 					(*itr_b)->get_scale(), (*itr_m)->get_place(),
-					(*itr_m)->get_scale())) {			//当たっていたら
+					(*itr_m)->get_scale(), NULL)) {			//当たっていたら
 				//削除
 				delete (*itr_m);
 				delete (*itr_b);

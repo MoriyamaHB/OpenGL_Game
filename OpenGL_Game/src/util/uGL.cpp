@@ -26,14 +26,14 @@ static void u3Dto2D() {
 		return;
 	}
 	//ライト削除
-	glDisable (GL_LIGHTING);
+	glDisable(GL_LIGHTING);
 	// 平行投影にする
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
 	gluOrtho2D(0, glutGet(GLUT_INIT_WINDOW_WIDTH),
 			glutGet(GLUT_INIT_WINDOW_HEIGHT), 0);
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
 
@@ -50,11 +50,11 @@ static void u2Dto3D() {
 
 	// 投射投影に戻す
 	glPopMatrix();
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 	//ライトを戻す
-	glEnable (GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 
 	u3d_2d_flag = 0;
 }
@@ -70,7 +70,7 @@ void uErrorOut(const char file[], const char func[], int line,
 void uPoint2D(int x, int y, float size) {
 	u3Dto2D();
 	glPointSize(size);
-	glBegin (GL_POINTS);
+	glBegin(GL_POINTS);
 	glVertex2i(x, y);
 	glEnd();
 	u2Dto3D();
@@ -80,7 +80,7 @@ void uPoint2D(int x, int y, float size) {
 void uLine2D(int x1, int y1, int x2, int y2, float width) {
 	u3Dto2D();
 	glLineWidth(width);
-	glBegin (GL_LINES);
+	glBegin(GL_LINES);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glEnd();
@@ -93,7 +93,7 @@ void uSquare2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4,
 	u3Dto2D();
 	glColor4fv(color);
 	glLineWidth(width);
-	glBegin (GL_LINE_LOOP);
+	glBegin(GL_LINE_LOOP);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x3, y3);
@@ -107,7 +107,7 @@ void uSquare2D(int x1, int y1, int x2, int y2, float width,
 	u3Dto2D();
 	glColor4fv(color);
 	glLineWidth(width);
-	glBegin (GL_LINE_LOOP);
+	glBegin(GL_LINE_LOOP);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y1);
 	glVertex2i(x2, y2);
@@ -121,7 +121,7 @@ void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
 		int y4, const float color[]) {
 	u3Dto2D();
 	glColor4fv(color);
-	glBegin (GL_QUADS);
+	glBegin(GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y2);
 	glVertex2i(x3, y3);
@@ -133,7 +133,7 @@ void uSquareFill2D(int x1, int y1, int x2, int y2, int x3, int y3, int x4,
 void uSquareFill2D(int x1, int y1, int x2, int y2, const float color[]) {
 	u3Dto2D();
 	glColor4fv(color);
-	glBegin (GL_QUADS);
+	glBegin(GL_QUADS);
 	glVertex2i(x1, y1);
 	glVertex2i(x2, y1);
 	glVertex2i(x2, y2);
@@ -155,7 +155,7 @@ void uCircle2D(float radius, int x, int y) {
 		float x2 = radius * cos(th2_rad);
 		float y2 = radius * sin(th2_rad);
 
-		glBegin (GL_LINES);
+		glBegin(GL_LINES);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
@@ -176,7 +176,7 @@ void uCircle2DFill(float radius, int x, int y) {
 		float x2 = radius * cos(th2_rad);
 		float y2 = radius * sin(th2_rad);
 
-		glBegin (GL_TRIANGLES);
+		glBegin(GL_TRIANGLES);
 		glVertex2f(x, y);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
@@ -198,7 +198,7 @@ void uOval2D(float radius, int x, int y, float ovalx, float ovaly) {
 		float x2 = radius * cos(th2_rad) * (ovalx / 100.0f);
 		float y2 = radius * sin(th2_rad) * (ovaly / 100.0f);
 
-		glBegin (GL_LINES);
+		glBegin(GL_LINES);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
 		glEnd();
@@ -219,7 +219,7 @@ void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
 		float x2 = radius * cos(th2_rad) * (ovalx / 100.0f);
 		float y2 = radius * sin(th2_rad) * (ovaly / 100.0f);
 
-		glBegin (GL_TRIANGLES);
+		glBegin(GL_TRIANGLES);
 		glVertex2f(x, y);
 		glVertex2f(x1 + x, y1 + y);
 		glVertex2f(x2 + x, y2 + y);
@@ -232,7 +232,7 @@ void uOval2DFill(float radius, int x, int y, float ovalx, float ovaly) {
 void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[]) {
 	u3Dto2D();
-	glBegin (GL_TRIANGLES);
+	glBegin(GL_TRIANGLES);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
 	glColor4fv(color2);
@@ -247,7 +247,7 @@ void uDrawTriangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 void uDrawQuadrangle(Vector3 v1, float color1[], Vector3 v2, float color2[],
 		Vector3 v3, float color3[], Vector3 v4, float color4[]) {
 	u3Dto2D();
-	glBegin (GL_QUADS);
+	glBegin(GL_QUADS);
 	glColor4fv(color1);
 	glVertex3f(v1.x, v1.y, v1.z);
 	glColor4fv(color2);
@@ -267,7 +267,7 @@ void uDrawGround(int size) {
 		return;
 	}
 	glPushMatrix();
-	glBegin (GL_QUADS);
+	glBegin(GL_QUADS);
 	glNormal3f(0.0, 1.0, 0.0);
 	for (int j = -size / 2; j < size / 2; j++) {
 		for (int i = -size / 2; i < size / 2; i++) {
@@ -283,9 +283,9 @@ void uDrawGround(int size) {
 				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, uMaterial4fv_black);
 
 			glVertex3d((GLdouble) i, 0.0, (GLdouble) j);
-			glVertex3d((GLdouble) i, 0.0, (GLdouble)(j + 1));
-			glVertex3d((GLdouble)(i + 1), 0.0, (GLdouble)(j + 1));
-			glVertex3d((GLdouble)(i + 1), 0.0, (GLdouble) j);
+			glVertex3d((GLdouble) i, 0.0, (GLdouble) (j + 1));
+			glVertex3d((GLdouble) (i + 1), 0.0, (GLdouble) (j + 1));
+			glVertex3d((GLdouble) (i + 1), 0.0, (GLdouble) j);
 		}
 	}
 	glEnd();
@@ -336,9 +336,13 @@ bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2) {
 }
 
 //球と球の当たり判定
-bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2, double r2) {
-	if (pow(b2.x - b1.x, 2) + pow(b2.y - b1.y, 2) + pow(b2.z - b1.z, 2)
-			<= pow(r1 + r2, 2))
+bool uIsCollisionBallAndBall(Vector3 b1, double r1, Vector3 b2, double r2,
+		double *distance/*距離を格納するポインタ(NULLでも可*/) {
+	double d1 = pow(b2.x - b1.x, 2) + pow(b2.y - b1.y, 2) + pow(b2.z - b1.z, 2);
+	double d2 = pow(r1 + r2, 2);
+	if (distance != NULL)
+		*distance = (r1 + r2) - sqrt(d1);
+	if (d1 <= d2)
 		return true;
 	return false;
 }
