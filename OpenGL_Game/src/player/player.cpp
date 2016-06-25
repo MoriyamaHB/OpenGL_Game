@@ -43,7 +43,7 @@ void Init(Camera3D3P *c) {
 	square.Init();
 	square.set_draw_flag(true);
 	square.set_material(uMaterial4fv_red);
-	square.set_scale(0.5);
+	square.set_scale(0.35);
 	hit_meteo = 0;
 	get_target = 0;
 	die_cnt = 0;
@@ -55,10 +55,8 @@ void Init(Camera3D3P *c) {
 //更新
 namespace player {
 int Update(Vector3 p, int now_cnt) {
-	if(remaining_lives<0)//残機がマイナスなら
-		return -1;
 	now_frame_cnt = now_cnt; //カウント更新
-	square.Move(p);	//移動
+	square.Move(p); //移動
 	//die中
 	if (player_state == DIE) {
 		//点滅処理
@@ -70,12 +68,15 @@ int Update(Vector3 p, int now_cnt) {
 			square.set_draw_flag(true);
 		}
 	}
+	if (player_state == FIN) {	//ゲーム終了時
+		return -1;
+	}
 	return 0;
 }
 }
 
-namespace player {
 //隕石に衝突した時呼び出される
+namespace player {
 void HitMeteo() {
 	if (player_state == PLAY) {
 		hit_meteo++;
@@ -83,8 +84,15 @@ void HitMeteo() {
 		die_cnt = now_frame_cnt;
 		camera->set_speed(0);
 		remaining_lives--;
+		if (remaining_lives < 0) { //残機がマイナスなら
+			player_state = FIN;
+			square.set_draw_flag(false);
+		}
 	}
 }
+}
+
+namespace player {
 //ターゲットにあたった時に呼び出される
 void HitTarget() {
 	if (player_state == PLAY)

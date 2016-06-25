@@ -1,10 +1,9 @@
 #ifndef OPENGLGAME_PLAYER_PLAYER_H_
 #define OPENGLGAME_PLAYER_PLAYER_H_
 
-
 namespace player {
 enum PlayerState {
-	PLAY, DIE
+	PLAY, DIE, FIN
 };
 Vector3 get_place(); //playerの場所を返す
 float get_scale(); //playerの大きさを返す

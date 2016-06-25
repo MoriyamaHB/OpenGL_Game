@@ -27,14 +27,16 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 	//登録
 	if (input::get_mouse_left_button_frame() == 1) {
 		if ((int) bullet_.size() < kMaxBulletNum) { //最大数を下回っている
-			//登録場所を少し上にずらす
-			camera_viewpoint.y += 0.5;
-			//毎フレームの移動角度(3座標)を計算
-			Vector3 each_move_angle = camera_viewpoint - camera_place;
-			//登録
-			Bullet *b = new Bullet(camera_viewpoint, each_move_angle,
-					camera_speed);
-			bullet_.push_back(b);
+			if (player::get_player_state() == player::PLAY) { //プレイ中なら
+				//登録場所を少し上にずらす
+				camera_viewpoint.y += 0.5;
+				//毎フレームの移動角度(3座標)を計算
+				Vector3 each_move_angle = camera_viewpoint - camera_place;
+				//登録
+				Bullet *b = new Bullet(camera_viewpoint, each_move_angle,
+						camera_speed);
+				bullet_.push_back(b);
+			}
 		}
 	}
 	//更新

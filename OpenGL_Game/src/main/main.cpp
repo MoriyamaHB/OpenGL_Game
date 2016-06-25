@@ -44,8 +44,9 @@ int GameMain() {
 			camera.GetStateWatchCoordinates(), camera.get_speed());
 	//プレイヤー更新
 	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount())
-			== -1)
-		return -1;
+			== -1)	//更新
+		if (0 == -1)	//結果表示(未実装)
+			return -1;
 	//スコア更新
 	opengl_game_main::score.Update();
 
@@ -106,7 +107,7 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
-		if (GameMain() == -1)
+		if (GameMain() == -1)		//ゲームメイン
 			main_state = kProjectIni;
 		break;
 	default:
