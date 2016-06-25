@@ -33,4 +33,5 @@
 #include "../player/camera.h"
 #include "../player/player.h"
 #include "../score/score.h"
+#include "../start/start.h"
 #include "../target/target.h"

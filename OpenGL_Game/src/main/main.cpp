@@ -4,61 +4,11 @@
 namespace {
 Camera3D3P camera;
 Fps fps;
-int start_rand_solid;
-float start_rand_mate[4];
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
 namespace opengl_game_main {
 Score score;
-}
-
-//スタートメイン部分
-namespace {
-int StartMain() {
-	if (input::get_keyboard_frame('a') == 1)
-		return -1;
-
-	//カメラ
-	camera.TransfarAndRotateByParam(3, 0); //カメラ移動計算(マウス)
-	camera.SetGluLookAt(); //視点をセット
-	//地面描画
-	uDrawGround(20);
-	//ランダムで図形描画
-	glPushMatrix();
-	glScalef(0.5, 0.5, 0.5);
-	glTranslated(0, 0.5, 0);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, start_rand_mate);
-	switch (start_rand_solid) {
-	case 0:
-		glutSolidDodecahedron();
-		break;
-	case 1:
-		glutSolidTeapot(1);
-		break;
-	case 2:
-		glutSolidCone(1, 1, 24, 24);
-		break;
-	case 3:
-		glutSolidIcosahedron();
-		break;
-	case 4:
-		glutSolidRhombicDodecahedron();
-		break;
-	case 5:
-		glutSolidTetrahedron();
-		break;
-	default:
-		uErrorOut(__FILE__, __func__, __LINE__, "表示する図形の指定ミス");
-		break;
-	}
-	glPopMatrix();
-	//ライト
-	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
-	//文字描画
-	uDrawString("Please press 'a' key to start.", 450, 100, uColor4fv_red);
-	return 0;
-}
 }
 
 //ゲーム初期化
@@ -144,18 +94,11 @@ void DisplayFunc(void) {
 	case opengl_game_main::kStartIni: //スタート画面初期化
 		//初期化
 		GameIni();
-		//カメラ位置
-		camera.TransfarAndRotateByParam(0, 300);
+		start::StartIni(&camera);
 		main_state = opengl_game_main::kStart;
-		//描画図形乱数
-		start_rand_solid = cc_util::GetRandom(0, 5);
-		start_rand_mate[0] = cc_util::GetRandom(0, 1000) / 1000.0;
-		start_rand_mate[1] = cc_util::GetRandom(0, 1000) / 1000.0;
-		start_rand_mate[2] = cc_util::GetRandom(0, 1000) / 1000.0;
-		start_rand_mate[3] = cc_util::GetRandom(0, 1000) / 1000.0;
 		break;
 	case opengl_game_main::kStart:		//スタート画面
-		if (StartMain() == -1)
+		if (start::StartMain(&camera) == -1)
 			main_state = opengl_game_main::kGameIni;
 		break;
 	case opengl_game_main::kGameIni:		//ゲーム初期化
@@ -167,8 +110,7 @@ void DisplayFunc(void) {
 			main_state = kProjectIni;
 		break;
 	default:
-		uErrorOut(__FILE__, __func__, __LINE__,
-				"不明なmain_statです. 初期状態に移行します.");
+		uErrorOut(__FILE__, __func__, __LINE__, "不明なmain_statです. 初期状態に移行します.");
 		main_state = opengl_game_main::kStartIni;
 		break;
 	}
@@ -197,12 +139,12 @@ void Resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(75.0, (double) w / (double) h, 0.1, 200.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 }
 }
 
