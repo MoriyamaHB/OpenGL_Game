@@ -10,6 +10,7 @@ void FirstInit(int argc, char *argv[]) {
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow(argv[0]);
 
+
 	//openGLイベント関数
 	glutDisplayFunc(opengl_game_main::DisplayFunc);
 	glutKeyboardFunc(input::CheckPushKey);
