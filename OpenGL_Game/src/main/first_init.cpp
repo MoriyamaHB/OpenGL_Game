@@ -21,15 +21,14 @@ void FirstInit(int argc, char *argv[]) {
 	glutTimerFunc(100, opengl_game_main::Timer, 0);
 
 	//その他openGLの設定
-	glutIgnoreKeyRepeat (GL_TRUE); //繰り返しのキー入力を無視する
+	glutIgnoreKeyRepeat(GL_TRUE); //繰り返しのキー入力を無視する
 	glClearColor(uColor4fv_sky_brue[0], uColor4fv_sky_brue[1],
-			uColor4fv_sky_brue[2], uColor4fv_sky_brue[3]);
-	glutSetCursor (GLUT_CURSOR_CROSSHAIR);
-	//塗りつぶし色を空色に設定
-	glEnable (GL_DEPTH_TEST);
-	glEnable (GL_CULL_FACE);
-	glEnable (GL_LIGHTING);
-	glEnable (GL_LIGHT0);
+			uColor4fv_sky_brue[2], uColor4fv_sky_brue[3]); //塗りつぶし色を空色に設定
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	glDisable(GL_CULL_FACE); //裏表の麺を描画
 }
 }
