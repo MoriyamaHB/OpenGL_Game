@@ -13,8 +13,7 @@ std::vector<Bullet*> bullet_;
 namespace control_bullet {
 void Init() {
 	//全要素の削除
-	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
-			itr != bullet_.end();) {
+	for (auto itr = bullet_.begin(); itr != bullet_.end();) {
 		delete (*itr);
 		itr = bullet_.erase(itr);
 	}
@@ -40,14 +39,12 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 		}
 	}
 	//更新
-	for (std::vector<Bullet*>::iterator itr_b = bullet_.begin();
-			itr_b != bullet_.end(); ++itr_b) {
+	for (auto itr_b = bullet_.begin(); itr_b != bullet_.end(); ++itr_b) {
 		(*itr_b)->Move();
 	}
 	//削除
 	//範囲外の時消滅
-	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
-			itr != bullet_.end();) {
+	for (auto itr = bullet_.begin(); itr != bullet_.end();) {
 		//プレイヤーの場所を足して考える
 		Vector3 range1 = kBulletRange1 + camera_place;
 		Vector3 range2 = kBulletRange2 + camera_place;
@@ -60,10 +57,8 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 	}
 	//隕石との当たり判定による削除
 	bool is_loop_end = false;
-	for (std::vector<Bullet*>::iterator itr_b = bullet_.begin();
-			itr_b != bullet_.end();) {
-		for (std::vector<Meteo*>::iterator itr_m =
-				control_meteo::meteo_.begin();
+	for (auto itr_b = bullet_.begin(); itr_b != bullet_.end();) {
+		for (auto itr_m = control_meteo::meteo_.begin();
 				itr_m != control_meteo::meteo_.end();) {
 			if (uIsCollisionBallAndBall((*itr_b)->get_place(),
 					(*itr_b)->get_scale(), (*itr_m)->get_place(),
@@ -94,8 +89,7 @@ void Update(Vector3 camera_place, Vector3 camera_viewpoint,
 namespace control_bullet {
 void Draw() {
 //描画
-	for (std::vector<Bullet*>::iterator itr = bullet_.begin();
-			itr != bullet_.end(); ++itr) {
+	for (auto itr = bullet_.begin(); itr != bullet_.end(); ++itr) {
 		(*itr)->Draw();
 	}
 //弾数を表示登録
