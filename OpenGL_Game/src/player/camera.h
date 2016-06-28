@@ -46,12 +46,12 @@ protected:
 	double speed_;
 	double distance_;
 	//カメラの角度限度
-	const static double kMinWrapAngleH = -PI / 2 + 0.001;
-	const static double kMaxWrapAngleH = PI / 2 - 0.001;
+	constexpr const static double kMinWrapAngleH = -PI / 2 + 0.001;
+	constexpr const static double kMaxWrapAngleH = PI / 2 - 0.001;
 	//カメラの速度関連
-	const static double kAcceleration = 0.008; //加速度
-	const static double kMaxSpeed = 1.5; //最高速度
-	const static double kMinSpeed = 0; //最低速度
+	constexpr const static double kAcceleration = 0.008; //加速度
+	constexpr const static double kMaxSpeed = 1.5; //最高速度
+	constexpr const static double kMinSpeed = 0; //最低速度
 
 	//速度をラップする
 	void WrapSpeed();

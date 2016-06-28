@@ -5,6 +5,7 @@
 #include <string.h>
 #include <vector>
 #include <math.h>
+#include <chrono>
 
 //自作ライブラリ
 #include "../util/cc_util.h"
@@ -35,3 +36,4 @@
 #include "../score/score.h"
 #include "../start/start.h"
 #include "../target/target.h"
+#include "../time/time.h"
