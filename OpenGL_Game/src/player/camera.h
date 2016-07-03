@@ -53,7 +53,7 @@ protected:
 	constexpr const static double kMaxSpeed = 1.5; //最高速度
 	constexpr const static double kMinSpeed = 0; //最低速度
 	//速度に応じて視点を遠ざける関連
-	constexpr const static double kMaxWatchDistance = 3;
+	constexpr const static double kMaxWatchDistance = 2.5;
 	constexpr const static double kMinWatchDistance = 1;
 	double distance_;//現在の距離
 
