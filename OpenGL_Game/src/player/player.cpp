@@ -43,7 +43,7 @@ void Init(Camera3D3P *c) {
 	square.Init();
 	square.set_draw_flag(true);
 	square.set_material(uMaterial4fv_red);
-	square.set_scale(0.35);
+	square.set_scale(0.25);
 	hit_meteo = 0;
 	get_target = 0;
 	die_cnt = 0;

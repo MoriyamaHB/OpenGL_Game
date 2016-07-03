@@ -30,8 +30,8 @@ int GameMain() {
 	//---------------------------    更新    ---------------------------
 
 	//カメラ
-	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.TransfarByKey(); //カメラ移動計算(キー)
+	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.SetGluLookAt(); //視点をセット
 	//隕石更新
 	control_meteo::Update(&fps, camera.GetStateCoordinates(),

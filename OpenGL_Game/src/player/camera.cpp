@@ -14,7 +14,7 @@ void Camera3D3P::InitCoordinates() {
 	angle_w_ = PI / 2;
 	angle_h_ = 0;
 	speed_ = 0;
-	distance_ = 1.5;
+	distance_ = kMinWatchDistance;
 }
 
 Camera3D3P::Camera3D3P() {
@@ -74,7 +74,7 @@ void Camera3D3P::TransfarAndRotateByMouse() {
 }
 
 //カメラ座標をパラメータから計算する(3人称視点)
-void Camera3D3P::TransfarAndRotateByParam(int dx,int dy) {
+void Camera3D3P::TransfarAndRotateByParam(int dx, int dy) {
 
 	//マウスの動きをカメラ角度に変換
 	angle_w_ += ((double) dx / CAMERA_ROTATE_PX) * 2 * PI;
@@ -101,18 +101,38 @@ void Camera3D3P::TransfarByKey() {
 	//スピード変更
 	if (input::get_keyboard_frame('w')) {
 		speed_ += kAcceleration;
+	} else {
+		speed_ -= kAcceleration;
 	}
 	if (input::get_keyboard_frame('s')) {
 		speed_ -= kAcceleration;
 	}
 
-	//スピードラップ
-	WrapSpeed();
+	WrapSpeed();	//スピードラップ
+	UpdateWatchDistance(); //カメラ距離を更新
 
-	//カメラの移動
+	//カメラの前進
 	gx_ -= speed_ * cos(angle_w_) * cos(angle_h_);
 	gz_ -= speed_ * sin(angle_w_) * cos(angle_h_);
 	gy_ -= speed_ * sin(angle_h_);
+
+	//キーによる横移動
+	if (input::get_keyboard_frame('a') >= 1) {
+		gx_ -= speed_ / 3 * cos(angle_w_ - PI / 2);
+		gz_ -= speed_ / 3 * sin(angle_w_ - PI / 2);
+	}
+	if (input::get_keyboard_frame('d') >= 1) {
+		gx_ -= speed_ / 3 * cos(angle_w_ + PI / 2);
+		gz_ -= speed_ / 3 * sin(angle_w_ + PI / 2);
+	}
+}
+
+//カメラ距離を更新
+void Camera3D3P::UpdateWatchDistance() {
+	double r = (speed_ - kMinSpeed) / kMaxSpeed;
+	distance_ = ((kMaxWatchDistance - kMinWatchDistance) * r)
+			+ kMinWatchDistance;
+	return;
 }
 
 //カメラの情報を表示（速度)
