@@ -52,7 +52,7 @@ void Draw() {
 	for (int i = 0; i < kMaxItem; i++)
 		if (item[i].flag == 1) {
 			//項目描画
-			uDrawString(item[i].str, kStartWidth,
+			uDrawString2(item[i].str, kStartWidth,
 					kStartHeight + kLineHeight * dn, item[i].color);
 			dn++;
 			//削除処理

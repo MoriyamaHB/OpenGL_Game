@@ -63,7 +63,7 @@ int StartMain(Camera3D3P *camera) {
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
 	//文字描画
-	uDrawString("Please press 'a' key to start.", 450, 100, uColor4fv_red);
+	uDrawString2("Aキーを押してください", 450, 100, uColor4fv_red);
 	return 0;
 }
 }

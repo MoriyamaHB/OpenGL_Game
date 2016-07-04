@@ -323,28 +323,28 @@ void uDrawString(const char str[], int x0, int y0, const float color[]) {
 //文字列描画(ftgl版)
 void uDrawString2(const char str[], int x0, int y0, const float color[]) {
 	u3Dto2D();
-	// 画面上にテキスト描画
-	glColor4fv(color);
-	glRasterPos2f(x0, y0);
+	// フォントのデータ
+	static FTPixmapFont* pFont; //フォント
+	unsigned long ulFontSize = 30;  //フォントサイズ
+	const static char kFilePath[256] = "font/fonts-japanese-gothic.ttf"; //フォントのパス
 	// フォントの初期化
-	static FTPixmapFont* g_pFont;
-	unsigned long g_ulFontSize = 14;  //!< フォントサイズ
-	if (!g_pFont) {
-		g_pFont = new FTPixmapFont("../font/UbuntuMono-R.ttf");
-		if (g_pFont->Error()) {
-			std::cout << "Failed to open font " << "../font/UbuntuMono-R.ttf"
-					<< std::endl;
-			delete g_pFont;
-			g_pFont = 0;
+	if (!pFont) {
+		pFont = new FTPixmapFont(kFilePath);
+		if (pFont->Error()) {
+			char es[256];
+			sprintf(es, "%sが開けません", kFilePath);
+			uErrorOut(__FILE__, __func__, __LINE__, es);
+			delete pFont;
+			pFont = 0;
 		} else {
-			g_pFont->FaceSize(g_ulFontSize);
+			pFont->FaceSize(ulFontSize);
 		}
 	}
 	// FTGLで文字列を描画
-	if (g_pFont) {
+	if (pFont) {
+		glColor4fv(color);
 		glRasterPos2f(x0, y0);
-		g_pFont->Render(str);
-		y0 += g_pFont->LineHeight();
+		pFont->Render(str);
 	}
 	u2Dto3D();
 }

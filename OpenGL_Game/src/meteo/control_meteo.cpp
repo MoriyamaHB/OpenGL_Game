@@ -89,7 +89,7 @@ void Draw() {
 	}
 	//隕石数を表示登録
 	char string[256];
-	sprintf(string, "meteo:%d", (int)meteo_.size());
+	sprintf(string, "隕石:%d", (int)meteo_.size());
 	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }

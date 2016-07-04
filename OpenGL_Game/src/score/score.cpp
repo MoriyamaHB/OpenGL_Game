@@ -17,13 +17,13 @@ void Score::Update() {
 	}
 	//各スコア表示
 	char string[256];
-	sprintf(string, "total_score: %d", total_score_);
+	sprintf(string, "合計スコア: %d", total_score_);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "near_meteo_score: %d", each_score_[kNearMeteo]);
+	sprintf(string, "かすりスコア: %d", each_score_[kNearMeteo]);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "get_target_score: %d", each_score_[kGetTarget]);
+	sprintf(string, "ターゲット獲得スコア: %d", each_score_[kGetTarget]);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "destruct_meteo: %d", each_score_[kDestructMeteo]);
+	sprintf(string, "隕石破壊スコア: %d", each_score_[kDestructMeteo]);
 	output_display::Regist(string, uColor4fv_green, 1);
 }
 

@@ -107,11 +107,11 @@ void Draw() {
 	square.Draw();
 	//ヒット情報登録
 	char string[256];
-	sprintf(string, "hit_meteo:%d", hit_meteo);
+	sprintf(string, "隕石破壊:%d", hit_meteo);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "get_target:%d", get_target);
+	sprintf(string, "ターゲット獲得:%d", get_target);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "zanki_num:%d", remaining_lives);
+	sprintf(string, "残機数:%d", remaining_lives);
 	output_display::Regist(string, uColor4fv_red, 1);
 }
 }
