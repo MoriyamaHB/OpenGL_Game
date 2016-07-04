@@ -2,10 +2,12 @@
 #define UGL_H_
 
 #include <GL/freeglut.h>
+#include <FTGL/ftgl.h>
 #include <math.h>
 #include <stdio.h>
 #include <utility>
 #include <stdarg.h>
+#include <iostream>
 
 #include "vector3.h"
 

@@ -320,6 +320,35 @@ void uDrawString(const char str[], int x0, int y0, const float color[]) {
 	u2Dto3D();
 }
 
+//文字列描画(ftgl版)
+void uDrawString2(const char str[], int x0, int y0, const float color[]) {
+	u3Dto2D();
+	// 画面上にテキスト描画
+	glColor4fv(color);
+	glRasterPos2f(x0, y0);
+	// フォントの初期化
+	static FTPixmapFont* g_pFont;
+	unsigned long g_ulFontSize = 14;  //!< フォントサイズ
+	if (!g_pFont) {
+		g_pFont = new FTPixmapFont("../font/UbuntuMono-R.ttf");
+		if (g_pFont->Error()) {
+			std::cout << "Failed to open font " << "../font/UbuntuMono-R.ttf"
+					<< std::endl;
+			delete g_pFont;
+			g_pFont = 0;
+		} else {
+			g_pFont->FaceSize(g_ulFontSize);
+		}
+	}
+	// FTGLで文字列を描画
+	if (g_pFont) {
+		glRasterPos2f(x0, y0);
+		g_pFont->Render(str);
+		y0 += g_pFont->LineHeight();
+	}
+	u2Dto3D();
+}
+
 //範囲外の時trueを返す
 bool uOutOfRange(Vector3 place, Vector3 v1, Vector3 v2) {
 	//v1が小さくなるように入れ替え

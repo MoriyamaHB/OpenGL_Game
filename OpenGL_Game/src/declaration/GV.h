@@ -1,11 +1,11 @@
 //標準ライブラリ
 #include <GL/freeglut.h>
+#include <FTGL/ftgl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
 #include <math.h>
-#include <chrono>
 
 //自作ライブラリ
 #include "../util/cc_util.h"
