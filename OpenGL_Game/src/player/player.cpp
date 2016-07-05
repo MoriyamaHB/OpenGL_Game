@@ -107,7 +107,7 @@ void Draw() {
 	square.Draw();
 	//ヒット情報登録
 	char string[256];
-	sprintf(string, "隕石破壊:%d", hit_meteo);
+	sprintf(string, "球破壊:%d", hit_meteo);
 	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "ターゲット獲得:%d", get_target);
 	output_display::Regist(string, uColor4fv_green, 1);

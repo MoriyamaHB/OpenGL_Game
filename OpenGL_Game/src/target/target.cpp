@@ -14,7 +14,7 @@ void Target::Init() {
 	//フラグ
 	set_draw_flag(true);
 	//大きさ
-	int s = cc_util::GetRandom(6, 18);
+	int s = cc_util::GetRandom(2, 5);
 	set_scale(s);
 	//スピード
 	speed_ = cc_util::GetRandom(1, 50) / 100.0;

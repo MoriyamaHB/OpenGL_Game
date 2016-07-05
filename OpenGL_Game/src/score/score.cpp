@@ -23,7 +23,7 @@ void Score::Update() {
 	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "ターゲット獲得スコア: %d", each_score_[kGetTarget]);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "隕石破壊スコア: %d", each_score_[kDestructMeteo]);
+	sprintf(string, "球破壊スコア: %d", each_score_[kDestructMeteo]);
 	output_display::Regist(string, uColor4fv_green, 1);
 }
 
