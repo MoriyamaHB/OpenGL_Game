@@ -98,14 +98,16 @@ void Camera3D3P::TransfarAndRotateByParam(int dx, int dy) {
 //qが入力されているときはここでカメラが初期化されます
 void Camera3D3P::TransfarByKey() {
 
-	//スピード変更
-	if (input::get_keyboard_frame('w')) {
-		speed_ += kAcceleration;
-	} else {
-		speed_ -= kAcceleration;
-	}
-	if (input::get_keyboard_frame('s')) {
-		speed_ -= kAcceleration;
+	if (input::get_special_keyboard_frame(GLUT_KEY_SHIFT_L) == 0) {	//シフトキーが押されていない時
+		//スピード変更
+		if (input::get_keyboard_frame('w')) {
+			speed_ += kAcceleration;
+		} else {
+			speed_ -= kAcceleration;
+		}
+		if (input::get_keyboard_frame('s')) {
+			speed_ -= kAcceleration;
+		}
 	}
 
 	WrapSpeed();	//スピードラップ

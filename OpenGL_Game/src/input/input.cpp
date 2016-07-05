@@ -44,6 +44,8 @@ void CheckPushKey(unsigned char key, int x, int y) {
 //キーボードの取得
 	if ('a' <= key && key <= 'z') {
 		keyboard[key - 'a'] = 1;
+	} else if ('A' <= key && key <= 'Z') {
+		keyboard[key - 'A'] = 1;
 	} else if (key == '\033') {
 		escape = 1;
 	}
@@ -53,9 +55,11 @@ void CheckPushKey(unsigned char key, int x, int y) {
 //OpenGLコールバック関数
 namespace input {
 void CheckUpkey(unsigned char key, int x, int y) {
-//キーボードの取得
+	//キーボードの取得
 	if ('a' <= key && key <= 'z') {
 		keyboard[key - 'a'] = 0;
+	} else if ('A' <= key && key <= 'Z') {
+		keyboard[key - 'A'] = 0;
 	} else if (key == '\033') {
 		escape = 0;
 	}
