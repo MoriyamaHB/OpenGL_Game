@@ -95,7 +95,6 @@ void Camera3D3P::TransfarAndRotateByParam(int dx, int dy) {
 }
 
 //カメラ座標をキー入力から計算する(3人称視点)
-//qが入力されているときはここでカメラが初期化されます
 void Camera3D3P::TransfarByKey() {
 
 	if (input::get_special_keyboard_frame(GLUT_KEY_SHIFT_L) == 0) {	//シフトキーが押されていない時
@@ -159,7 +158,8 @@ void Camera3D3P::WrapSpeed() {
 }
 
 //-------------------------------------------------------------------------------------------
-//カメラ座標をマウスの移動から計算する(3人称視点)
+//カメラ座標をマウスの移動から計算する(1人称視点)
+//3人称視点の動きと同期できていないため使用しないほうが良い
 void Camera3D1P::TransfarAndRotateByMouse() {
 
 	//マウス移動の取得
@@ -185,8 +185,8 @@ void Camera3D1P::TransfarAndRotateByMouse() {
 
 }
 
-//カメラ座標をキー入力から計算する(3人称視点)
-//qが入力されているときはここでカメラが初期化されます
+//カメラ座標をキー入力から計算する(1人称視点)
+//3人称視点の動きと同期できていないため使用しないほうが良い
 void Camera3D1P::TransfarByKey() {
 
 	//スピード変更

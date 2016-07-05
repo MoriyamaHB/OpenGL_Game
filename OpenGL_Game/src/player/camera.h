@@ -64,6 +64,7 @@ protected:
 };
 
 //1人称 & 自由飛行のカメラ移動計算を行います
+//3人称視点の動きと同期できていないため使用しないほうが良い
 class Camera3D1P: public Camera3D3P {
 public:
 	//カメラ移動
