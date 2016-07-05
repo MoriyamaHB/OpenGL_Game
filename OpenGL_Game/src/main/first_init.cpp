@@ -14,6 +14,8 @@ void FirstInit(int argc, char *argv[]) {
 	glutDisplayFunc(opengl_game_main::DisplayFunc);
 	glutKeyboardFunc(input::CheckPushKey);
 	glutKeyboardUpFunc(input::CheckUpkey);
+	glutSpecialFunc(input::CheckPushSpecialKey);
+	glutSpecialUpFunc(input::CheckUpSpecialkey);
 	glutPassiveMotionFunc(input::CheckMouseMotion);
 	glutMouseFunc(input::CheckMouse);
 	glutMotionFunc(input::CheckMouseMotion);

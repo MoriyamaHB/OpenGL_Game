@@ -8,6 +8,8 @@ unsigned int keyboard[26];
 unsigned int keyboard_frame[26];
 unsigned int escape;
 unsigned int escape_frame;
+unsigned int shift;
+unsigned int shift_frame;
 }
 
 //キーボードの入力フレーム数を返す
@@ -17,6 +19,18 @@ int get_keyboard_frame(unsigned char key) {
 		return keyboard_frame[key - 'a'];
 	} else if (key == '\033') {
 		return escape_frame;
+	} else {
+		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
+		return -1;
+	}
+}
+}
+
+//特殊キーの入力フレーム数を返す
+namespace input {
+int get_special_keyboard_frame(int key) {
+	if (key == GLUT_KEY_SHIFT_L) {
+		return shift_frame;
 	} else {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
@@ -45,6 +59,22 @@ void CheckUpkey(unsigned char key, int x, int y) {
 	} else if (key == '\033') {
 		escape = 0;
 	}
+}
+}
+
+//OpenGLコールバック関数
+namespace input {
+void CheckPushSpecialKey(int key, int x, int y) {
+	if (key == GLUT_KEY_SHIFT_L)
+		shift = 1;
+}
+}
+
+//OpenGLコールバック関数
+namespace input {
+void CheckUpSpecialkey(int key, int x, int y) {
+	if (key == GLUT_KEY_SHIFT_L)
+		shift = 0;
 }
 }
 
@@ -121,6 +151,10 @@ void UpdateFrame() {
 		escape_frame++;
 	else
 		escape_frame = 0;
+	if (shift)
+		shift_frame++;
+	else
+		shift_frame = 0;
 	//左マウスクリック
 	if (is_down_mouse_left_button)
 		mouse_left_button_frame++;
@@ -136,6 +170,8 @@ void Init() {
 	memset(keyboard_frame, 0, sizeof(keyboard_frame));
 	escape = 0;
 	escape_frame = 0;
+	shift = 0;
+	shift_frame = 0;
 	mouse_dx = 0;
 	mouse_dy = 0;
 	is_down_mouse_left_button = false;
