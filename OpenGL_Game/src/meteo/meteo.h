@@ -15,7 +15,7 @@ public:
 	//描画
 	void Draw() const;
 	//定数
-	constexpr const static float kAppearanceDistance = 150; //プレイヤーと隕石の出現距離,削除距離を考慮すること
+	const static float kAppearanceDistance = 150; //プレイヤーと隕石の出現距離,削除距離を考慮すること
 private:
 	//each_move_angle * speedずつ各座標軸で移動を行います
 	float speed_; //移動するスピード

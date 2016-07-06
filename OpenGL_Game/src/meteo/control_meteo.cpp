@@ -44,7 +44,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	}
 
 	//更新
-	for (auto itr = meteo_.begin(); itr != meteo_.end(); ++itr) {
+	for (std::vector<Meteo*>::iterator itr = meteo_.begin(); itr != meteo_.end(); ++itr) {
 		//プレイヤーへの当たり判定
 		double distance;
 		if (player::get_player_state() == player::PLAY) {			//プレイ中なら
@@ -67,7 +67,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//削除
 	//eraseを使うため場合分けして次のitrを決める
 	//for文でitr++すると削除した次の要素に移動できない可能性があるのでeraseの戻り値を使う
-	for (auto itr = meteo_.begin(); itr != meteo_.end();) {
+	for (std::vector<Meteo*>::iterator itr = meteo_.begin(); itr != meteo_.end();) {
 		//範囲外の時消滅
 		//プレイヤーの場所を足して考える
 		Vector3 range1 = kMeteoRange1 + camera_place;
@@ -84,7 +84,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 namespace control_meteo {
 void Draw() {
 	//描画
-	for (auto itr = meteo_.begin(); itr != meteo_.end(); ++itr) {
+	for (std::vector<Meteo*>::iterator itr = meteo_.begin(); itr != meteo_.end(); ++itr) {
 		(*itr)->Draw();
 	}
 	//隕石数を表示登録

@@ -61,7 +61,7 @@ std::vector<Target*> target_;
 namespace control_target {
 void Init() {
 	//全要素の削除
-	for (auto itr = target_.begin(); itr != target_.end();) {
+	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end();) {
 		delete (*itr);
 		itr = target_.erase(itr);
 	}
@@ -90,7 +90,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	}
 
 	//更新
-	for (auto itr = target_.begin(); itr != target_.end(); ++itr) {
+	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end(); ++itr) {
 		//プレイヤーへの当たり判定
 		if (player::get_player_state() == player::PLAY) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
@@ -110,7 +110,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 		(*itr)->Move();
 	}
 	//削除
-	for (auto itr = target_.begin(); itr != target_.end();) {
+	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end();) {
 		//範囲外の時消滅
 		//プレイヤーの場所を足して考える
 		Vector3 range1 = kMeteoRange1 + camera_place;
@@ -127,7 +127,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 namespace control_target {
 void Draw() {
 	//描画
-	for (auto itr = target_.begin(); itr != target_.end(); ++itr) {
+	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end(); ++itr) {
 		(*itr)->Draw();
 	}
 	//隕石数を表示登録
