@@ -138,7 +138,7 @@ void Camera3D3P::UpdateWatchDistance() {
 
 //カメラの情報を表示（速度)
 void Camera3D3P::DisplayInfo() const {
-	uDrawString2("スピード:", 860, 25, uColor4fv_red);
+	uDrawString2("スピード:", 845, 23, uColor4fv_red);
 	uSquareFill2D(980, 10, (int) (980 + 200 * (speed_ - kMinSpeed) / kMaxSpeed),
 			15, uColor4fv_green);
 	uSquareFill2D(980, 10, 980 + 200, 15, uColor4fv_brack);
