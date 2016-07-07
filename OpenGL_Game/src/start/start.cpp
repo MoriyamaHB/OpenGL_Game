@@ -4,7 +4,7 @@ namespace {
 int start_rand_solid;
 float start_rand_mate[4];
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
-FTPixmapFont title_font("font/crayon.ttf"); //タイトルフォント
+FTPixmapFont title_font("font/null_eng.otf"); //タイトルフォント
 const unsigned long kTitleFontSize = 150;  //タイトルフォントサイズ
 }
 
@@ -37,8 +37,8 @@ int StartMain(Camera3D3P *camera) {
 	//タイトル描画
 	u3Dto2D();
 	if (!title_font.Error()) {
-		glColor4fv(uColor4fv_red);
-		glRasterPos2f(200, 180);
+		glColor4fv(uColor4fv_purple);
+		glRasterPos2f(120, 180);
 		title_font.Render("Avoid Meteo");
 	}
 	u2Dto3D();

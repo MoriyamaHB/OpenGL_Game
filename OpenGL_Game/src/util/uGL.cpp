@@ -7,6 +7,9 @@ const float uColor4fv_red[] = { 1.0f, 0.0f, 0.0f, 1.0f }; //赤
 const float uColor4fv_green[] = { 0.0f, 1.0f, 0.0f, 1.0f }; //緑
 const float uColor4fv_blue[] = { 0.0f, 0.0f, 1.0f, 1.0f }; //青
 const float uColor4fv_sky_brue[] = { 0.61176f, 0.65490f, 0.88627f, 1.0f }; //空色
+const float uColor4fv_maroon[] = { 0.46667f, 0.27450f, 0.20784f, 1.0f }; //栗色
+const float uColor4fv_jewel_green[] = { 0.19607f, 0.80000f, 0.71372f, 1.0f }; //青竹色
+const float uColor4fv_purple[] = { 0.76862f, 0.0f, 0.80000f, 1.0f }; //紫
 
 //材質(4fv)
 const float uMaterial4fv_red[] = { 0.8, 0.2, 0.2, 1.0 }; //赤
