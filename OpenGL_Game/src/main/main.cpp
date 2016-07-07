@@ -111,7 +111,7 @@ void DisplayFunc(void) {
 			main_state = kProjectIni;
 		break;
 	default:
-		uErrorOut(__FILE__, __func__, __LINE__, "不明なmain_statです. 初期状態に移行します.");
+		uErrorOut(__FILE__, __func__, __LINE__, "不明なmain_stateです. 初期状態に移行します.");
 		main_state = opengl_game_main::kStartIni;
 		break;
 	}
