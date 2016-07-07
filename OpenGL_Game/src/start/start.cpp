@@ -4,6 +4,8 @@ namespace {
 int start_rand_solid;
 float start_rand_mate[4];
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
+FTPixmapFont title_font("font/crayon.ttf"); //タイトルフォント
+const unsigned long kTitleFontSize = 150;  //タイトルフォントサイズ
 }
 
 //ゲーム初期化
@@ -17,6 +19,12 @@ void StartIni(Camera3D3P *camera) {
 	start_rand_mate[1] = cc_util::GetRandom(0, 1000) / 1000.0;
 	start_rand_mate[2] = cc_util::GetRandom(0, 1000) / 1000.0;
 	start_rand_mate[3] = cc_util::GetRandom(0, 1000) / 1000.0;
+	// フォントの初期化
+	if (title_font.Error()) {
+		uErrorOut(__FILE__, __func__, __LINE__, "タイトルフォントが開けません");
+	} else {
+		title_font.FaceSize(kTitleFontSize);
+	}
 }
 }
 
@@ -26,6 +34,14 @@ int StartMain(Camera3D3P *camera) {
 	if (input::get_keyboard_frame('a') == 1)
 		return -1;
 
+	//タイトル描画
+	u3Dto2D();
+	if (!title_font.Error()) {
+		glColor4fv(uColor4fv_red);
+		glRasterPos2f(200, 180);
+		title_font.Render("Avoid Meteo");
+	}
+	u2Dto3D();
 	//カメラ
 	camera->TransfarAndRotateByParam(3, 0); //カメラ移動計算(マウス)
 	camera->SetGluLookAt(); //視点をセット
@@ -63,7 +79,7 @@ int StartMain(Camera3D3P *camera) {
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
 	//文字描画
-	uDrawString2("Aキーを押してください", 450, 100, uColor4fv_red);
+	uDrawString2("Aキーを押してください", 850, 760, uColor4fv_blue);
 	return 0;
 }
 }

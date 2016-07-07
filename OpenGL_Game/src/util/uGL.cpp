@@ -20,7 +20,7 @@ static int u3d_2d_flag = 0;
 
 //3D設定から2Dの設定に変更します
 //関数の最後にu2Dto3D関数で3Dに戻してください
-static void u3Dto2D() {
+void u3Dto2D() {
 	if (u3d_2d_flag != 0) {
 		uErrorOut(__FILE__, __func__, __LINE__, "正しく呼びだされていない可能性があります");
 		return;
@@ -42,7 +42,7 @@ static void u3Dto2D() {
 
 //2D設定から3Dの設定に戻す
 //u3Dto2D関数で変更した設定を戻すことを前提としています
-static void u2Dto3D() {
+void u2Dto3D() {
 	if (u3d_2d_flag != 1) {
 		uErrorOut(__FILE__, __func__, __LINE__, "正しく呼びだされていない可能性があります");
 		return;
