@@ -17,7 +17,18 @@ namespace {
 void PlaySound(opengl_game_main::MainSound sound) {
 	delete psound[sound];
 	if (sound == opengl_game_main::kGameSound)
-		psound[sound] = new Sound("sound/111.wav");	//サウンド
+		psound[sound] = new Sound("sound/whistle.wav");	//サウンド
+}
+}
+
+//サウンドを更新
+namespace {
+void UpdateSound() {
+	for (int i = 0; i < opengl_game_main::MainSoundNum; i++) {
+		if (psound[i] == NULL)
+			break;
+		psound[i]->stream();
+	}
 }
 }
 
@@ -30,7 +41,6 @@ void StopSound(void) {
 	}
 }
 }
-
 
 //ゲーム初期化
 //スタートの初期化も兼ねている
@@ -122,7 +132,7 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kStart;
 		break;
 	case opengl_game_main::kStart:		//スタート画面
-		if (start::StartMain(&camera) == -1){
+		if (start::StartMain(&camera) == -1) {
 			StopSound();
 			main_state = opengl_game_main::kGameIni;
 		}
@@ -147,6 +157,9 @@ void DisplayFunc(void) {
 	//基本描画
 	fps.Draw(10, 25); //fps登録
 	output_display::Draw(); //画面出力文字列描画
+
+	//サウンド更新
+	UpdateSound();
 
 	//ディスプレイ終了処理
 	glEnd();
