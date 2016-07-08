@@ -4,6 +4,7 @@
 namespace {
 Camera3D3P camera;
 Fps fps;
+Sound *psound[opengl_game_main::MainSoundNum]; //サウンド
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
@@ -11,7 +12,28 @@ namespace opengl_game_main {
 Score score;
 }
 
+//サウンドを鳴らす
+namespace {
+void PlaySound(opengl_game_main::MainSound sound) {
+	delete psound[sound];
+	if (sound == opengl_game_main::kGameSound)
+		psound[sound] = new Sound("sound/111.wav");	//サウンド
+}
+}
+
+//サウンドを止める
+namespace {
+void StopSound(void) {
+	for (int i = 0; i < opengl_game_main::MainSoundNum; i++) {
+		delete psound[i];
+		psound[i] = NULL;
+	}
+}
+}
+
+
 //ゲーム初期化
+//スタートの初期化も兼ねている
 namespace {
 void GameIni() {
 	control_meteo::Init();
@@ -90,6 +112,7 @@ void DisplayFunc(void) {
 		input::Init();
 		output_display::Init();
 		fps.Init();
+		StopSound();
 		main_state = kStartIni;
 		break;
 	case opengl_game_main::kStartIni: //スタート画面初期化
@@ -99,16 +122,21 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kStart;
 		break;
 	case opengl_game_main::kStart:		//スタート画面
-		if (start::StartMain(&camera) == -1)
+		if (start::StartMain(&camera) == -1){
+			StopSound();
 			main_state = opengl_game_main::kGameIni;
+		}
 		break;
 	case opengl_game_main::kGameIni:		//ゲーム初期化
 		GameIni();
+		PlaySound(opengl_game_main::kGameSound);
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
-		if (GameMain() == -1)		//ゲームメイン
+		if (GameMain() == -1) {		//ゲームメイン
 			main_state = kProjectIni;
+			StopSound();
+		}
 		break;
 	default:
 		uErrorOut(__FILE__, __func__, __LINE__, "不明なmain_stateです. 初期状態に移行します.");

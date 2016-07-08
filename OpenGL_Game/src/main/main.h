@@ -7,6 +7,9 @@ namespace opengl_game_main {
 enum MainState {
 	kProjectIni, kStartIni, kStart, kGameIni, kGame
 };
+enum MainSound {
+	kGameSound = 0, MainSoundNum
+};
 extern Score score;
 void DisplayFunc(void);
 void Resize(int w, int h);

@@ -6,10 +6,11 @@ void FirstInit(int argc, char *argv[]) {
 
 	//openGLの初期化,ウィンドウ生成
 	glutInitWindowSize(WINDOW_INI_HEIGHT, WINDOW_INI_WIDTH);
-	glutInitWindowPosition(WINDOW_INI_POSITION_X,WINDOW_INI_POSITION_Y);
+	glutInitWindowPosition(WINDOW_INI_POSITION_X, WINDOW_INI_POSITION_Y);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow(argv[0]);
+	alutInit(&argc, argv);
 
 	//openGLイベント関数
 	glutDisplayFunc(opengl_game_main::DisplayFunc);

@@ -1,6 +1,10 @@
 //標準ライブラリ
 #include <GL/freeglut.h>
 #include <FTGL/ftgl.h>
+#include <AL/alut.h>
+#include <cstdio>
+#include <stdlib.h>
+#include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,6 +38,7 @@
 #include "../player/camera.h"
 #include "../player/player.h"
 #include "../score/score.h"
+#include "../sound/sound.h"
 #include "../start/start.h"
 #include "../target/target.h"
 #include "../time/time.h"
