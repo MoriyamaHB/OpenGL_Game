@@ -103,6 +103,13 @@ int GameMain() {
 }
 }
 
+//プロジェクトで必要な終了処理
+namespace opengl_game_main{
+void ProjectFin(){
+	alutExit();
+}
+}
+
 //OpenGLコールバック関数
 namespace opengl_game_main {
 void DisplayFunc(void) {
@@ -166,8 +173,10 @@ void DisplayFunc(void) {
 	glEndList();
 	glutSwapBuffers();
 	//エスケープキーで終了
-	if (input::get_keyboard_frame('\033') == 1)
-		exit(0);
+	if (input::get_keyboard_frame('\033') == 1){
+		ProjectFin();
+		exit(1);
+	}
 	//q入力で初期状態に移行
 	if (input::get_keyboard_frame('q') == 1)
 		main_state = kProjectIni;
