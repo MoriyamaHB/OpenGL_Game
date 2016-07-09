@@ -3,9 +3,13 @@ class Sound {
 private:
 	//バッファとソース
 	ALuint buffer_, source_;
+	//フラグ
+	bool should_delete_buffer_;
 
 public:
-	Sound(const char *BGMFileName); //コンストラクタ
+	//コンストラクタ
+	Sound(const char *BGMFileName);
+	Sound(ALuint buffer);
 	void SetListener(Vector3 listener_position, Vector3 listener_direction,
 			Vector3 listener_up_vec) const; //リスナー位置設定
 	void SetListener(const Camera3D3P *camera) const; //リスナー位置設定(カメラクラスを用いる)

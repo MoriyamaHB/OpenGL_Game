@@ -3,6 +3,9 @@
 
 Sound::Sound(const char *BGMFileName) {
 
+	//デストラクタでbufferを削除するべきに設定
+	should_delete_buffer_ = true;
+
 	//有効なバッファとソース番号を取得します
 	alGenSources(1, &source_);
 
@@ -11,6 +14,40 @@ Sound::Sound(const char *BGMFileName) {
 	if (AL_NONE == buffer_) {
 		char string[256];
 		sprintf(string, "%sの読み込みに失敗しました", BGMFileName);
+		uErrorOut(__FILE__, __func__, __LINE__, string);
+		exit(1);	//読み込みが失敗したら終了
+	}
+
+	//ソースとバッファを結び付けます
+	alSourcei(source_, AL_BUFFER, buffer_);
+
+	// リスナーの位置(x, y, z)
+	alListener3f(AL_POSITION, 0.0, 0.0, 0.0);
+
+	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
+	float vec[6] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
+	alListenerfv(AL_ORIENTATION, vec);
+
+	//音源の位置
+	alSource3f(source_, AL_POSITION, 0.0, 0.0, 0.0);
+
+}
+
+//多くのSoundクラスを生成したり、処理中に生成する場合に,
+//バッファから読みこめば軽くできるかどうかわからないが作っておく
+Sound::Sound(ALuint buffer) {
+
+	//デストラクタでbufferを削除しないべきに設定
+	should_delete_buffer_ = false;
+
+	//有効なバッファとソース番号を取得します
+	alGenSources(1, &source_);
+
+	//bufferから読み込み
+	buffer_ = buffer; //既存のbufferから読み込み
+	if (AL_NONE == buffer_) {
+		char string[256];
+		sprintf(string, "bufferの読み込みに失敗しました");
 		uErrorOut(__FILE__, __func__, __LINE__, string);
 		exit(1);	//読み込みが失敗したら終了
 	}
@@ -84,6 +121,7 @@ Sound::~Sound() {
 	alSourcei(source_, AL_BUFFER, 0);
 
 	//終了
-	alDeleteBuffers(1, &buffer_);
+	if (should_delete_buffer_)
+		alDeleteBuffers(1, &buffer_);
 	alDeleteSources(1, &source_);
 }

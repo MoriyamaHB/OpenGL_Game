@@ -16,8 +16,9 @@ Score score;
 namespace {
 void PlaySound(opengl_game_main::MainSound sound) {
 	delete psound[sound];
-	if (sound == opengl_game_main::kGameSound)
+	if (sound == opengl_game_main::kGameSound) {
 		psound[sound] = new Sound("sound/111.wav");	//サウンド
+	}
 }
 }
 
