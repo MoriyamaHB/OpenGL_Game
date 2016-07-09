@@ -84,7 +84,7 @@ void HitMeteo() {
 		die_cnt = now_frame_cnt;
 		camera->set_speed(0);
 		remaining_lives--;
-		if (remaining_lives < 0) { //残機がマイナスなら
+		if (remaining_lives <= 0) { //残機が0以下なら
 			player_state = FIN;
 			square.set_draw_flag(false);
 		}

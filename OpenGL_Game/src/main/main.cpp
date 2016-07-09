@@ -5,6 +5,7 @@ namespace {
 Camera3D3P camera;
 Fps fps;
 Sound *pbgm[opengl_game_main::MainBgmNum]; //Bgm
+LimitedTime ltime;//制限時間
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
@@ -45,7 +46,6 @@ void StopBgm(void) {
 }
 
 //ゲーム初期化
-//スタートの初期化も兼ねている
 namespace {
 void GameIni() {
 	control_meteo::Init();
@@ -54,6 +54,7 @@ void GameIni() {
 	camera.InitCoordinates();
 	player::Init(&camera);
 	opengl_game_main::score.Init();
+	ltime.Init(60);//制限時間を設定
 }
 }
 
@@ -83,6 +84,8 @@ int GameMain() {
 			return -1;
 	//スコア更新
 	opengl_game_main::score.Update();
+	//制限時間更新
+	ltime.Update();
 
 	//---------------------------    描画    ---------------------------
 
@@ -100,6 +103,8 @@ int GameMain() {
 	player::Draw();
 	//スコア描画
 	opengl_game_main::score.Draw();
+	//制限時間描画
+	ltime.Draw();
 
 	return 0;
 }
@@ -137,7 +142,12 @@ void DisplayFunc(void) {
 		break;
 	case opengl_game_main::kStartIni: //スタート画面初期化
 		//初期化
-		GameIni();
+		control_meteo::Init();
+		control_target::Init();
+		control_bullet::Init();
+		camera.InitCoordinates();
+		player::Init(&camera);
+		opengl_game_main::score.Init();
 		start::StartIni(&camera);
 		main_state = opengl_game_main::kStart;
 		break;

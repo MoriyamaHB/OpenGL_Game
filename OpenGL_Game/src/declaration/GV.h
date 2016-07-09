@@ -10,6 +10,7 @@
 #include <string.h>
 #include <vector>
 #include <math.h>
+#include <time.h>
 
 //自作ライブラリ
 #include "../util/cc_util.h"
