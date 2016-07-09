@@ -31,6 +31,11 @@ Vector3 Camera3D3P::GetStateCoordinates() const {
 	return Vector3(x_, y_, z_);
 }
 
+//カメラ上方向をVector3クラスで返します
+Vector3 Camera3D3P::GetStateUpCoordinates() const {
+	return Vector3(ux_, uy_, uz_);
+}
+
 //カメラ角度をgetする
 void Camera3D3P::GetAngle(double *angle_w, double *angle_h) const {
 	*angle_w = angle_w_;

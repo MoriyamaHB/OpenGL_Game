@@ -32,10 +32,13 @@ Sound::Sound(const char *BGMFileName) {
 
 //リスナーの座標をセットする
 void Sound::SetListener(Vector3 listener_position, Vector3 listener_direction,
-		Vector3 listener_up_vec) {
+		Vector3 listener_up_vec) const {
 	// リスナーの位置(x, y, z)
 	alListener3f(AL_POSITION, listener_position.x, listener_position.y,
 			listener_position.z);
+
+	//リスナーの向きを計算(視点位置から現在地を引き算)
+	listener_direction -= listener_position;
 
 	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
 	float vec[6] = { listener_direction.x, listener_direction.y,
@@ -44,15 +47,22 @@ void Sound::SetListener(Vector3 listener_position, Vector3 listener_direction,
 	alListenerfv(AL_ORIENTATION, vec);
 }
 
+//リスナー位置設定(カメラクラスを用いる)
+void Sound::SetListener(const Camera3D3P *camera) const {
+	SetListener(camera->GetStateCoordinates(),
+			camera->GetStateWatchCoordinates(),
+			camera->GetStateUpCoordinates());
+}
+
 //音源座標を設定する
-void Sound::SetSource(Vector3 source_position) {
+void Sound::SetSource(Vector3 source_position) const {
 	alSource3f(source_, AL_POSITION, source_position.x, source_position.y,
 			source_position.z);
 }
 
 //停止していたら再生(bgmに用いる)
 //ループしたい時に毎フレーム呼び出す
-void Sound::Stream() {
+void Sound::Stream() const {
 	ALint state;
 	if (alGetSourcei(source_, AL_SOURCE_STATE, &state), state != AL_PLAYING) {
 		alSourcePlay(source_);
@@ -60,7 +70,7 @@ void Sound::Stream() {
 }
 
 //再度最初から再生
-void Sound::Play() {
+void Sound::Play() const {
 	alSourcePlay(source_);
 }
 

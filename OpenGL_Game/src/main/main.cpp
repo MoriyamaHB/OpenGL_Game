@@ -28,6 +28,7 @@ void UpdateSound() {
 		if (psound[i] == NULL)
 			break;
 		psound[i]->Stream();
+		psound[i]->SetListener(&camera);
 	}
 }
 }

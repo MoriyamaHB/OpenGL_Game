@@ -7,9 +7,10 @@ private:
 public:
 	Sound(const char *BGMFileName); //コンストラクタ
 	void SetListener(Vector3 listener_position, Vector3 listener_direction,
-			Vector3 listener_up_vec);//リスナー位置設定
-	void SetSource(Vector3 source_position);//音源位置設定
-	void Stream();	//毎フレーム呼ぶと音源がループする
-	void Play();	//呼び出すと再度最初から再生する
+			Vector3 listener_up_vec) const; //リスナー位置設定
+	void SetListener(const Camera3D3P *camera) const; //リスナー位置設定(カメラクラスを用いる)
+	void SetSource(Vector3 source_position) const; //音源位置設定
+	void Stream() const;	//毎フレーム呼ぶと音源がループする
+	void Play() const;	//呼び出すと再度最初から再生する
 	~Sound();	//デストラクタ
 };

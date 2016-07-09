@@ -14,6 +14,7 @@ public:
 	//getter
 	Vector3 GetStateWatchCoordinates() const;
 	Vector3 GetStateCoordinates() const;
+	Vector3 GetStateUpCoordinates() const;
 	void GetAngle(double *angle_w, double *angle_h) const;
 	double get_speed() const;
 
