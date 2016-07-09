@@ -104,9 +104,9 @@ int GameMain() {
 }
 
 //プロジェクトで必要な終了処理
-namespace opengl_game_main{
-void ProjectFin(){
-	StopSound();//音を削除
+namespace opengl_game_main {
+void ProjectFin() {
+	StopSound();	//音を削除
 	alutExit();
 }
 }
@@ -174,7 +174,7 @@ void DisplayFunc(void) {
 	glEndList();
 	glutSwapBuffers();
 	//エスケープキーで終了
-	if (input::get_keyboard_frame('\033') == 1){
+	if (input::get_keyboard_frame('\033') == 1) {
 		ProjectFin();
 		exit(1);
 	}

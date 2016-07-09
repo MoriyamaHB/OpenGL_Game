@@ -25,6 +25,9 @@ Sound::Sound(const char *BGMFileName) {
 	float vec[6] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
 	alListenerfv(AL_ORIENTATION, vec);
 
+	//音源の位置
+	alSource3f(source_, AL_POSITION, 0.0, 0.0, 0.0);
+
 }
 
 //リスナーの座標をセットする
