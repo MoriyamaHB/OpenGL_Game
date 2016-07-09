@@ -10,6 +10,8 @@ void FirstInit(int argc, char *argv[]) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow(argv[0]);
+
+	//alutの初期化
 	alutInit(&argc, argv);
 
 	//openGLイベント関数

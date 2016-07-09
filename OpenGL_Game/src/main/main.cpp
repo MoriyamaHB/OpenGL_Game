@@ -17,7 +17,7 @@ namespace {
 void PlaySound(opengl_game_main::MainSound sound) {
 	delete psound[sound];
 	if (sound == opengl_game_main::kGameSound)
-		psound[sound] = new Sound("sound/whistle.wav");	//サウンド
+		psound[sound] = new Sound("sound/111.wav");	//サウンド
 }
 }
 
@@ -27,7 +27,7 @@ void UpdateSound() {
 	for (int i = 0; i < opengl_game_main::MainSoundNum; i++) {
 		if (psound[i] == NULL)
 			break;
-		psound[i]->stream();
+		psound[i]->Stream();
 	}
 }
 }
@@ -106,6 +106,7 @@ int GameMain() {
 //プロジェクトで必要な終了処理
 namespace opengl_game_main{
 void ProjectFin(){
+	StopSound();//音を削除
 	alutExit();
 }
 }
