@@ -141,7 +141,6 @@ void DisplayFunc(void) {
 		main_state = kStartIni;
 		break;
 	case opengl_game_main::kStartIni: //スタート画面初期化
-		//初期化
 		control_meteo::Init();
 		control_target::Init();
 		control_bullet::Init();
@@ -163,7 +162,7 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
-		if (GameMain() == -1) {		//ゲームメイン
+		if (GameMain() == -1) {
 			main_state = kProjectIni;
 			StopBgm();
 		}
