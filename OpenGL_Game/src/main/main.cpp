@@ -4,7 +4,7 @@
 namespace {
 Camera3D3P camera;
 Fps fps;
-Sound *psound[opengl_game_main::MainSoundNum]; //サウンド
+Sound *pbgm[opengl_game_main::MainBgmNum]; //Bgm
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
@@ -12,34 +12,34 @@ namespace opengl_game_main {
 Score score;
 }
 
-//サウンドを鳴らす
+//Bgmを鳴らす
 namespace {
-void PlaySound(opengl_game_main::MainSound sound) {
-	delete psound[sound];
-	if (sound == opengl_game_main::kGameSound) {
-		psound[sound] = new Sound("sound/111.wav");	//サウンド
+void PlayBgm(opengl_game_main::MainBgm sound) {
+	delete pbgm[sound];
+	if (sound == opengl_game_main::kGameBgm) {
+		pbgm[sound] = new Sound("sound/111.wav");	//Bgm
 	}
 }
 }
 
-//サウンドを更新
+//Bgmを更新
 namespace {
-void UpdateSound() {
-	for (int i = 0; i < opengl_game_main::MainSoundNum; i++) {
-		if (psound[i] == NULL)
+void UpdateBgm() {
+	for (int i = 0; i < opengl_game_main::MainBgmNum; i++) {
+		if (pbgm[i] == NULL)
 			break;
-		psound[i]->Stream();
-		psound[i]->SetListener(&camera);
+		pbgm[i]->Stream();
+		pbgm[i]->SetListener(&camera);
 	}
 }
 }
 
-//サウンドを止める
+//Bgmを止める
 namespace {
-void StopSound(void) {
-	for (int i = 0; i < opengl_game_main::MainSoundNum; i++) {
-		delete psound[i];
-		psound[i] = NULL;
+void StopBgm(void) {
+	for (int i = 0; i < opengl_game_main::MainBgmNum; i++) {
+		delete pbgm[i];
+		pbgm[i] = NULL;
 	}
 }
 }
@@ -108,7 +108,7 @@ int GameMain() {
 //プロジェクトで必要な終了処理
 namespace opengl_game_main {
 void ProjectFin() {
-	StopSound();	//音を削除
+	StopBgm();	//Bgmを削除
 	alutExit();
 }
 }
@@ -132,7 +132,7 @@ void DisplayFunc(void) {
 		input::Init();
 		output_display::Init();
 		fps.Init();
-		StopSound();
+		StopBgm();
 		main_state = kStartIni;
 		break;
 	case opengl_game_main::kStartIni: //スタート画面初期化
@@ -143,19 +143,19 @@ void DisplayFunc(void) {
 		break;
 	case opengl_game_main::kStart:		//スタート画面
 		if (start::StartMain(&camera) == -1) {
-			StopSound();
+			StopBgm();
 			main_state = opengl_game_main::kGameIni;
 		}
 		break;
 	case opengl_game_main::kGameIni:		//ゲーム初期化
 		GameIni();
-		PlaySound(opengl_game_main::kGameSound);
+		PlayBgm(opengl_game_main::kGameBgm);
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
 		if (GameMain() == -1) {		//ゲームメイン
 			main_state = kProjectIni;
-			StopSound();
+			StopBgm();
 		}
 		break;
 	default:
@@ -168,8 +168,8 @@ void DisplayFunc(void) {
 	fps.Draw(10, 25); //fps登録
 	output_display::Draw(); //画面出力文字列描画
 
-	//サウンド更新
-	UpdateSound();
+	//Bgm更新
+	UpdateBgm();
 
 	//ディスプレイ終了処理
 	glEnd();
