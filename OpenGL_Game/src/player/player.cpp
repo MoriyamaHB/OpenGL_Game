@@ -101,10 +101,13 @@ void HitMeteo() {
 }
 
 //プレイヤの状態をゲーム終了に設定
-namespace player{
-void SetPlayerStateFin(){
+namespace player {
+void SetPlayerStateFin() {
 	player_state = FIN;
 	square.set_draw_flag(false);
+	//残り残機数分をスコアに加算
+	opengl_game_main::score.set_score(4000 * remaining_lives,
+			Score::kRemainingLives);
 }
 }
 

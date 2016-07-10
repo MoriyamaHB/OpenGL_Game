@@ -42,6 +42,13 @@ int Score::get_score(Score::ScoreType st) const {
 	return -1;
 }
 
+void Score::set_score(int set_para, Score::ScoreType st) {
+	if (0 <= st && st < kCount)
+		each_score_[st] = set_para;
+	else
+		uErrorOut(__FILE__, __func__, __LINE__, "存在しないスコアです");
+}
+
 void Score::add_score(int add_para, Score::ScoreType st) {
 	if (0 <= st && st < kCount)
 		each_score_[st] += add_para;
