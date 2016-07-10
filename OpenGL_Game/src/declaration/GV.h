@@ -40,6 +40,7 @@
 #include "../player/player.h"
 #include "../score/score.h"
 #include "../sound/sound.h"
+#include "../sound/bgm.h"
 #include "../start/start.h"
 #include "../target/target.h"
 #include "../time/time.h"

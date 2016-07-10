@@ -10,8 +10,8 @@ int DrawGameResult();
 namespace {
 Camera3D3P camera;
 Fps fps;
-Sound *pbgm[opengl_game_main::MainBgmNum]; //Bgm
 LimitedTime ltime; //制限時間
+Bgm bgm;
 bool can_draw_game_result;
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
@@ -19,37 +19,6 @@ const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 //グローバル変数
 namespace opengl_game_main {
 Score score;
-}
-
-//Bgmを鳴らす
-namespace {
-void PlayBgm(opengl_game_main::MainBgm sound) {
-	delete pbgm[sound];
-	if (sound == opengl_game_main::kGameBgm) {
-		pbgm[sound] = new Sound("sound/111.wav");	//Bgm
-	}
-}
-}
-
-//Bgmを更新
-namespace {
-void UpdateBgm() {
-	for (int i = 0; i < opengl_game_main::MainBgmNum; i++) {
-		if (pbgm[i] == NULL)
-			break;
-		pbgm[i]->Stream();
-	}
-}
-}
-
-//Bgmを止める
-namespace {
-void StopBgm(void) {
-	for (int i = 0; i < opengl_game_main::MainBgmNum; i++) {
-		delete pbgm[i];
-		pbgm[i] = NULL;
-	}
-}
 }
 
 //ゲーム初期化
@@ -138,7 +107,7 @@ int DrawGameResult() {
 //プロジェクトで必要な終了処理
 namespace opengl_game_main {
 void ProjectFin() {
-	StopBgm();	//Bgmを削除
+	bgm.Stop();	//Bgmを削除
 	control_bullet::Fin();	//効果音削除
 	player::Fin();
 	alutExit();
@@ -164,7 +133,7 @@ void DisplayFunc(void) {
 		input::Init();
 		output_display::Init();
 		fps.Init();
-		StopBgm();
+		bgm.Stop();
 		main_state = kStartIni;
 		break;
 	case opengl_game_main::kStartIni: //スタート画面初期化
@@ -179,19 +148,19 @@ void DisplayFunc(void) {
 		break;
 	case opengl_game_main::kStart:		//スタート画面
 		if (start::StartMain(&camera) == -1) {
-			StopBgm();
+			bgm.Stop();
 			main_state = opengl_game_main::kGameIni;
 		}
 		break;
 	case opengl_game_main::kGameIni:		//ゲーム初期化
 		GameIni();
-		PlayBgm(opengl_game_main::kGameBgm);
+		bgm.Play(Bgm::kGameBgm);
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
 		if (GameMain() == -1) {
 			main_state = kProjectIni;
-			StopBgm();
+			bgm.Stop();
 		}
 		break;
 	default:
@@ -205,7 +174,7 @@ void DisplayFunc(void) {
 	output_display::Draw(); //画面出力文字列描画
 
 	//Bgm更新
-	UpdateBgm();
+	bgm.Update();
 
 	//Soundクラスのリスナー位置を更新
 	Sound::SetListener(&camera);
