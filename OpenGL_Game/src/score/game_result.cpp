@@ -37,15 +37,15 @@ const char* GameResult::GetRating(int score) const {
 		return "A-";
 	else if (score >= 30000)
 		return "B+";
-	else if (score > 25000)
+	else if (score >= 25000)
 		return "B";
-	else if (score > 20000)
+	else if (score >= 20000)
 		return "B-";
-	else if (score > 15000)
+	else if (score >= 15000)
 		return "C";
-	else if (score > 10000)
+	else if (score >= 10000)
 		return "D";
-	else if (score > 5000)
+	else if (score >= 5000)
 		return "E";
 	else
 		return "F";
