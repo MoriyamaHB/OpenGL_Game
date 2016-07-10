@@ -39,6 +39,7 @@
 #include "../player/camera.h"
 #include "../player/player.h"
 #include "../score/score.h"
+#include "../score/game_result.h"
 #include "../sound/sound.h"
 #include "../sound/bgm.h"
 #include "../start/start.h"

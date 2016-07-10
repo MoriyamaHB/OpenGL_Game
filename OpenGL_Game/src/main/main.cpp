@@ -1,17 +1,13 @@
 #define GLOBAL_INSTANCE
 #include "../declaration/GV.h"
 
-//プロトタイプ宣言
-namespace {
-int DrawGameResult();
-}
-
 //staticグローバル変数
 namespace {
 Camera3D3P camera;
 Fps fps;
 LimitedTime ltime; //制限時間
 Bgm bgm;
+GameResult game_result; //ゲーム結果
 bool can_draw_game_result;
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
@@ -86,20 +82,11 @@ int GameMain() {
 
 	//結果を描画
 	if (can_draw_game_result) {
-		if (DrawGameResult() == -1)
+		if (game_result.Update() == -1)//更新
 			return -1;	//ゲーム終了
+		game_result.Draw();//描画
 	}
 
-	return 0;
-}
-}
-
-//結果出力
-namespace {
-int DrawGameResult() {
-	printf("結果\n");
-	if (input::get_keyboard_frame(13) == 1)
-		return -1;
 	return 0;
 }
 }
