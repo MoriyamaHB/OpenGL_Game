@@ -74,7 +74,6 @@ void Update(const Camera3D3P *camera) {
 					(*itr_b)->get_scale(), (*itr_m)->get_place(),
 					(*itr_m)->get_scale(), NULL)) {			//当たっていたら
 				//効果音を鳴らす
-				bullet_to_meteo_se->SetListener(camera);
 				bullet_to_meteo_se->SetSource((*itr_b)->get_place());
 				bullet_to_meteo_se->Play();
 				//削除

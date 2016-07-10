@@ -13,6 +13,7 @@ int Update(Vector3 p, int now_cnt); //更新
 void HitMeteo(); //隕石があたった時に呼び出す
 void HitTarget(); //ターゲットがあたった時に呼び出す
 void Draw(); //描画
+void Fin(); //終了処理
 }
 
 #endif

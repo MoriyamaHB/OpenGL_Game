@@ -17,16 +17,8 @@ Sound::Sound(const char *BGMFileName) {
 		uErrorOut(__FILE__, __func__, __LINE__, string);
 		exit(1);	//読み込みが失敗したら終了
 	}
-
 	//ソースとバッファを結び付けます
 	alSourcei(source_, AL_BUFFER, buffer_);
-
-	// リスナーの位置(x, y, z)
-	alListener3f(AL_POSITION, 0.0, 0.0, 0.0);
-
-	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
-	float vec[6] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
-	alListenerfv(AL_ORIENTATION, vec);
 
 	//音源の位置
 	alSource3f(source_, AL_POSITION, 0.0, 0.0, 0.0);
@@ -55,46 +47,23 @@ Sound::Sound(ALuint buffer) {
 	//ソースとバッファを結び付けます
 	alSourcei(source_, AL_BUFFER, buffer_);
 
-	// リスナーの位置(x, y, z)
-	alListener3f(AL_POSITION, 0.0, 0.0, 0.0);
-
-	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
-	float vec[6] = { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 };
-	alListenerfv(AL_ORIENTATION, vec);
-
 	//音源の位置
 	alSource3f(source_, AL_POSITION, 0.0, 0.0, 0.0);
 
-}
-
-//リスナーの座標をセットする
-void Sound::SetListener(Vector3 listener_position, Vector3 listener_direction,
-		Vector3 listener_up_vec) const {
-	// リスナーの位置(x, y, z)
-	alListener3f(AL_POSITION, listener_position.x, listener_position.y,
-			listener_position.z);
-
-	//リスナーの向きを計算(視点位置から現在地を引き算)
-	listener_direction -= listener_position;
-
-	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
-	float vec[6] = { listener_direction.x, listener_direction.y,
-			listener_direction.z, listener_up_vec.x, listener_up_vec.y,
-			listener_up_vec.z };
-	alListenerfv(AL_ORIENTATION, vec);
-}
-
-//リスナー位置設定(カメラクラスを用いる)
-void Sound::SetListener(const Camera3D3P *camera) const {
-	SetListener(camera->GetStateCoordinates(),
-			camera->GetStateWatchCoordinates(),
-			camera->GetStateUpCoordinates());
 }
 
 //音源座標を設定する
 void Sound::SetSource(Vector3 source_position) const {
 	alSource3f(source_, AL_POSITION, source_position.x, source_position.y,
 			source_position.z);
+}
+
+//音源座標をリスナーと同じ場所に設定
+//再生する瞬間だけでなく常に同期するために、毎フレーム呼び出すことを推奨
+void Sound::SetSourceToListener() {
+	ALfloat x, y, z;
+	alGetListener3f(AL_POSITION, &x, &y, &z);
+	alSource3f(source_, AL_POSITION, x, y, z);
 }
 
 //停止していたら再生(bgmに用いる)
@@ -124,4 +93,32 @@ Sound::~Sound() {
 	if (should_delete_buffer_)
 		alDeleteBuffers(1, &buffer_);
 	alDeleteSources(1, &source_);
+}
+
+///////////////////// static ////////////////////////////
+
+//リスナーの座標をセットする
+//ソース別ではないのでどこかで一度呼べば良い
+void Sound::SetListener(Vector3 listener_position, Vector3 listener_direction,
+		Vector3 listener_up_vec) {
+	// リスナーの位置(x, y, z)
+	alListener3f(AL_POSITION, listener_position.x, listener_position.y,
+			listener_position.z);
+
+	//リスナーの向きを計算(視点位置から現在地を引き算)
+	listener_direction -= listener_position;
+
+	// リスナーの向き(x, y, z)とUPベクトル(x, y, z)
+	float vec[6] = { listener_direction.x, listener_direction.y,
+			listener_direction.z, listener_up_vec.x, listener_up_vec.y,
+			listener_up_vec.z };
+	alListenerfv(AL_ORIENTATION, vec);
+}
+
+//リスナー位置設定(カメラクラスを用いる)
+//ソース別ではないのでどこかで一度呼べば良い
+void Sound::SetListener(const Camera3D3P *camera) {
+	SetListener(camera->GetStateCoordinates(),
+			camera->GetStateWatchCoordinates(),
+			camera->GetStateUpCoordinates());
 }

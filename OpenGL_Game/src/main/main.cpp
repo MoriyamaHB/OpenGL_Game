@@ -30,7 +30,6 @@ void UpdateBgm() {
 		if (pbgm[i] == NULL)
 			break;
 		pbgm[i]->Stream();
-		pbgm[i]->SetListener(&camera);
 	}
 }
 }
@@ -114,6 +113,7 @@ namespace opengl_game_main {
 void ProjectFin() {
 	StopBgm();	//Bgmを削除
 	control_bullet::Fin();	//効果音削除
+	player::Fin();
 	alutExit();
 }
 }
@@ -179,6 +179,9 @@ void DisplayFunc(void) {
 
 	//Bgm更新
 	UpdateBgm();
+
+	//Soundクラスのリスナー位置を更新
+	Sound::SetListener(&camera);
 
 	//ディスプレイ終了処理
 	glEnd();

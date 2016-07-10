@@ -2,6 +2,7 @@
 
 namespace {
 Camera3D3P *camera;
+Sound *player_die_se = NULL;
 Square square; //playerの四角
 int hit_meteo; //隕石衝突回数
 int get_target; //ターゲット獲得数
@@ -38,6 +39,8 @@ PlayerState get_player_state() {
 //初期化
 namespace player {
 void Init(Camera3D3P *c) {
+	if (player_die_se == NULL)
+		player_die_se = new Sound("sound/player_die.wav"); //効果音読み込み
 	camera = c;
 	player_state = PLAY;
 	square.Init();
@@ -57,6 +60,8 @@ namespace player {
 int Update(Vector3 p, int now_cnt) {
 	now_frame_cnt = now_cnt; //カウント更新
 	square.Move(p); //移動
+	//効果音の場所をリスナー位置に同期
+	player_die_se->SetSourceToListener();
 	//die中
 	if (player_state == DIE) {
 		//点滅処理
@@ -68,7 +73,8 @@ int Update(Vector3 p, int now_cnt) {
 			square.set_draw_flag(true);
 		}
 	}
-	if (player_state == FIN) {	//ゲーム終了時
+	//ゲーム終了時
+	if (player_state == FIN) {
 		return -1;
 	}
 	return 0;
@@ -84,6 +90,8 @@ void HitMeteo() {
 		die_cnt = now_frame_cnt;
 		camera->set_speed(0);
 		remaining_lives--;
+		//効果音再生
+		player_die_se->Play();
 		if (remaining_lives <= 0) { //残機が0以下なら
 			player_state = FIN;
 			square.set_draw_flag(false);
@@ -113,6 +121,13 @@ void Draw() {
 	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "残機数:%d", remaining_lives);
 	output_display::Regist(string, uColor4fv_red, 1);
+}
+}
+
+//終了処理
+namespace player {
+void Fin() {
+	delete player_die_se; //効果音削除
 }
 }
 
