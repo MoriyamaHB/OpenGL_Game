@@ -77,9 +77,12 @@ void Update(const Camera3D3P *camera) {
 				bullet_to_meteo_se->SetSource((*itr_b)->get_place());
 				bullet_to_meteo_se->Play();
 				//削除
-				opengl_game_main::score.add_score(
-						(int) (kDestructMeteoScoreFactor * (*itr_m)->get_scale()),
-						Score::kDestructMeteo);	//スコア加算
+				if (player::get_player_state() == player::DIE
+						|| player::get_player_state() == player::PLAY)//プレイ中or死亡中なら
+					opengl_game_main::score.add_score(
+							(int) (kDestructMeteoScoreFactor
+									* (*itr_m)->get_scale()),
+							Score::kDestructMeteo);	//スコア加算
 				delete (*itr_m);
 				delete (*itr_b);
 				itr_m = control_meteo::meteo_.erase(itr_m);
@@ -113,8 +116,8 @@ void Draw() {
 }
 }
 
-namespace control_bullet{
-void Fin(){
+namespace control_bullet {
+void Fin() {
 	//効果音削除
 	delete bullet_to_meteo_se;
 }

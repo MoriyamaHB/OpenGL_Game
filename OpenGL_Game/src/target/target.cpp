@@ -61,7 +61,8 @@ std::vector<Target*> target_;
 namespace control_target {
 void Init() {
 	//全要素の削除
-	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end();) {
+	for (std::vector<Target*>::iterator itr = target_.begin();
+			itr != target_.end();) {
 		delete (*itr);
 		itr = target_.erase(itr);
 	}
@@ -71,26 +72,29 @@ void Init() {
 namespace control_target {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
-	if (fps->GetFrameCount() % 45 == 0) { //登録フレームである
-		if ((int) target_.size() < kMaxTargetNum) { //最大数を下回っている
-			//登録場所を計算
-			//視点の先の場所を計算
-			Vector3 register_place = 100 * (camera_viewpoint - camera_place)
-					+ camera_place;
-			//乱数によりバラけさせる
-			register_place.x += cc_util::GetRandom(-20, 20);
-			register_place.y += cc_util::GetRandom(-20, 20);
-			register_place.z += cc_util::GetRandom(-20, 20);
-			//毎フレームの移動角度(3座標)を計算
-			Vector3 each_move_angle = camera_place - camera_viewpoint;
-			//登録
-			Target *m = new Target(register_place, each_move_angle);
-			target_.push_back(m);
+	if (player::get_player_state() != player::FIN) { //終了後ではない
+		if (fps->GetFrameCount() % 45 == 0) { //登録フレームである
+			if ((int) target_.size() < kMaxTargetNum) { //最大数を下回っている
+				//登録場所を計算
+				//視点の先の場所を計算
+				Vector3 register_place = 100 * (camera_viewpoint - camera_place)
+						+ camera_place;
+				//乱数によりバラけさせる
+				register_place.x += cc_util::GetRandom(-20, 20);
+				register_place.y += cc_util::GetRandom(-20, 20);
+				register_place.z += cc_util::GetRandom(-20, 20);
+				//毎フレームの移動角度(3座標)を計算
+				Vector3 each_move_angle = camera_place - camera_viewpoint;
+				//登録
+				Target *m = new Target(register_place, each_move_angle);
+				target_.push_back(m);
+			}
 		}
 	}
 
 	//更新
-	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end(); ++itr) {
+	for (std::vector<Target*>::iterator itr = target_.begin();
+			itr != target_.end(); ++itr) {
 		//プレイヤーへの当たり判定
 		if (player::get_player_state() == player::PLAY) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
@@ -110,7 +114,8 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 		(*itr)->Move();
 	}
 	//削除
-	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end();) {
+	for (std::vector<Target*>::iterator itr = target_.begin();
+			itr != target_.end();) {
 		//範囲外の時消滅
 		//プレイヤーの場所を足して考える
 		Vector3 range1 = kMeteoRange1 + camera_place;
@@ -127,12 +132,13 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 namespace control_target {
 void Draw() {
 	//描画
-	for (std::vector<Target*>::iterator itr = target_.begin(); itr != target_.end(); ++itr) {
+	for (std::vector<Target*>::iterator itr = target_.begin();
+			itr != target_.end(); ++itr) {
 		(*itr)->Draw();
 	}
 	//隕石数を表示登録
 	char string[256];
-	sprintf(string, "ターゲット:%d", (int)target_.size());
+	sprintf(string, "ターゲット:%d", (int) target_.size());
 	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }

@@ -22,7 +22,7 @@ GameResult::GameResult() {
 }
 
 //更新
-int GameResult::Update() {
+int GameResult::Update() const {
 	if (input::get_keyboard_frame(13)) { //エンターキーが押されたら
 		return -1;
 	}
@@ -30,17 +30,51 @@ int GameResult::Update() {
 }
 
 //描画
-void GameResult::Draw() {
+void GameResult::Draw() const {
 	if (pFont->Error())
 		return;
 	u3Dto2D();
+	char string[256];
 
 	//ゲーム結果描画開始
-	glColor4fv(uColor4fv_green);
-	glRasterPos2f(400, 200);
-	pFont->Render("ゲーム結果");
+	glColor4fv(uColor4fv_red);
+	glRasterPos2f(x0, y0);
+	pFont->Render("<ゲーム結果>");
 
-
+	//ターゲット獲得スコア
+	glColor4fv(uColor4fv_blue);
+	glRasterPos2f(x0, y0 + kFontSize + kCharSpace);
+	sprintf(string, "ターゲット獲得スコア : %d",
+			opengl_game_main::score.get_score(Score::kGetTarget));
+	pFont->Render(string);
+	//Meteoとのかすりスコア
+	glRasterPos2f(x0, y0 + kFontSize * 2 + kCharSpace);
+	sprintf(string, "Meteoとのかすりスコア : %d",
+			opengl_game_main::score.get_score(Score::kNearMeteo));
+	pFont->Render(string);
+	//Meteo破壊スコア
+	glRasterPos2f(x0, y0 + kFontSize * 3 + kCharSpace);
+	sprintf(string, "Meteo破壊スコア : %d",
+			opengl_game_main::score.get_score(Score::kDestructMeteo));
+	pFont->Render(string);
+	//残機ボーナススコア
+	glRasterPos2f(x0, y0 + kFontSize * 4 + kCharSpace);
+	sprintf(string, "残機ボーナススコア : %d",
+			opengl_game_main::score.get_score(Score::kRemainingLives));
+	pFont->Render(string);
+	//----------------
+	glRasterPos2f(x0, y0 + kFontSize * 5 + kCharSpace);
+	pFont->Render("-------------------------------");
+	//合計スコア
+	glColor4fv(uColor4fv_red);
+	glRasterPos2f(x0, y0 + kFontSize * 6 + kCharSpace);
+	sprintf(string, "合計スコア : %d", opengl_game_main::score.get_total_score());
+	pFont->Render(string);
+	//評価
+	glColor4fv(uColor4fv_red);
+	glRasterPos2f(x0, y0 + kFontSize * 7 + kCharSpace);
+	sprintf(string, "評価 : %c", 'A');
+	pFont->Render(string);
 	u2Dto3D();
 }
 

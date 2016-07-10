@@ -20,6 +20,7 @@ extern const float uColor4fv_white[];
 extern const float uColor4fv_red[];
 extern const float uColor4fv_green[];
 extern const float uColor4fv_blue[];
+extern const float uColor4fv_yellow[];
 extern const float uColor4fv_sky_brue[];
 extern const float uColor4fv_maroon[];
 extern const float uColor4fv_jewel_green[];

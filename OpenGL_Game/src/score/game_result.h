@@ -14,10 +14,14 @@ private:
 	FTPixmapFont* pFont; //フォント
 	const static unsigned long kFontSize = 40;  //フォントサイズ
 	const static char kFontFilePath[256]; //フォントのパス
+	const static float x0 = 350; //描画開始位置x
+	const static float y0 = 200; //描画開始位置y
+	const static float kCharSpace = 10;//行間
+
 public:
 	GameResult();
-	int Update();
-	void Draw();
+	int Update() const;
+	void Draw() const;
 	~GameResult();
 };
 
