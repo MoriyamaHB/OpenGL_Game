@@ -98,7 +98,7 @@ int GameMain() {
 namespace {
 int DrawGameResult() {
 	printf("結果\n");
-	if (input::get_keyboard_frame('a') == 1)
+	if (input::get_keyboard_frame(13) == 1)
 		return -1;
 	return 0;
 }

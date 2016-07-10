@@ -10,6 +10,8 @@ unsigned int escape;
 unsigned int escape_frame;
 unsigned int shift;
 unsigned int shift_frame;
+unsigned int enter;
+unsigned int enter_frame;
 }
 
 //キーボードの入力フレーム数を返す
@@ -19,6 +21,8 @@ int get_keyboard_frame(unsigned char key) {
 		return keyboard_frame[key - 'a'];
 	} else if (key == '\033') {
 		return escape_frame;
+	} else if (key == 13) {
+		return enter_frame;
 	} else {
 		uErrorOut(__FILE__, __func__, __LINE__, "keyの値が不正です");
 		return -1;
@@ -41,13 +45,15 @@ int get_special_keyboard_frame(int key) {
 //OpenGLコールバック関数
 namespace input {
 void CheckPushKey(unsigned char key, int x, int y) {
-//キーボードの取得
+	//キーボードの取得
 	if ('a' <= key && key <= 'z') {
 		keyboard[key - 'a'] = 1;
 	} else if ('A' <= key && key <= 'Z') {
 		keyboard[key - 'A'] = 1;
 	} else if (key == '\033') {
 		escape = 1;
+	} else if (key == 13) {
+		enter = 1;
 	}
 }
 }
@@ -62,6 +68,8 @@ void CheckUpkey(unsigned char key, int x, int y) {
 		keyboard[key - 'A'] = 0;
 	} else if (key == '\033') {
 		escape = 0;
+	} else if (key == 13) {
+		enter = 0;
 	}
 }
 }
@@ -159,6 +167,10 @@ void UpdateFrame() {
 		shift_frame++;
 	else
 		shift_frame = 0;
+	if (enter)
+		enter_frame++;
+	else
+		enter_frame = 0;
 	//左マウスクリック
 	if (is_down_mouse_left_button)
 		mouse_left_button_frame++;
@@ -176,6 +188,8 @@ void Init() {
 	escape_frame = 0;
 	shift = 0;
 	shift_frame = 0;
+	enter = 0;
+	enter_frame = 0;
 	mouse_dx = 0;
 	mouse_dy = 0;
 	is_down_mouse_left_button = false;
