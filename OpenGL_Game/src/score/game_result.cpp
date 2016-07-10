@@ -21,6 +21,36 @@ GameResult::GameResult() {
 	}
 }
 
+//評価を計算
+const char* GameResult::GetRating(int score) const {
+	if (score >= 60000)
+		return "SSS";
+	else if (score >= 55000)
+		return "SS";
+	else if (score >= 50000)
+		return "S";
+	else if (score >= 45000)
+		return "A+";
+	else if (score >= 40000)
+		return "A";
+	else if (score >= 35000)
+		return "A-";
+	else if (score >= 30000)
+		return "B+";
+	else if (score > 25000)
+		return "B";
+	else if (score > 20000)
+		return "B-";
+	else if (score > 15000)
+		return "C";
+	else if (score > 10000)
+		return "D";
+	else if (score > 5000)
+		return "E";
+	else
+		return "F";
+}
+
 //更新
 int GameResult::Update() const {
 	if (input::get_keyboard_frame(13)) { //エンターキーが押されたら
@@ -73,7 +103,8 @@ void GameResult::Draw() const {
 	//評価
 	glColor4fv(uColor4fv_red);
 	glRasterPos2f(x0, y0 + kFontSize * 7 + kCharSpace);
-	sprintf(string, "評価 : %c", 'A');
+	sprintf(string, "評価 : %s",
+			GetRating(opengl_game_main::score.get_total_score()));
 	pFont->Render(string);
 
 	//終了案内

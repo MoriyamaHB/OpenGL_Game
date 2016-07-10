@@ -79,7 +79,7 @@ int StartMain(Camera3D3P *camera) {
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
 	//文字描画
-	uDrawString2("Aキーを押してください", 850, 760, uColor4fv_blue);
+	uDrawString2("Aキーを押してください", 740, 760, uColor4fv_red);
 	return 0;
 }
 }
