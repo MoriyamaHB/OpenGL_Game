@@ -106,7 +106,7 @@ void SetPlayerStateFin() {
 	player_state = kFin;
 	square.set_draw_flag(false);
 	//残り残機数分をスコアに加算
-	opengl_game_main::score.set_score(4000 * remaining_lives,
+	opengl_game_main::score.set_score(5000 * remaining_lives,
 			Score::kRemainingLives);
 }
 }
