@@ -22,7 +22,7 @@ public:
 	void Update();
 
 	//描画
-	void Draw(int x, int y) const;
+	void Draw() const;
 };
 
 #endif

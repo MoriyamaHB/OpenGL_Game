@@ -33,7 +33,7 @@ void Fps::Update() {
 }
 
 //x,yの位置に計測したfpsの描画を登録します
-void Fps::Draw(int x, int y) const {
+void Fps::Draw() const {
 	char string[256];
 	sprintf(string,"fps:%.2f", fps);
 	output_display::Regist(string, uColor4fv_blue);

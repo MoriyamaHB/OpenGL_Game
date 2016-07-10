@@ -170,7 +170,7 @@ void DisplayFunc(void) {
 	}
 
 	//基本描画
-	fps.Draw(10, 25); //fps登録
+	fps.Draw(); //fps登録
 	output_display::Draw(); //画面出力文字列描画
 
 	//Bgm更新
