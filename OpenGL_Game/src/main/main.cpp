@@ -1,14 +1,22 @@
 #define GLOBAL_INSTANCE
 #include "../declaration/GV.h"
 
+//プロトタイプ宣言
+namespace {
+int DrawGameResult();
+}
+
+//staticグローバル変数
 namespace {
 Camera3D3P camera;
 Fps fps;
 Sound *pbgm[opengl_game_main::MainBgmNum]; //Bgm
 LimitedTime ltime; //制限時間
+bool can_draw_game_result;
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
+//グローバル変数
 namespace opengl_game_main {
 Score score;
 }
@@ -53,7 +61,8 @@ void GameIni() {
 	camera.InitCoordinates();
 	player::Init(&camera);
 	opengl_game_main::score.Init();
-	ltime.Init(60);	//制限時間を設定
+	ltime.Init(6);	//制限時間を設定
+	can_draw_game_result = false;	//結果出力をfalseに設定
 }
 }
 
@@ -77,13 +86,15 @@ int GameMain() {
 	control_bullet::Update(&camera);
 	//プレイヤー更新
 	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount())
-			== -1)	//更新
-		if (0 == -1)	//結果表示(未実装)
-			return -1;
+			== -1)
+		can_draw_game_result = true;	//結果描画をtrueに設定
 	//スコア更新
 	opengl_game_main::score.Update();
 	//制限時間更新
-	ltime.Update();
+	if (ltime.Update() == -1) {
+		can_draw_game_result = true;	//結果描画をtrueに設定
+		player::SetPlayerStateFin();	//プレイヤーの状態を終了に設定
+	}
 
 	//---------------------------    描画    ---------------------------
 
@@ -104,6 +115,22 @@ int GameMain() {
 	//制限時間描画
 	ltime.Draw();
 
+	//結果を描画
+	if (can_draw_game_result) {
+		if (DrawGameResult() == -1)
+			return -1;	//ゲーム終了
+	}
+
+	return 0;
+}
+}
+
+//結果出力
+namespace {
+int DrawGameResult() {
+	printf("結果\n");
+	if (input::get_keyboard_frame('a') == 1)
+		return -1;
 	return 0;
 }
 }

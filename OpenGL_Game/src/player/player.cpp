@@ -100,6 +100,14 @@ void HitMeteo() {
 }
 }
 
+//プレイヤの状態をゲーム終了に設定
+namespace player{
+void SetPlayerStateFin(){
+	player_state = FIN;
+	square.set_draw_flag(false);
+}
+}
+
 namespace player {
 //ターゲットにあたった時に呼び出される
 void HitTarget() {

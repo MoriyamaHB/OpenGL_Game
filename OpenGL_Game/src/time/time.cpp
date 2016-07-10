@@ -9,7 +9,7 @@ LimitedTime::LimitedTime() {
 
 //計測開始
 void LimitedTime::Init(int limited_time_sec) {
-	limited_time_sec_ = (time_t)limited_time_sec;
+	limited_time_sec_ = (time_t) limited_time_sec;
 	is_measuring = true;
 	start_ = time(NULL);
 }
@@ -18,10 +18,11 @@ void LimitedTime::Init(int limited_time_sec) {
 int LimitedTime::Update() {
 	if (is_measuring) { //測定中なら
 		//残り時間計算
-		time_remaining_ = limited_time_sec_
-				- (time(NULL) - start_);
-		//時間切れなら-1を返す
+		time_remaining_ = limited_time_sec_ - (time(NULL) - start_);
 		if (time_remaining_ < 0)
+			time_remaining_ = 0;
+		//時間切れなら-1を返す
+		if (time_remaining_ <= 0)
 			return -1;
 		else
 			return 0;
