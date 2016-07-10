@@ -2,9 +2,9 @@
 
 namespace {
 const int kMaxItem = 24; 	//最大登録数
-const int kLineHeight = 30; 	//一行分の高さ
+const int kLineHeight = 45; 	//一行分の高さ
 const int kStartWidth = 10; 	//描画開始座標x
-const int kStartHeight = 23; //描画開始座標y
+const int kStartHeight = 33; //描画開始座標y
 OutputItem item[kMaxItem];
 }
 

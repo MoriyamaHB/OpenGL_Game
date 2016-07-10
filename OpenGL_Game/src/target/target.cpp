@@ -137,9 +137,9 @@ void Draw() {
 		(*itr)->Draw();
 	}
 	//隕石数を表示登録
-	char string[256];
-	sprintf(string, "ターゲット:%d", (int) target_.size());
-	output_display::Regist(string, uColor4fv_blue, 1);
+//	char string[256];
+//	sprintf(string, "ターゲット:%d", (int) target_.size());
+//	output_display::Regist(string, uColor4fv_blue, 1);
 }
 }
 

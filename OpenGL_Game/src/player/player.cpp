@@ -12,7 +12,7 @@ int now_frame_cnt; //フレームカウント
 int remaining_lives; //残機数
 
 const int kRestorationCount = 150; //死んでから復活までのカウント数
-const int kInitRemainingLives = 100; //初期残機数
+const int kInitRemainingLives = 5; //初期残機数
 }
 
 //プレイヤーの場所を返す
@@ -126,10 +126,10 @@ void Draw() {
 	square.Draw();
 	//ヒット情報登録
 	char string[256];
-	sprintf(string, "球破壊:%d", hit_meteo);
-	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "ターゲット獲得:%d", get_target);
-	output_display::Regist(string, uColor4fv_green, 1);
+//	sprintf(string, "球破壊:%d", hit_meteo);
+//	output_display::Regist(string, uColor4fv_green, 1);
+//	sprintf(string, "ターゲット獲得:%d", get_target);
+//	output_display::Regist(string, uColor4fv_green, 1);
 	sprintf(string, "残機数:%d", remaining_lives);
 	output_display::Regist(string, uColor4fv_red, 1);
 }

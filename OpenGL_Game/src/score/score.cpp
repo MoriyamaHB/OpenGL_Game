@@ -19,12 +19,12 @@ void Score::Update() {
 	char string[256];
 	sprintf(string, "合計スコア: %d", total_score_);
 	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "かすりスコア: %d", each_score_[kNearMeteo]);
-	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "ターゲット獲得スコア: %d", each_score_[kGetTarget]);
-	output_display::Regist(string, uColor4fv_green, 1);
-	sprintf(string, "球破壊スコア: %d", each_score_[kDestructMeteo]);
-	output_display::Regist(string, uColor4fv_green, 1);
+//	sprintf(string, "かすりスコア: %d", each_score_[kNearMeteo]);
+//	output_display::Regist(string, uColor4fv_green, 1);
+//	sprintf(string, "ターゲット獲得スコア: %d", each_score_[kGetTarget]);
+//	output_display::Regist(string, uColor4fv_green, 1);
+//	sprintf(string, "球破壊スコア: %d", each_score_[kDestructMeteo]);
+//	output_display::Regist(string, uColor4fv_green, 1);
 }
 
 void Score::Draw() const {

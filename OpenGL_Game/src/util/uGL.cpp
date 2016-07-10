@@ -329,7 +329,7 @@ void uDrawString2(const char str[], int x0, int y0, const float color[]) {
 	u3Dto2D();
 	// フォントのデータ
 	static FTPixmapFont* pFont; //フォント
-	unsigned long ulFontSize = 30;  //フォントサイズ
+	unsigned long ulFontSize = 40;  //フォントサイズ
 	const static char kFilePath[256] = "font/hui.ttf"; //フォントのパス
 	// フォントの初期化
 	if (!pFont) {
