@@ -25,7 +25,7 @@ void Init() {
 namespace control_meteo {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
-	if (player::get_player_state() != player::FIN) { //終了後ではない
+	if (player::get_player_state() != player::kFin) { //終了後ではない
 		if (fps->GetFrameCount() % 5 == 0) { //登録フレームである
 			if ((int) meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
 				//登録場所を計算
@@ -50,7 +50,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 			itr != meteo_.end(); ++itr) {
 		//プレイヤーへの当たり判定
 		double distance;
-		if (player::get_player_state() == player::PLAY) {			//プレイ中なら
+		if (player::get_player_state() == player::kPlay) {			//プレイ中なら
 			if (uIsCollisionBallAndBall((*itr)->get_place(),
 					(*itr)->get_scale(), player::get_place(),
 					player::get_scale(), &distance)) {

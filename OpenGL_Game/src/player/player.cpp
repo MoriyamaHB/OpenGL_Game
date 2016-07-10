@@ -42,7 +42,7 @@ void Init(Camera3D3P *c) {
 	if (player_die_se == NULL)
 		player_die_se = new Sound("sound/player_die.wav"); //効果音読み込み
 	camera = c;
-	player_state = PLAY;
+	player_state = kPlay;
 	square.Init();
 	square.set_draw_flag(true);
 	square.set_material(uMaterial4fv_red);
@@ -63,18 +63,18 @@ int Update(Vector3 p, int now_cnt) {
 	//効果音の場所をリスナー位置に同期
 	player_die_se->SetSourceToListener();
 	//die中
-	if (player_state == DIE) {
+	if (player_state == kDie) {
 		//点滅処理
 		if (now_frame_cnt % 5 == 0)
 			square.set_draw_flag(!square.get_draw_flag());
 		//復活処理
 		if (now_frame_cnt - die_cnt >= kRestorationCount) {
-			player_state = PLAY;
+			player_state = kPlay;
 			square.set_draw_flag(true);
 		}
 	}
 	//ゲーム終了時
-	if (player_state == FIN) {
+	if (player_state == kFin) {
 		return -1;
 	}
 	return 0;
@@ -84,16 +84,16 @@ int Update(Vector3 p, int now_cnt) {
 //隕石に衝突した時呼び出される
 namespace player {
 void HitMeteo() {
-	if (player_state == PLAY) {
+	if (player_state == kPlay) {
 		hit_meteo++;
-		player_state = DIE;
+		player_state = kDie;
 		die_cnt = now_frame_cnt;
 		camera->set_speed(0);
 		remaining_lives--;
 		//効果音再生
 		player_die_se->Play();
 		if (remaining_lives <= 0) { //残機が0以下なら
-			player_state = FIN;
+			player_state = kFin;
 			square.set_draw_flag(false);
 		}
 	}
@@ -103,7 +103,7 @@ void HitMeteo() {
 //プレイヤの状態をゲーム終了に設定
 namespace player {
 void SetPlayerStateFin() {
-	player_state = FIN;
+	player_state = kFin;
 	square.set_draw_flag(false);
 	//残り残機数分をスコアに加算
 	opengl_game_main::score.set_score(4000 * remaining_lives,
@@ -114,7 +114,7 @@ void SetPlayerStateFin() {
 namespace player {
 //ターゲットにあたった時に呼び出される
 void HitTarget() {
-	if (player_state == PLAY)
+	if (player_state == kPlay)
 		get_target++;
 }
 }

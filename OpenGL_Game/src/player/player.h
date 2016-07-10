@@ -3,7 +3,7 @@
 
 namespace player {
 enum PlayerState {
-	PLAY, DIE, FIN
+	kPlay, kDie, kFin
 };
 Vector3 get_place(); //playerの場所を返す
 float get_scale(); //playerの大きさを返す

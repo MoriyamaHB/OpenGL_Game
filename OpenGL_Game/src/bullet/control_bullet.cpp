@@ -30,7 +30,7 @@ void Update(const Camera3D3P *camera) {
 	//登録
 	if (input::get_mouse_left_button_frame() == 1) {
 		if ((int) bullet_.size() < kMaxBulletNum) { //最大数を下回っている
-			if (player::get_player_state() == player::PLAY) { //プレイ中なら
+			if (player::get_player_state() == player::kPlay) { //プレイ中なら
 				//毎フレームの移動角度(3座標)を計算
 				Vector3 each_move_angle = camera->GetStateWatchCoordinates()
 						- camera->GetStateCoordinates();
@@ -77,8 +77,8 @@ void Update(const Camera3D3P *camera) {
 				bullet_to_meteo_se->SetSource((*itr_b)->get_place());
 				bullet_to_meteo_se->Play();
 				//削除
-				if (player::get_player_state() == player::DIE
-						|| player::get_player_state() == player::PLAY)//プレイ中or死亡中なら
+				if (player::get_player_state() == player::kDie
+						|| player::get_player_state() == player::kPlay)//プレイ中or死亡中なら
 					opengl_game_main::score.add_score(
 							(int) (kDestructMeteoScoreFactor
 									* (*itr_m)->get_scale()),

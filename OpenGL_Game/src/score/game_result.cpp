@@ -75,6 +75,13 @@ void GameResult::Draw() const {
 	glRasterPos2f(x0, y0 + kFontSize * 7 + kCharSpace);
 	sprintf(string, "評価 : %c", 'A');
 	pFont->Render(string);
+
+	//終了案内
+	glColor4fv(uColor4fv_yellow);
+	glRasterPos2f(x0 + 200, y0 + kFontSize * 9 + kCharSpace);
+	pFont->Render("再度プレイ : エンターキー");
+	glRasterPos2f(x0 + 200, y0 + kFontSize * 10 + kCharSpace);
+	pFont->Render("終了 : Escキー");
 	u2Dto3D();
 }
 
