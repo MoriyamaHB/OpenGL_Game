@@ -5,7 +5,7 @@ namespace {
 Camera3D3P camera;
 Fps fps;
 Sound *pbgm[opengl_game_main::MainBgmNum]; //Bgm
-LimitedTime ltime;//制限時間
+LimitedTime ltime; //制限時間
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
@@ -54,7 +54,7 @@ void GameIni() {
 	camera.InitCoordinates();
 	player::Init(&camera);
 	opengl_game_main::score.Init();
-	ltime.Init(60);//制限時間を設定
+	ltime.Init(60);	//制限時間を設定
 }
 }
 
@@ -75,8 +75,7 @@ int GameMain() {
 	control_target::Update(&fps, camera.GetStateCoordinates(),
 			camera.GetStateWatchCoordinates());
 	//弾更新
-	control_bullet::Update(camera.GetStateCoordinates(),
-			camera.GetStateWatchCoordinates(), camera.get_speed());
+	control_bullet::Update(&camera);
 	//プレイヤー更新
 	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount())
 			== -1)	//更新
@@ -114,6 +113,7 @@ int GameMain() {
 namespace opengl_game_main {
 void ProjectFin() {
 	StopBgm();	//Bgmを削除
+	control_bullet::Fin();	//効果音削除
 	alutExit();
 }
 }
