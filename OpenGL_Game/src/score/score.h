@@ -15,6 +15,7 @@ public:
 	void Draw() const;
 	//getter,setterなど
 	int get_total_score() const;
+	int get_score(Score::ScoreType st) const;
 	void add_score(int add_para, Score::ScoreType st);
 private:
 	int total_score_;
