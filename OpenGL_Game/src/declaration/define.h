@@ -4,7 +4,7 @@
 
 //初期ウィンドウ位置
 #define WINDOW_INI_POSITION_X 100
-#define WINDOW_INI_POSITION_Y 100
+#define WINDOW_INI_POSITION_Y 50
 
 //FPS
 #define FRAME_PER_SECONDS 60
