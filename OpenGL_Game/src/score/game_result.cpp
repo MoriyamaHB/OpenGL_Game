@@ -9,7 +9,7 @@
 
 GameResult::GameResult() {
 	//フォントのパス(ポインタ定数の場合このように定義する必要があるらしい)
-	const static char kFontFilePath[256] = "font/hui.ttf";
+	const static char kFontFilePath[256] = "font/jkgm.ttf";
 	// フォントの初期化
 	pFont = new FTPixmapFont(kFontFilePath);
 	if (pFont->Error()) {
