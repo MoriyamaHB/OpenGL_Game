@@ -65,8 +65,6 @@ int GameMain() {
 
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
-	//カメラの情報を表示登録
-	camera.DisplayInfo();
 	//地面描画
 	uDrawGround(20);
 	//隕石描画
@@ -79,6 +77,8 @@ int GameMain() {
 	opengl_game_main::score.Draw();
 	//制限時間描画
 	ltime.Draw();
+	//カメラの情報を描画
+	camera.DisplayInfo();
 
 	//結果を描画
 	if (can_draw_game_result) {
