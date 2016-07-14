@@ -5,7 +5,9 @@ int start_rand_solid;
 float start_rand_mate[4];
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 FTPixmapFont title_font("font/null_eng.otf"); //タイトルフォント
+FTPixmapFont description_font("font/jkgm.ttf"); //ゲーム説明フォント
 const unsigned long kTitleFontSize = 150;  //タイトルフォントサイズ
+const unsigned long kDescriptionFontSize = 40;  //説明フォントサイズ
 }
 
 //ゲーム初期化
@@ -20,10 +22,11 @@ void StartIni(Camera3D3P *camera) {
 	start_rand_mate[2] = cc_util::GetRandom(0, 1000) / 1000.0;
 	start_rand_mate[3] = cc_util::GetRandom(0, 1000) / 1000.0;
 	// フォントの初期化
-	if (title_font.Error()) {
+	if (title_font.Error() || description_font.Error()) {
 		uErrorOut(__FILE__, __func__, __LINE__, "タイトルフォントが開けません");
 	} else {
 		title_font.FaceSize(kTitleFontSize);
+		description_font.FaceSize(kDescriptionFontSize);
 	}
 }
 }
@@ -34,14 +37,6 @@ int StartMain(Camera3D3P *camera) {
 	if (input::get_keyboard_frame('a') == 1)
 		return -1;
 
-	//タイトル描画
-	u3Dto2D();
-	if (!title_font.Error()) {
-		glColor4fv(uColor4fv_purple);
-		glRasterPos2f(270, 180);
-		title_font.Render("Avoid Meteo");
-	}
-	u2Dto3D();
 	//カメラ
 	camera->TransfarAndRotateByParam(3, 0); //カメラ移動計算(マウス)
 	camera->SetGluLookAt(); //視点をセット
@@ -76,10 +71,32 @@ int StartMain(Camera3D3P *camera) {
 		break;
 	}
 	glPopMatrix();
+
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
+
 	//文字描画
-	uDrawString2("Aキーを押してください", 940, 760, uColor4fv_red);
+	uDrawString2("Aキーを押すとゲーム開始です", 940, 760, uColor4fv_red);
+
+	//タイトル描画
+	u3Dto2D();
+	if (!title_font.Error()) {
+		glColor4fv(uColor4fv_purple);
+		glRasterPos2f(270, 180);
+		title_font.Render("Avoid Meteo");
+	}
+	//ゲーム説明描画
+	if (!description_font.Error()) {
+		glColor4fv(uColor4fv_blue);
+		glRasterPos2f(820, 280);
+		description_font.Render("このゲームは球(Meteo)をよけながら、");
+		glRasterPos2f(820, 330);
+		description_font.Render("立方体(ターゲット)を獲得し、");
+		glRasterPos2f(820, 380);
+		description_font.Render("スコアを稼ぐゲームです。");
+	}
+	u2Dto3D();
+
 	return 0;
 }
 }
