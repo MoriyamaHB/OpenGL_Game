@@ -23,42 +23,64 @@ GameResult::GameResult() {
 
 //評価を計算
 const char* GameResult::GetRating(int score) const {
-	if (score >= 42500)
+	if (score >= 70000)
+		return "+++";
+	else if (score >= 67500)
 		return "SSS";
-	else if (score >= 40000)
+	else if (score >= 65000)
+		return "SS+";
+	else if (score >= 62500)
 		return "SS";
-	else if (score >= 37500)
+	else if (score >= 60000)
+		return "SS-";
+	else if (score >= 57500)
+		return "S+";
+	else if (score >= 55000)
 		return "S";
-	else if (score >= 35000)
+	else if (score >= 52500)
+		return "S-";
+	else if (score >= 50000)
 		return "A+";
-	else if (score >= 32500)
+	else if (score >= 47500)
 		return "A";
-	else if (score >= 30000)
+	else if (score >= 45000)
 		return "A-";
-	else if (score >= 27500)
+	else if (score >= 42500)
 		return "B+";
-	else if (score >= 25000)
+	else if (score >= 40000)
 		return "B";
-	else if (score >= 22500)
+	else if (score >= 37500)
 		return "B-";
-	else if (score >= 20000)
+	else if (score >= 35000)
 		return "C+";
-	else if (score >= 17500)
+	else if (score >= 32500)
 		return "C";
-	else if (score >= 15000)
+	else if (score >= 30000)
 		return "C-";
-	else if (score >= 12500)
+	else if (score >= 27500)
 		return "D+";
-	else if (score >= 10000)
+	else if (score >= 25000)
 		return "D";
-	else if (score >= 7500)
+	else if (score >= 22500)
 		return "D-";
-	else if (score >= 5000)
+	else if (score >= 20000)
 		return "E+";
-	else if (score >= 2500)
+	else if (score >= 17500)
 		return "E";
-	else
+	else if (score >= 15000)
 		return "E-";
+	else if (score >= 12500)
+		return "F+";
+	else if (score >= 10000)
+		return "F";
+	else if (score >= 7500)
+		return "F-";
+	else if (score >= 5000)
+		return "G+";
+	else if (score >= 2500)
+		return "G";
+	else
+		return "G-";
 }
 
 //更新
