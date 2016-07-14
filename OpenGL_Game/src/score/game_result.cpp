@@ -23,32 +23,42 @@ GameResult::GameResult() {
 
 //評価を計算
 const char* GameResult::GetRating(int score) const {
-	if (score >= 60000)
+	if (score >= 42500)
 		return "SSS";
-	else if (score >= 55000)
-		return "SS";
-	else if (score >= 50000)
-		return "S";
-	else if (score >= 45000)
-		return "A+";
 	else if (score >= 40000)
-		return "A";
+		return "SS";
+	else if (score >= 37500)
+		return "S";
 	else if (score >= 35000)
-		return "A-";
+		return "A+";
+	else if (score >= 32500)
+		return "A";
 	else if (score >= 30000)
+		return "A-";
+	else if (score >= 27500)
 		return "B+";
 	else if (score >= 25000)
 		return "B";
-	else if (score >= 20000)
+	else if (score >= 22500)
 		return "B-";
-	else if (score >= 15000)
+	else if (score >= 20000)
+		return "C+";
+	else if (score >= 17500)
 		return "C";
+	else if (score >= 15000)
+		return "C-";
+	else if (score >= 12500)
+		return "D+";
 	else if (score >= 10000)
 		return "D";
+	else if (score >= 7500)
+		return "D-";
 	else if (score >= 5000)
+		return "E+";
+	else if (score >= 2500)
 		return "E";
 	else
-		return "F";
+		return "E-";
 }
 
 //更新
