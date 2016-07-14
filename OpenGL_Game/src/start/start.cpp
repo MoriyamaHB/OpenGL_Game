@@ -14,7 +14,7 @@ const unsigned long kDescriptionFontSize = 40;  //説明フォントサイズ
 namespace start {
 void StartIni(Camera3D3P *camera) {
 	//カメラ位置
-	camera->TransfarAndRotateByParam(0, 300);
+	camera->TransfarAndRotateByParam(0, 200);
 	//描画図形乱数
 	start_rand_solid = cc_util::GetRandom(0, 5);
 	start_rand_mate[0] = cc_util::GetRandom(0, 1000) / 1000.0;
@@ -87,13 +87,11 @@ int StartMain(Camera3D3P *camera) {
 	}
 	//ゲーム説明描画
 	if (!description_font.Error()) {
-		glColor4fv(uColor4fv_blue);
-		glRasterPos2f(820, 280);
+		glColor4fv(uColor4fv_gray);
+		glRasterPos2f(500, 260);
 		description_font.Render("このゲームは球(Meteo)をよけながら、");
-		glRasterPos2f(820, 330);
-		description_font.Render("立方体(ターゲット)を獲得し、");
-		glRasterPos2f(820, 380);
-		description_font.Render("スコアを稼ぐゲームです。");
+		glRasterPos2f(500, 310);
+		description_font.Render("立方体(ターゲット)を獲得し、スコアを稼ぐゲームです。");
 	}
 	u2Dto3D();
 

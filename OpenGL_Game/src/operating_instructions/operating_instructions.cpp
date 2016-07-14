@@ -23,15 +23,15 @@ void OperatingInstructions::Draw() {
 
 	u3Dto2D();
 	glColor4fv(uColor4fv_purple);
-	glRasterPos2f(x0-30, y0);
+	glRasterPos2f(x0 - 30, y0);
 	font_->Render("操作説明");
 	glRasterPos2f(x0, y0 + line_space);
 	font_->Render("[w/sキー]=加速/減速");
-	glRasterPos2f(x0, y0 + line_space*2);
+	glRasterPos2f(x0, y0 + line_space * 2);
 	font_->Render("[a/dキー]=左/右移動");
-	glRasterPos2f(x0, y0 + line_space*3);
+	glRasterPos2f(x0, y0 + line_space * 3);
 	font_->Render("[マウス移動]=視点移動");
-	glRasterPos2f(x0, y0 + line_space*4);
+	glRasterPos2f(x0, y0 + line_space * 4);
 	font_->Render("[マウスクリック]=弾発射");
 	u2Dto3D();
 }
