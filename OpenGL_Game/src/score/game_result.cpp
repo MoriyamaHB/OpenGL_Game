@@ -119,9 +119,9 @@ void GameResult::Draw() const {
 
 	//終了案内
 	glColor4fv(uColor4fv_yellow);
-	glRasterPos2f(x0 + 200, y0 + kFontSize * 9 + kCharSpace);
+	glRasterPos2f(x0 + 100, y0 + kFontSize * 9 + kCharSpace);
 	pFont->Render("再度プレイ : エンターキー");
-	glRasterPos2f(x0 + 200, y0 + kFontSize * 10 + kCharSpace);
+	glRasterPos2f(x0 + 100, y0 + kFontSize * 10 + kCharSpace);
 	pFont->Render("終了 : Escキー");
 	u2Dto3D();
 }

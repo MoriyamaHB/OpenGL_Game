@@ -3,14 +3,15 @@
 
 //staticグローバル変数
 namespace {
-Camera3D3P camera;
-Fps fps;
-LimitedTime ltime; //制限時間
-Bgm bgm;
-Sound *game_finish_se = NULL; //ゲーム終了効果音
-bool has_sounded_finish_se; //ゲーム終了効果音再生フラグ
-GameResult game_result; //ゲーム結果
-bool can_draw_game_result;
+Camera3D3P camera;				//カメラ管理クラス
+Fps fps;						//FPS管理クラス
+LimitedTime ltime; 				//制限時間管理クラス
+Bgm bgm;						//BGMクラス
+OperatingInstructions ope;		//操作説明クラス
+Sound *game_finish_se = NULL; 	//ゲーム終了効果音
+bool has_sounded_finish_se; 	//ゲーム終了効果音再生フラグ
+GameResult game_result; 		//ゲーム結果
+bool can_draw_game_result;		//結果画面フラグ
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
 }
 
@@ -84,6 +85,8 @@ int GameMain() {
 	ltime.Draw();
 	//カメラの情報を描画
 	camera.DisplayInfo();
+	//操作説明描画
+	ope.Draw();
 
 	//結果を描画
 	if (can_draw_game_result) {
@@ -104,7 +107,7 @@ int GameMain() {
 //プロジェクトで必要な終了処理
 namespace opengl_game_main {
 void ProjectFin() {
-	bgm.Stop();	//Bgmを削除
+	bgm.Stop();				//Bgmを削除
 	delete game_finish_se;	//効果音削除
 	control_bullet::Fin();	//効果音削除
 	player::Fin();

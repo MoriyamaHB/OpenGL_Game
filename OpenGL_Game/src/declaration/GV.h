@@ -36,6 +36,7 @@
 #include "../main/main.h"
 #include "../meteo/control_meteo.h"
 #include "../meteo/meteo.h"
+#include "../operating_instructions/operating_instructions.h"
 #include "../player/camera.h"
 #include "../player/player.h"
 #include "../score/score.h"
