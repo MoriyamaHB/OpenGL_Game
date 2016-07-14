@@ -14,7 +14,7 @@ private:
 	FTPixmapFont* pFont; //フォント
 	const static unsigned long kFontSize = 50;  //フォントサイズ
 	const static char kFontFilePath[256]; //フォントのパス
-	const static float x0 = 250; //描画開始位置x
+	const static float x0 = 400; //描画開始位置x
 	const static float y0 = 200; //描画開始位置y
 	const static float kCharSpace = 10; //行間
 

@@ -38,7 +38,7 @@ int StartMain(Camera3D3P *camera) {
 	u3Dto2D();
 	if (!title_font.Error()) {
 		glColor4fv(uColor4fv_purple);
-		glRasterPos2f(120, 180);
+		glRasterPos2f(270, 180);
 		title_font.Render("Avoid Meteo");
 	}
 	u2Dto3D();
@@ -79,7 +79,7 @@ int StartMain(Camera3D3P *camera) {
 	//ライト
 	glLightfv(GL_LIGHT0, GL_POSITION, kLight0Pos);
 	//文字描画
-	uDrawString2("Aキーを押してください", 740, 760, uColor4fv_red);
+	uDrawString2("Aキーを押してください", 940, 760, uColor4fv_red);
 	return 0;
 }
 }
