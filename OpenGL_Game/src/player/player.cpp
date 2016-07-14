@@ -3,6 +3,7 @@
 namespace {
 Camera3D3P *camera;
 Sound *player_die_se = NULL;
+Sound *get_target_se = NULL;
 Square square; //playerの四角
 int hit_meteo; //隕石衝突回数
 int get_target; //ターゲット獲得数
@@ -39,8 +40,12 @@ PlayerState get_player_state() {
 //初期化
 namespace player {
 void Init(Camera3D3P *c) {
+	//効果音読み込み
 	if (player_die_se == NULL)
-		player_die_se = new Sound("sound/player_die.wav"); //効果音読み込み
+		player_die_se = new Sound("sound/player_die.wav");
+	if (get_target_se == NULL)
+		get_target_se = new Sound("sound/get_target_se.wav");
+
 	camera = c;
 	player_state = kPlay;
 	square.Init();
@@ -62,6 +67,7 @@ int Update(Vector3 p, int now_cnt) {
 	square.Move(p); //移動
 	//効果音の場所をリスナー位置に同期
 	player_die_se->SetSourceToListener();
+	get_target_se->SetSourceToListener();
 	//die中
 	if (player_state == kDie) {
 		//点滅処理
@@ -114,6 +120,7 @@ void SetPlayerStateFin() {
 namespace player {
 //ターゲットにあたった時に呼び出される
 void HitTarget() {
+	get_target_se->Play(); //効果音再生
 	if (player_state == kPlay)
 		get_target++;
 }
@@ -138,7 +145,9 @@ void Draw() {
 //終了処理
 namespace player {
 void Fin() {
-	delete player_die_se; //効果音削除
+	//効果音削除
+	delete player_die_se;
+	delete get_target_se;
 }
 }
 

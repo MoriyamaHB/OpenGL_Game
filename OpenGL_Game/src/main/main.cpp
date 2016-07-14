@@ -7,6 +7,8 @@ Camera3D3P camera;
 Fps fps;
 LimitedTime ltime; //制限時間
 Bgm bgm;
+Sound *game_finish_se = NULL; //ゲーム終了効果音
+bool has_sounded_finish_se; //ゲーム終了効果音再生フラグ
 GameResult game_result; //ゲーム結果
 bool can_draw_game_result;
 const GLfloat kLight0Pos[] = { 0.0, 15.0, 0.0, 1.0 };	//ライト位置
@@ -28,6 +30,9 @@ void GameIni() {
 	opengl_game_main::score.Init();
 	ltime.Init(60);	//制限時間を設定
 	can_draw_game_result = false;	//結果出力をfalseに設定
+	if (game_finish_se == NULL)
+		game_finish_se = new Sound("sound/game_finish_se.wav");	//ゲーム終了効果音
+	has_sounded_finish_se = false;
 }
 }
 
@@ -82,9 +87,14 @@ int GameMain() {
 
 	//結果を描画
 	if (can_draw_game_result) {
-		if (game_result.Update() == -1)//更新
+		if (game_result.Update() == -1)	//更新
 			return -1;	//ゲーム終了
-		game_result.Draw();//描画
+		game_result.Draw();	//描画
+		//効果音未再生なら再生
+		if (has_sounded_finish_se == false) {
+			game_finish_se->Play();
+			has_sounded_finish_se = true;
+		}
 	}
 
 	return 0;
@@ -95,6 +105,7 @@ int GameMain() {
 namespace opengl_game_main {
 void ProjectFin() {
 	bgm.Stop();	//Bgmを削除
+	delete game_finish_se;	//効果音削除
 	control_bullet::Fin();	//効果音削除
 	player::Fin();
 	alutExit();
@@ -145,9 +156,11 @@ void DisplayFunc(void) {
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
+		game_finish_se->SetSourceToListener();		//効果音位置をリスナーに同期
 		if (GameMain() == -1) {
 			main_state = kProjectIni;
 			bgm.Stop();
+			delete game_finish_se;	//効果音削除
 		}
 		break;
 	default:

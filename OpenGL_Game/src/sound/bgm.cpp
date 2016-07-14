@@ -11,7 +11,7 @@
 void Bgm::Play(Bgm::BgmStruct sound) {
 	delete pbgm_[sound];
 	if (sound == Bgm::kGameBgm) {
-		pbgm_[sound] = new Sound("sound/111.wav");	//Bgm
+		pbgm_[sound] = new Sound("sound/game_bgm.wav");	//Bgm
 	}
 }
 
