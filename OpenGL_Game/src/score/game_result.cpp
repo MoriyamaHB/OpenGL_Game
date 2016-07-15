@@ -23,64 +23,75 @@ GameResult::GameResult() {
 
 //評価を計算
 const char* GameResult::GetRating(int score) const {
+	static char str[24];
+	static int static_score = 0;
+
+	//前回と同じならそれを返す
+	if (static_score == score)
+		return str;
+
+	//前回と違うとき
+	static_score = score;
 	if (score >= 70000)
-		return "+++";
+		strcpy(str, "+++");
 	else if (score >= 67500)
-		return "SSS";
+		strcpy(str, "SSS");
 	else if (score >= 65000)
-		return "SS+";
+		strcpy(str, "SS+");
 	else if (score >= 62500)
-		return "SS";
+		strcpy(str, "SS");
 	else if (score >= 60000)
-		return "SS-";
+		strcpy(str, "SS-");
 	else if (score >= 57500)
-		return "S+";
+		strcpy(str, "S+");
 	else if (score >= 55000)
-		return "S";
+		strcpy(str, "S");
 	else if (score >= 52500)
-		return "S-";
+		strcpy(str, "S-");
 	else if (score >= 50000)
-		return "A+";
+		strcpy(str, "A+");
 	else if (score >= 47500)
-		return "A";
+		strcpy(str, "A");
 	else if (score >= 45000)
-		return "A-";
+		strcpy(str, "A-");
 	else if (score >= 42500)
-		return "B+";
+		strcpy(str, "B+");
 	else if (score >= 40000)
-		return "B";
+		strcpy(str, "B");
 	else if (score >= 37500)
-		return "B-";
+		strcpy(str, "B-");
 	else if (score >= 35000)
-		return "C+";
+		strcpy(str, "c+");
 	else if (score >= 32500)
-		return "C";
+		strcpy(str, "c");
 	else if (score >= 30000)
-		return "C-";
+		strcpy(str, "C-");
 	else if (score >= 27500)
-		return "D+";
+		strcpy(str, "D+");
 	else if (score >= 25000)
-		return "D";
+		strcpy(str, "D");
 	else if (score >= 22500)
-		return "D-";
+		strcpy(str, "D-");
 	else if (score >= 20000)
-		return "E+";
+		strcpy(str, "E+");
 	else if (score >= 17500)
-		return "E";
+		strcpy(str, "E");
 	else if (score >= 15000)
-		return "E-";
+		strcpy(str, "E-");
 	else if (score >= 12500)
-		return "F+";
+		strcpy(str, "F+");
 	else if (score >= 10000)
-		return "F";
+		strcpy(str, "F");
 	else if (score >= 7500)
-		return "F-";
+		strcpy(str, "F-");
 	else if (score >= 5000)
-		return "G+";
+		strcpy(str, "G+");
 	else if (score >= 2500)
-		return "G";
+		strcpy(str, "G");
 	else
-		return "G-";
+		strcpy(str, "G-");
+
+	return str;
 }
 
 //更新
@@ -96,7 +107,7 @@ void GameResult::Draw() const {
 	if (pFont->Error())
 		return;
 	u3Dto2D();
-	char string[256];
+	char string[128];
 
 	//ゲーム結果描画開始
 	glColor4fv(uColor4fv_red);

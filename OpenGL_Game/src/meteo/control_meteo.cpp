@@ -57,10 +57,11 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 				player::HitMeteo();
 			} else {			//衝突していないとき
 				//距離が近いほどスコアを加算
-				if (distance <= kAddScoreMaxDistance) {
+				if (distance < kAddScoreMaxDistance) {
 					opengl_game_main::score.add_score(
-							(distance / kAddScoreMaxDistance) * kAddScoreFactor,
-							Score::kNearMeteo);
+							(kAddScoreMaxDistance
+									- distance / kAddScoreMaxDistance)
+									* kAddScoreFactor, Score::kNearMeteo);
 				}
 			}
 		}

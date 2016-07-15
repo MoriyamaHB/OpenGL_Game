@@ -29,7 +29,7 @@ void GameIni() {
 	camera.InitCoordinates();
 	player::Init(&camera);
 	opengl_game_main::score.Init();
-	ltime.Init(60);	//制限時間を設定
+	ltime.Init(6);	//制限時間を設定
 	can_draw_game_result = false;	//結果出力をfalseに設定
 	if (game_finish_se == NULL)
 		game_finish_se = new Sound("sound/game_finish_se.wav");	//ゲーム終了効果音
@@ -173,7 +173,7 @@ void DisplayFunc(void) {
 	}
 
 	//基本描画
-//	fps.Draw(); //fps登録
+	fps.Draw(); //fps登録
 	output_display::Draw(); //画面出力文字列描画
 
 	//Bgm更新
