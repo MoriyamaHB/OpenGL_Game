@@ -8,10 +8,10 @@
 #ifndef SOUND_BGM_H_
 #define SOUND_BGM_H_
 
-class Bgm{
+class Bgm {
 public:
 	enum BgmStruct {
-		kGameBgm = 0, BgmStructNum
+		kStartBgm = 0, kGameBgm = 1, BgmStructNum
 	};
 	void Play(BgmStruct sound);
 	void Update();
