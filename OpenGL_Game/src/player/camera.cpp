@@ -136,17 +136,15 @@ void Camera3D3P::TransfarByKey() {
 //カメラ距離を更新
 void Camera3D3P::UpdateWatchDistance() {
 	double r = (speed_ - kMinSpeed) / kMaxSpeed;
-	distance_ = ((kMaxWatchDistance - kMinWatchDistance) * r)
-			+ kMinWatchDistance;
+	distance_ = ((kMaxWatchDistance - kMinWatchDistance) * r) + kMinWatchDistance;
 	return;
 }
 
 //カメラの情報を表示（速度)
 void Camera3D3P::DisplayInfo() const {
 	uDrawString2("スピード:", 1100, 30, uColor4fv_red);
-	uSquareFill2D(1280, 10, (int) (1280 + 200 * (speed_ - kMinSpeed) / kMaxSpeed),
-			15, uColor4fv_green);
-	uSquareFill2D(1280, 10,1280 + 200, 15, uColor4fv_brack);
+	uSquareFill2D(1280, 10, (int) (1280 + 200 * (speed_ - kMinSpeed) / kMaxSpeed), 15, uColor4fv_green);
+	uSquareFill2D(1280, 10, 1280 + 200, 15, uColor4fv_brack);
 }
 
 //gluLookAtを設定する

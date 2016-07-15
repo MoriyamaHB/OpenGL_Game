@@ -34,6 +34,7 @@ void GameIni() {
 	if (game_finish_se == NULL)
 		game_finish_se = new Sound("sound/game_finish_se.wav");	//ゲーム終了効果音
 	has_sounded_finish_se = false;
+	bgm.Play(Bgm::kGameBgm);
 }
 }
 
@@ -48,16 +49,13 @@ int GameMain() {
 	camera.TransfarAndRotateByMouse(); //カメラ移動計算(マウス)
 	camera.SetGluLookAt(); //視点をセット
 	//隕石更新
-	control_meteo::Update(&fps, camera.GetStateCoordinates(),
-			camera.GetStateWatchCoordinates());
+	control_meteo::Update(&fps, camera.GetStateCoordinates(), camera.GetStateWatchCoordinates());
 	//ターゲット更新
-	control_target::Update(&fps, camera.GetStateCoordinates(),
-			camera.GetStateWatchCoordinates());
+	control_target::Update(&fps, camera.GetStateCoordinates(), camera.GetStateWatchCoordinates());
 	//弾更新
 	control_bullet::Update(&camera);
 	//プレイヤー更新
-	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount())
-			== -1)
+	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount()) == -1)
 		can_draw_game_result = true;	//結果描画をtrueに設定
 	//スコア更新
 	opengl_game_main::score.Update();
@@ -66,6 +64,8 @@ int GameMain() {
 		can_draw_game_result = true;	//結果描画をtrueに設定
 		player::SetPlayerStateFin();	//プレイヤーの状態を終了に設定
 	}
+	//効果音位置をリスナーに同期
+	game_finish_se->SetSourceToListener();
 
 	//---------------------------    描画    ---------------------------
 
@@ -118,8 +118,7 @@ void ProjectFin() {
 //OpenGLコールバック関数
 namespace opengl_game_main {
 void DisplayFunc(void) {
-	static opengl_game_main::MainState main_state =
-			opengl_game_main::kProjectIni;
+	static opengl_game_main::MainState main_state = opengl_game_main::kProjectIni;
 
 	//ディスプレイ初期化
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //画面の初期化
@@ -145,7 +144,7 @@ void DisplayFunc(void) {
 		player::Init(&camera);
 		opengl_game_main::score.Init();
 		start::StartIni(&camera);
-		bgm.Play(Bgm::kStartBgm);//bgmを流す
+		bgm.Play(Bgm::kStartBgm); //bgmを流す
 		main_state = opengl_game_main::kStart;
 		break;
 	case opengl_game_main::kStart:		//スタート画面
@@ -156,11 +155,9 @@ void DisplayFunc(void) {
 		break;
 	case opengl_game_main::kGameIni:		//ゲーム初期化
 		GameIni();
-		bgm.Play(Bgm::kGameBgm);
 		main_state = opengl_game_main::kGame;
 		break;
 	case opengl_game_main::kGame:		//ゲーム
-		game_finish_se->SetSourceToListener();		//効果音位置をリスナーに同期
 		if (GameMain() == -1) {
 			main_state = kProjectIni;
 			bgm.Stop();
@@ -205,12 +202,12 @@ void Resize(int w, int h) {
 	glViewport(0, 0, w, h); //ウィンドウ全体をビューポートにする
 
 	//透視変換行列設定
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity(); //透視変換行列の初期化
 	gluPerspective(85.0, (double) w / (double) h, 0.1, 200.0);
 
 	//モデルビュー変換行列の指定
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 }
 }
 
