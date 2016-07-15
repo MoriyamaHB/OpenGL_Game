@@ -29,7 +29,7 @@ void Bgm::Update() {
 	for (int i = 0; i < Bgm::BgmStructNum; i++) {
 		if (pbgm_[i] == NULL)
 			continue;
-		pbgm_[i]->SetSourceToListener(); //音源をリスナーに同期
+		pbgm_[i]->SetSourceToListenerFront(10); //音源をリスナーに同期
 		pbgm_[i]->Stream(); //ループさせる
 	}
 }

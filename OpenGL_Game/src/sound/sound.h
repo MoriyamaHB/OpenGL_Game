@@ -15,6 +15,7 @@ public:
 	static void SetListener(const Camera3D3P *camera); //リスナー位置設定(カメラクラスを用いる)
 	void SetSource(Vector3 source_position) const; //音源位置設定
 	void SetSourceToListener(); //音源位置をリスナーと同じ位置に設定
+	void SetSourceToListenerFront(float distance); //音源位置をリスナーの正面位置に設定
 	void Stream() const;	//毎フレーム呼ぶと音源がループする
 	void Play() const;	//呼び出すと再度最初から再生する
 	~Sound();	//デストラクタ

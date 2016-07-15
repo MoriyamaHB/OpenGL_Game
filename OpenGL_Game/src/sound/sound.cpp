@@ -66,6 +66,24 @@ void Sound::SetSourceToListener() {
 	alSource3f(source_, AL_POSITION, x, y, z);
 }
 
+//音源座標をリスナーの正面に設置する
+//音量調節に使う
+//再生する瞬間だけでなく常に同期するために、毎フレーム呼び出すことを推奨
+void Sound::SetSourceToListenerFront(float distance) {
+	//リスナーの座標を取得
+	float vec[6];
+	alGetListenerfv(AL_ORIENTATION, vec);
+	ALfloat x, y, z;
+	alGetListener3f(AL_POSITION, &x, &y, &z);
+	Vector3 listener_posi(x, y, z);
+	Vector3 listener_direction(vec[0], vec[1], vec[2]);
+	//リスナーの正面の座標を計算
+	Vector3 source_posi = listener_posi + listener_direction * distance;
+	//音源を計算した座標に設置
+	alSource3f(source_, AL_POSITION, source_posi.x, source_posi.y,
+			source_posi.z);
+}
+
 //停止していたら再生(bgmに用いる)
 //ループしたい時に毎フレーム呼び出す
 void Sound::Stream() const {
