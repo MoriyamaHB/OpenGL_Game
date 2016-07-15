@@ -192,8 +192,8 @@ void DisplayFunc(void) {
 		ProjectFin();
 		exit(1);
 	}
-	//q入力で初期状態に移行
-	if (input::get_keyboard_frame('q') == 1)
+	//p入力で初期状態に移行
+	if (input::get_keyboard_frame('p') == 1)
 		main_state = kProjectIni;
 }
 }
