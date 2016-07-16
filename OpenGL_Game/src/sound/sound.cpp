@@ -15,8 +15,9 @@ Sound::Sound(const char *BGMFileName) {
 		char string[256];
 		sprintf(string, "%sの読み込みに失敗しました", BGMFileName);
 		uErrorOut(__FILE__, __func__, __LINE__, string);
-		exit(1);	//読み込みが失敗したら終了
-	}
+		is_error_ = true;
+	} else
+		is_error_ = false;
 	//ソースとバッファを結び付けます
 	alSourcei(source_, AL_BUFFER, buffer_);
 
@@ -41,8 +42,9 @@ Sound::Sound(ALuint buffer) {
 		char string[256];
 		sprintf(string, "bufferの読み込みに失敗しました");
 		uErrorOut(__FILE__, __func__, __LINE__, string);
-		exit(1);	//読み込みが失敗したら終了
-	}
+		is_error_ = true;
+	} else
+		is_error_ = false;
 
 	//ソースとバッファを結び付けます
 	alSourcei(source_, AL_BUFFER, buffer_);
@@ -54,6 +56,8 @@ Sound::Sound(ALuint buffer) {
 
 //音源座標を設定する
 void Sound::SetSource(Vector3 source_position) const {
+	if(is_error_)
+		return;
 	alSource3f(source_, AL_POSITION, source_position.x, source_position.y,
 			source_position.z);
 }
@@ -61,6 +65,8 @@ void Sound::SetSource(Vector3 source_position) const {
 //音源座標をリスナーと同じ場所に設定
 //再生する瞬間だけでなく常に同期するために、毎フレーム呼び出すことを推奨
 void Sound::SetSourceToListener() {
+	if(is_error_)
+		return;
 	ALfloat x, y, z;
 	alGetListener3f(AL_POSITION, &x, &y, &z);
 	alSource3f(source_, AL_POSITION, x, y, z);
@@ -70,6 +76,8 @@ void Sound::SetSourceToListener() {
 //音量調節に使う
 //再生する瞬間だけでなく常に同期するために、毎フレーム呼び出すことを推奨
 void Sound::SetSourceToListenerFront(float distance) {
+	if(is_error_)
+		return;
 	//リスナーの座標を取得
 	float vec[6];
 	alGetListenerfv(AL_ORIENTATION, vec);
@@ -87,6 +95,8 @@ void Sound::SetSourceToListenerFront(float distance) {
 //停止していたら再生(bgmに用いる)
 //ループしたい時に毎フレーム呼び出す
 void Sound::Stream() const {
+	if(is_error_)
+		return;
 	ALint state;
 	if (alGetSourcei(source_, AL_SOURCE_STATE, &state), state != AL_PLAYING) {
 		alSourcePlay(source_);
@@ -95,10 +105,14 @@ void Sound::Stream() const {
 
 //再度最初から再生
 void Sound::Play() const {
+	if(is_error_)
+		return;
 	alSourcePlay(source_);
 }
 
 Sound::~Sound() {
+	if(is_error_)
+		return;
 	//再生されていたら停止
 	ALint state;
 	if (alGetSourcei(source_, AL_SOURCE_STATE, &state), state == AL_PLAYING)

@@ -5,6 +5,8 @@ private:
 	ALuint buffer_, source_;
 	//フラグ
 	bool should_delete_buffer_;
+	//エラーフラグ
+	bool is_error_;
 
 public:
 	//コンストラクタ

@@ -147,7 +147,9 @@ namespace player {
 void Fin() {
 	//効果音削除
 	delete player_die_se;
+	player_die_se = NULL;
 	delete get_target_se;
+	get_target_se = NULL;
 }
 }
 

@@ -159,9 +159,11 @@ void DisplayFunc(void) {
 		break;
 	case opengl_game_main::kGame:		//ゲーム
 		if (GameMain() == -1) {
-			main_state = kProjectIni;
+			main_state = kStartIni;
 			bgm.Stop();
-			delete game_finish_se;	//効果音削除
+			//効果音削除
+			delete game_finish_se;
+			game_finish_se = NULL;
 		}
 		break;
 	default:
