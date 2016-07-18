@@ -11,7 +11,7 @@ OperatingInstructions::OperatingInstructions() {
 	font_ = new FTPixmapFont("font/jkgl.ttf");
 	// フォントの初期化
 	if (font_->Error())
-		uErrorOut(__FILE__, __func__, __LINE__, "タイトルフォントが開けません");
+		uErrorOut(__FILE__, __func__, __LINE__, "フォントが開けません");
 	else
 		font_->FaceSize(kFontSize);
 }
@@ -22,7 +22,7 @@ void OperatingInstructions::Draw() {
 		return;
 
 	u3Dto2D();
-	glColor4fv(uColor4fv_purple);
+	glColor4fv (uColor4fv_purple);
 	glRasterPos2f(x0 - 30, y0);
 	font_->Render("操作説明");
 	glRasterPos2f(x0, y0 + line_space);
