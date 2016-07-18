@@ -15,7 +15,7 @@ const int kAddScoreFactor = 13;
 extern std::vector<Meteo*> meteo_;
 
 void Init();
-void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint);
+void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint, float camera_spped);
 void Draw();
 }
 
