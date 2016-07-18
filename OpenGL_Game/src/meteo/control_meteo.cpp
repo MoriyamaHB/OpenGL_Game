@@ -53,6 +53,7 @@ void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint, float came
 				player::HitMeteo();
 			} else {			//衝突していないとき
 				//距離が近く、スピードが早いほどほどスコアを加算
+				//kAddScoreMaxDistance - distanceに括弧がいるけど今のスコアが丁度いいのでこのままで
 				if (distance < kAddScoreMaxDistance) {
 					opengl_game_main::score.add_score(
 							(kAddScoreMaxDistance - distance / kAddScoreMaxDistance) * camera_speed * kAddScoreFactor,
