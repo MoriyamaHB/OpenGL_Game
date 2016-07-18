@@ -28,6 +28,7 @@ void GameIni() {
 	control_bullet::Init();
 	camera.InitCoordinates();
 	player::Init(&camera);
+	input::Init();
 	opengl_game_main::score.Init();
 	ltime.Init(60);	//制限時間を設定
 	can_draw_game_result = false;	//結果出力をfalseに設定

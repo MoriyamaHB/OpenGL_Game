@@ -61,9 +61,9 @@ const char* GameResult::GetRating(int score) const {
 	else if (score >= 37500)
 		strcpy(str, "B-");
 	else if (score >= 35000)
-		strcpy(str, "c+");
+		strcpy(str, "C+");
 	else if (score >= 32500)
-		strcpy(str, "c");
+		strcpy(str, "C");
 	else if (score >= 30000)
 		strcpy(str, "C-");
 	else if (score >= 27500)
@@ -110,30 +110,26 @@ void GameResult::Draw() const {
 	char string[128];
 
 	//ゲーム結果描画開始
-	glColor4fv(uColor4fv_red);
+	glColor4fv (uColor4fv_red);
 	glRasterPos2f(x0, y0);
 	pFont->Render("<ゲーム結果>");
 
 	//ターゲット獲得スコア
-	glColor4fv(uColor4fv_blue);
+	glColor4fv (uColor4fv_blue);
 	glRasterPos2f(x0, y0 + kFontSize + kCharSpace);
-	sprintf(string, "ターゲット獲得スコア : %d",
-			opengl_game_main::score.get_score(Score::kGetTarget));
+	sprintf(string, "ターゲット獲得スコア : %d", opengl_game_main::score.get_score(Score::kGetTarget));
 	pFont->Render(string);
 	//Meteoとのかすりスコア
 	glRasterPos2f(x0, y0 + kFontSize * 2 + kCharSpace);
-	sprintf(string, "Meteoとのかすりスコア : %d",
-			opengl_game_main::score.get_score(Score::kNearMeteo));
+	sprintf(string, "Meteoとのかすりスコア : %d", opengl_game_main::score.get_score(Score::kNearMeteo));
 	pFont->Render(string);
 	//Meteo破壊スコア
 	glRasterPos2f(x0, y0 + kFontSize * 3 + kCharSpace);
-	sprintf(string, "Meteo破壊スコア : %d",
-			opengl_game_main::score.get_score(Score::kDestructMeteo));
+	sprintf(string, "Meteo破壊スコア : %d", opengl_game_main::score.get_score(Score::kDestructMeteo));
 	pFont->Render(string);
 	//残機ボーナススコア
 	glRasterPos2f(x0, y0 + kFontSize * 4 + kCharSpace);
-	sprintf(string, "残機ボーナススコア : %d",
-			opengl_game_main::score.get_score(Score::kRemainingLives));
+	sprintf(string, "残機ボーナススコア : %d", opengl_game_main::score.get_score(Score::kRemainingLives));
 	pFont->Render(string);
 	//----------------
 	glRasterPos2f(x0, y0 + kFontSize * 5 + kCharSpace);
@@ -146,12 +142,11 @@ void GameResult::Draw() const {
 	//評価
 	glColor4fv(uColor4fv_red);
 	glRasterPos2f(x0, y0 + kFontSize * 7 + kCharSpace);
-	sprintf(string, "評価 : %s",
-			GetRating(opengl_game_main::score.get_total_score()));
+	sprintf(string, "評価 : %s", GetRating(opengl_game_main::score.get_total_score()));
 	pFont->Render(string);
 
 	//終了案内
-	glColor4fv(uColor4fv_yellow);
+	glColor4fv (uColor4fv_yellow);
 	glRasterPos2f(x0 + 100, y0 + kFontSize * 9 + kCharSpace);
 	pFont->Render("再度プレイ : エンターキー");
 	glRasterPos2f(x0 + 100, y0 + kFontSize * 10 + kCharSpace);
