@@ -73,7 +73,7 @@ namespace control_target {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint) {
 	//登録
 	if (player::get_player_state() != player::kFin) { //終了後ではない
-		if (fps->GetFrameCount() % 45 == 0) { //登録フレームである
+		if (fps->get_frame_count() % 45 == 0) { //登録フレームである
 			if ((int) target_.size() < kMaxTargetNum) { //最大数を下回っている
 				//登録場所を計算
 				//視点の先の場所を計算

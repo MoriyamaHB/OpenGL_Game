@@ -25,7 +25,7 @@ namespace control_meteo {
 void Update(Fps *fps, Vector3 camera_place, Vector3 camera_viewpoint, float camera_speed) {
 	//登録
 	if (player::get_player_state() != player::kFin) { //終了後ではない
-		if (fps->GetFrameCount() % 5 == 0) { //登録フレームである
+		if (fps->get_frame_count() % 5 == 0) { //登録フレームである
 			if ((int) meteo_.size() < kMaxMeteoNum) { //最大数を下回っている
 				//登録場所を計算
 				//視点の先の場所を計算

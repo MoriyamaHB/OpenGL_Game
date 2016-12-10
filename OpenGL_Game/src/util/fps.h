@@ -3,11 +3,11 @@
 
 class Fps {
 private:
-	int GLframe; //フレーム数
-	int GLtimenow; //経過時間
-	int GLtimebase; //計測開始時間
-	int frame_count; //Updateが呼ばれた回数=開始からのフレーム数
-	double fps; //fps
+	int GLframe_; //フレーム数
+	int GLtimenow_; //経過時間
+	int GLtimebase_; //計測開始時間
+	int frame_count_; //Updateが呼ばれた回数=開始からのフレーム数
+	double fps_; //fps
 
 public:
 	Fps();
@@ -16,7 +16,7 @@ public:
 	void Init();
 
 	//getter
-	int GetFrameCount() const;
+	int get_frame_count() const;
 
 	//更新
 	void Update();

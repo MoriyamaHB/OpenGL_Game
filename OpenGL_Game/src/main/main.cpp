@@ -56,7 +56,7 @@ int GameMain() {
 	//弾更新
 	control_bullet::Update(&camera);
 	//プレイヤー更新
-	if (player::Update(camera.GetStateWatchCoordinates(), fps.GetFrameCount()) == -1)
+	if (player::Update(camera.GetStateWatchCoordinates(), fps.get_frame_count()) == -1)
 		can_draw_game_result = true;	//結果描画をtrueに設定
 	//スコア更新
 	opengl_game_main::score.Update();
